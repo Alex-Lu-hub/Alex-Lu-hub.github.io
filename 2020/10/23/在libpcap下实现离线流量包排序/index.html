@@ -1,0 +1,737 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/pi.jpg">
+  <link rel="icon" type="image/png" href="/img/pi.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Alex Lu">
+  <meta name="keywords" content="">
+  <title>libpcap离线包排序 - LL&#39;s treasure</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/a11y-dark.min.css" />
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>蒹葭的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Alex Lu
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-10-23 08:00" pubdate>
+        2020年10月23日 早上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      27
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">libpcap离线包排序</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年10月25日 下午
+                
+              </p>
+            
+            <div class="markdown-body" id="post-body">
+              <p>libpcap是unix/linux平台下的网络数据包捕获函数包，大多数网络监控软件都以它为基础。原先的在python下用scapy读包效率过低，故转用在C下由libpcap实现读包排序。</p>
+<a id="more"></a>
+
+<h1 id="libpcap安装"><a href="#libpcap安装" class="headerlink" title="libpcap安装"></a>libpcap安装</h1><div class="hljs"><pre><code class="hljs bash">wget https://www.tcpdump.org/release/libpcap-1.9.1.tar.gz
+tar zxvf libpcap-1.9.1.tar.gz
+<span class="hljs-built_in">cd</span> libpcap-1.9.1/
+./configure
+sudo make
+sudo make install</code></pre></div>
+
+<h1 id="libpcap的一些关键函数"><a href="#libpcap的一些关键函数" class="headerlink" title="libpcap的一些关键函数"></a>libpcap的一些关键函数</h1><h2 id="1-获取网络接口"><a href="#1-获取网络接口" class="headerlink" title="1.获取网络接口"></a><strong>1.获取网络接口</strong></h2><p><code>char * pcap_lookupdev(char * errbuf)</code></p>
+<p>返回第一个合适的网络接口的字符串指针，如果出错，则errbuf存放出错信息字符串，errbuf至少应该是PCAP_ERRBUF_SIZE个字节长度的</p>
+<h2 id="2-释放网络接口"><a href="#2-释放网络接口" class="headerlink" title="2.释放网络接口"></a><strong>2.释放网络接口</strong></h2><p><code>void pcap_close(pcap_t * p)</code></p>
+<p>关闭pcap_open_live()获取的pcap_t的网络接口对象并释放相关资源</p>
+<h2 id="3-读取本地pcap文件"><a href="#3-读取本地pcap文件" class="headerlink" title="3.读取本地pcap文件"></a><strong>3.读取本地pcap文件</strong></h2><p><code>pcap_t * pcap_open_offline(const char *fname, char *errbuf)</code></p>
+<p>函数打开保存的数据包文件，用于读取，返回文件描述符</p>
+<p>fname参数指定了pcap文件名</p>
+<p>errbuf依旧是函数出错的时候返回错误信息</p>
+<h2 id="4-获取数据包"><a href="#4-获取数据包" class="headerlink" title="4.获取数据包"></a><strong>4.获取数据包</strong></h2><p><code>int pcap_loop(pcap_t * p, int cnt, pcap_handler callback, u_char * user)</code></p>
+<p><strong>第一个参数</strong>是第2步返回的pcap_t类型的指针<br><strong>第二个参数</strong>是需要抓的数据包的个数，一旦抓到了cnt个数据包，pcap_loop立即返回。负数的cnt表示pcap_loop永远循环抓包，直到出现错误。<br><strong>第三个参数</strong>是一个回调函数指针，它必须是如下的形式：<br><code>void callback(u_char * userarg, const struct pcap_pkthdr * pkthdr, const u_char * packet)</code></p>
+<ul>
+<li><strong>第一个参数是</strong>pcap_loop的最后一个参数，当收到足够数量的包后pcap_loop会调用callback回调函数，同时将pcap_loop()的user参数传递给它</li>
+<li><strong>第二个参数</strong>是收到的数据包的pcap_pkthdr类型的指针</li>
+<li><strong>第三个参数</strong>是收到的数据包数据</li>
+</ul>
+<h2 id="5-保存数据包"><a href="#5-保存数据包" class="headerlink" title="5.保存数据包"></a><strong>5.保存数据包</strong></h2><p><code>pcap_dumper_t *pcap_dump_open(pcap_t *p, const char *file)</code></p>
+<p>函数返回pcap_dumper_t类型的指针，file是文件名，可以是绝对路径</p>
+<p><code>void  pcap_dump_close(pcap_dumper_t *p)</code></p>
+<p>用来关闭pcap_dump_open打开的文件，入参是pcap_dump_open返回的指针</p>
+<p><code>int pcap_dump_flush(pcap_dumper_t *p)</code></p>
+<p>刷新缓冲区，把捕获的数据包从缓冲区真正拷贝到文件</p>
+<p><code>void  pcap_dump(u_char * userarg, const struct pcap_pkthdr * pkthdr, const u_char * packet)</code></p>
+<p>输出数据到文件，与pcap_loop的第二个参数回调函数<code>void callback(u_char * userarg, const struct pcap_pkthdr * pkthdr, const u_char * packet)</code> 形式完全相同，可以直接当pcap_loop的第二个参数；</p>
+<h1 id="排序思路"><a href="#排序思路" class="headerlink" title="排序思路"></a>排序思路</h1><h2 id="提取特征"><a href="#提取特征" class="headerlink" title="提取特征"></a>提取特征</h2><p><img src="/img/%E5%9C%A8libpcap%E4%B8%8B%E5%AE%9E%E7%8E%B0%E7%A6%BB%E7%BA%BF%E6%B5%81%E9%87%8F%E5%8C%85%E6%8E%92%E5%BA%8F.assets/image-20201019220018746.png" srcset="/img/loading.gif"></p>
+<p><img src="/img/%E5%9C%A8libpcap%E4%B8%8B%E5%AE%9E%E7%8E%B0%E7%A6%BB%E7%BA%BF%E6%B5%81%E9%87%8F%E5%8C%85%E6%8E%92%E5%BA%8F.assets/image-20201019220143733.png" srcset="/img/loading.gif"></p>
+<p>上面两张图相当关键，是提取出排序思路的要点。整体上可以得出如下的排序原则：</p>
+<ul>
+<li>对于一个流来说， <code>seq</code> 是呈递增趋势的</li>
+<li>存在 <code>ack</code> 包长度为0，对于一个流来说，为0的包接下来的包的 <code>seq</code> 和本次相同，直至传来有长度的包</li>
+<li>如果包为 <code>syn</code> ，对于一个流来说，即使这个包为0，下一个来的包的 <code>seq</code> + 1</li>
+<li>对于一个seesion的包来说，两个之间的 <code>ack</code> 和 <code>seq</code> 存在对应关系，应满足如下的关系：（a、b指一个session中两个不同的流）<ul>
+<li>a的 <code>ack</code> 小于或等于b的 <code>seq</code></li>
+<li>a的 <code>seq</code> 小于b的 <code>ack</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="排序特征总结"><a href="#排序特征总结" class="headerlink" title="排序特征总结"></a>排序特征总结</h2><p>根据上述说明，我们可以得出一些排序时我们需要得出的信息：</p>
+<ul>
+<li><p><code>源IP地址</code> 、 <code>目标IP地址</code></p>
+<p>这两者用于来在一个session中区分出两个不同的流，仅需比较一个就够了。同时我们对session排序需要严格控制插入的规则，应该只允许一个流的插入到另一个流之中，避免出现混乱。</p>
+</li>
+<li><p><code>seq</code> 、<code>next_seq</code></p>
+<p>这两者用于一个流的排序。 <code>next_seq</code> 实际为 <code>seq</code> 值加上包的长度 <code>len</code> ，如果 <code>len</code> 为0正常情况下 <code>seq</code> 和 <code>next_seq</code> 相同，但是在出现包为 <code>syn</code> 时，即使 <code>len</code> 为0， <code>next_seq</code> 也要为 <code>seq</code>  + 1</p>
+</li>
+<li><p><code>ack</code></p>
+<p>用于session的排序中，确定一个流的包在何时插入至另一个流中。有时需要结合 <code>seq</code> 判断</p>
+</li>
+</ul>
+<h2 id="分析流量包"><a href="#分析流量包" class="headerlink" title="分析流量包"></a>分析流量包</h2><p>我们使用libpcap所获得的流量包是裸包，即最原始的包信息，我们需要对获得的包手动进行分析才能得到我们需要的信息。</p>
+<p>调用 <code>pcap_loop</code> 获得的包需要在 <code>callback</code> 函数中进行我们的分析。后两个参数是包的信息关键，原始包信息就在最后一个参数 <code>packet</code> 中，而包的长度则由前一个参数 <code>pkthdr</code> 结构里定义，其结构如下：</p>
+<div class="hljs"><pre><code class="hljs C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pcap_pkthdr</span></span>
+<span class="hljs-class">&#123;</span>
+  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">timeval</span> <span class="hljs-title">ts</span>;</span>    <span class="hljs-comment">/* time stamp */</span>
+  bpf_u_int32 caplen;   <span class="hljs-comment">/* length of portion present */</span>
+  bpf_u_int32 len;      <span class="hljs-comment">/* length this packet (off wire) */</span>
+&#125;;</code></pre></div>
+
+<p>在分析过程中我们主要关注 <code>packet</code></p>
+<h3 id="以太网帧头"><a href="#以太网帧头" class="headerlink" title="以太网帧头"></a>以太网帧头</h3><p><code>packet</code> 的第一部分为以太网帧头，排序过程中我们不关心它，不进行解析，只需要知晓它的长度跳过即可。它的长度为 <code>ETH_HLEN</code> ，为14字节</p>
+<h3 id="IP头"><a href="#IP头" class="headerlink" title="IP头"></a>IP头</h3><p>以太网帧头后的部分为IP头，我们通过 <code>netinet/ip.h</code> 中定义好的 <code>iphdr</code> 结构来解析它。结构如下：</p>
+<div class="hljs"><pre><code class="hljs C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">iphdr</span> &#123;</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">if</span> defined(__LITTLE_ENDIAN_BITFIELD)</span>
+	__u8	ihl:<span class="hljs-number">4</span>,
+		version:<span class="hljs-number">4</span>;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">elif</span> defined (__BIG_ENDIAN_BITFIELD)</span>
+	__u8	version:<span class="hljs-number">4</span>,
+  		ihl:<span class="hljs-number">4</span>;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">else</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">error</span>	<span class="hljs-meta-string">&quot;Please fix &lt;asm/byteorder.h&gt;&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+	__u8	tos;
+	__be16	tot_len;
+	__be16	id;
+	__be16	frag_off;
+	__u8	ttl;
+	__u8	protocol;
+	__sum16	check;
+	__be32	saddr;
+	__be32	daddr;
+	<span class="hljs-comment">/*The options start here. */</span>
+&#125;;</code></pre></div>
+
+<p>通过以下代码计算偏移量，我们就可以获得所需要的IP头结构：</p>
+<div class="hljs"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">iphdr</span> *<span class="hljs-title">ip_header</span> =</span> (struct iphdr *)(packet + ETH_HLEN);</code></pre></div>
+
+<p>我们关注的IP头信息为 <code>源IP地址</code> 和 <code>目标IP地址</code> ，这两个信息为IP头中的 <code>saddr</code> 和 <code>daddr</code> ，但是直接读取这两者我们不能得到想要的 <code>x.x.x.x</code> 的结构。为了得到想要的内容，我们还需要借助 <code>arpa/inet.h</code> 中定义好的结构 <code>sockaddr_in</code> 。结构如下：</p>
+<div class="hljs"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span></span>
+<span class="hljs-class">&#123;</span>
+	<span class="hljs-keyword">sa_family_t</span>		sin_family;		<span class="hljs-comment">//地址族（Address Family）</span>
+	<span class="hljs-keyword">uint16_t</span>		sin_port;		<span class="hljs-comment">//16位TCP/UDP端口号</span>
+	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">in_addr</span>	<span class="hljs-title">sin_addr</span>;</span>		<span class="hljs-comment">//32位IP地址</span>
+	<span class="hljs-keyword">char</span>			sin_zero[<span class="hljs-number">8</span>];	<span class="hljs-comment">//不使用</span>
+&#125;;
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">in_addr</span></span>
+<span class="hljs-class">&#123;</span>
+    In_addr_t		s_addr;			<span class="hljs-comment">//32位IPv4地址</span>
+&#125;</code></pre></div>
+
+<p>所以，将 <code>saddr</code> 和 <code>daddr</code> 赋给上述结构中的 <code>s_addr</code> ，再调用 <code>inet_ntoa()</code> 函数，就得到了我们需要的两个地址。</p>
+<ul>
+<li><p><code>char *inet_ntoa(struct in_addr in)</code> </p>
+<p>将一个32位网络字节序的二进制IP地址转换成相应的点分十进制的IP地址（返回点分十进制的字符串在静态内存中的指针）。</p>
+<p>所在头文件： <code>arpa/inet.h</code> </p>
+</li>
+</ul>
+<h3 id="TCP头"><a href="#TCP头" class="headerlink" title="TCP头"></a>TCP头</h3><p>IP头后的部分位TCP头，我们通过 <code>netinet/tcp.h</code> 中定义好的 <code>tcphdr</code> 结构解析它。结构如下：</p>
+<div class="hljs"><pre><code class="hljs C"><span class="hljs-keyword">typedef</span>	u_long	tcp_seq;
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment"> * TCP header.</span>
+<span class="hljs-comment"> * Per RFC 793, September, 1981.</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">tcphdr</span> &#123;</span>
+	u_short	th_sport;		<span class="hljs-comment">/* source port */</span>
+	u_short	th_dport;		<span class="hljs-comment">/* destination port */</span>
+	tcp_seq	th_seq;			<span class="hljs-comment">/* sequence number */</span>
+	tcp_seq	th_ack;			<span class="hljs-comment">/* acknowledgement number */</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">if</span> BYTE_ORDER == LITTLE_ENDIAN </span>
+	u_char	th_x2:<span class="hljs-number">4</span>,		<span class="hljs-comment">/* (unused) */</span>
+		th_off:<span class="hljs-number">4</span>;		<span class="hljs-comment">/* data offset */</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">if</span> BYTE_ORDER == BIG_ENDIAN </span>
+	u_char	th_off:<span class="hljs-number">4</span>,		<span class="hljs-comment">/* data offset */</span>
+		th_x2:<span class="hljs-number">4</span>;		<span class="hljs-comment">/* (unused) */</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+	u_char	th_flags;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>	TH_FIN	0x01</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>	TH_SYN	0x02</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>	TH_RST	0x04</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>	TH_PUSH	0x08</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>	TH_ACK	0x10</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>	TH_URG	0x20</span>
+	u_short	th_win;			<span class="hljs-comment">/* window */</span>
+	u_short	th_sum;			<span class="hljs-comment">/* checksum */</span>
+	u_short	th_urp;			<span class="hljs-comment">/* urgent pointer */</span>
+&#125;;</code></pre></div>
+
+<p>通过以下代码计算偏移量，我们就可以获得所需要的TCP头结构：</p>
+<div class="hljs"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">tcphdr</span> *<span class="hljs-title">tcp_header</span> =</span> (struct tcphdr *)(packet + ETH_HLEN + <span class="hljs-keyword">sizeof</span>(struct iphdr));</code></pre></div>
+
+<p>我们关注的信息为 <code>seq</code> 、 <code>ack</code> 、 <code>next_seq</code> 。其中， <code>seq</code> 、 <code>ack</code> 是结构中给我们的，通过 <code>th_seq</code> 、 <code>th_ack</code> ，调用 <code>ntohl()</code> 函数，我们就可以得到需要的两个值。</p>
+<ul>
+<li><p><code>uint32_t ntohl(uint32_t netlong)</code> </p>
+<p>将一个无符号长整形数从网络字节顺序转换为主机字节顺序。</p>
+<p>所在头文件： <code>arpa/inet.h</code> </p>
+</li>
+</ul>
+<p><code>next_seq</code> 是接下来的重头戏，因为结构本身并没有给出这个值，需要我们自己去计算得出。按照之前的的分析，这个值是 <code>seq</code> 的值加上包的长度。IP头结构中的 <code>tot_len</code> 可以给我们帮助，只需要用这个长度减去IP头长度和TCP头长度，这两个的长度就需要我们自己获得了。</p>
+<p><img src="/img/%E5%9C%A8libpcap%E4%B8%8B%E5%AE%9E%E7%8E%B0%E7%A6%BB%E7%BA%BF%E6%B5%81%E9%87%8F%E5%8C%85%E6%8E%92%E5%BA%8F.assets/image-20201021111348745.png" srcset="/img/loading.gif"></p>
+<p>借助wireshark，我们可以看到IP头的长度在原始数据包中是有所记录的，就在包的第15个字节的后一位，该值*4即为IP头长度</p>
+<p><img src="/img/%E5%9C%A8libpcap%E4%B8%8B%E5%AE%9E%E7%8E%B0%E7%A6%BB%E7%BA%BF%E6%B5%81%E9%87%8F%E5%8C%85%E6%8E%92%E5%BA%8F.assets/image-20201021115924988.png" srcset="/img/loading.gif"></p>
+<p>同样的，可以看到TCP头的长度在原始数据包中有记录，在包的第47个字节的前一位，该值*4即为TCP头长度</p>
+<p>通过以下代码计算偏移量，我们就可以获得包的长度了：</p>
+<div class="hljs"><pre><code class="hljs c">len = ntohs(ip_header-&gt;tot_len) - ((<span class="hljs-keyword">int</span>)packet[<span class="hljs-number">46</span>])/<span class="hljs-number">16</span>*<span class="hljs-number">4</span> - ((<span class="hljs-keyword">int</span>)packet[<span class="hljs-number">14</span>])%<span class="hljs-number">16</span>*<span class="hljs-number">4</span>;</code></pre></div>
+
+<p> <code>next_seq</code> 的值即为 <code>seq</code> + <code>len</code></p>
+<h1 id="排序数据结构"><a href="#排序数据结构" class="headerlink" title="排序数据结构"></a>排序数据结构</h1><p>现在我们已经获得了排序所需要的信息，接下来就需要构建一个便于我们排序的结构来进行排序。为了便于我们的插入排序，构建链表是一个不错的选择</p>
+<div class="hljs"><pre><code class="hljs C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">packetnode</span>&#123;</span>
+	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pcap_pkthdr</span> *<span class="hljs-title">pkthdr</span>;</span>
+	u_char *packet;
+	<span class="hljs-keyword">char</span> *srcip;
+	<span class="hljs-keyword">char</span> *dstip;
+	u_long seq;
+	u_long ack;
+	u_long next_seq;
+&#125;;</code></pre></div>
+
+<p>上面的节点结构用来处理数据包，便于后续排序。 <code>pkthdr</code> 和 <code>packet</code> 是原始抓到的数据包，也是我们后续要保存至文件的东西。后面的五个就是在上面分析流量包的环节我们排序所需要的信息，将它保存在这个节点结构中</p>
+<div class="hljs"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">packlist</span>&#123;</span>
+	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">packetnode</span> *<span class="hljs-title">data</span>;</span>
+	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">packlist</span> *<span class="hljs-title">left</span>;</span>
+	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">packlist</span> *<span class="hljs-title">right</span>;</span>
+&#125;;</code></pre></div>
+
+<p>上面的链表结构用来构建链表，有 <code>left</code> 和 <code>right</code> 用来进行查询和插入</p>
+<h1 id="排序流程图"><a href="#排序流程图" class="headerlink" title="排序流程图"></a>排序流程图</h1>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/libpcap/">libpcap</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/libpcap/">libpcap</a>
+                    
+                      <a class="hover-with-bg" href="/tags/C/">C</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/10/25/Linux%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Linux小系统网络配置问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/10/08/Centos6.9%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/">
+                        <span class="hidden-mobile">Centos6.9网络配置</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ABJnbiLU9eQe9IkXz99YBnuL-gzGzoHsz",
+          app_key: "n7cSaYt4NkA2o3ai4DM5qOyo",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    waitElementVisible('vcomments', loadValine);
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://alex-lu-hub.github.io/" target="_blank" rel="nofollow noopener"><span>LL_treasure</span></a> <i class="iconfont icon-love"></i> <a href="https://alex-lu-hub.github.io/" target="_blank" rel="nofollow noopener"><span>蒹葭的博客</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "libpcap离线包排序&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

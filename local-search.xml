@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>Sony Xperia 5 II 内置软件卸载</title>
+    <link href="/2020/11/15/Sony%20Xperia%205%20II%20%E5%86%85%E7%BD%AE%E8%BD%AF%E4%BB%B6%E5%8D%B8%E8%BD%BD/"/>
+    <url>/2020/11/15/Sony%20Xperia%205%20II%20%E5%86%85%E7%BD%AE%E8%BD%AF%E4%BB%B6%E5%8D%B8%E8%BD%BD/</url>
+    
+    <content type="html"><![CDATA[<p>入手港版Sony后有一些我用不到的软件，又不想root，利用adb卸载。</p><a id="more"></a><h1 id="下载adb工具包"><a href="#下载adb工具包" class="headerlink" title="下载adb工具包"></a>下载adb工具包</h1><p>这玩意儿网上百度一大堆，下一个就好了。应该是个压缩包，解压到你知道的地方即可</p><h1 id="手机准备"><a href="#手机准备" class="headerlink" title="手机准备"></a>手机准备</h1><p>首先，手机要打开 <code>开发者选项</code> ，通常应该是点击版本号5下即可，具体的请自行百度</p><p>随后，进入 <code>开发者选下</code> ，打开 <code>USB调试</code></p><p>请下载一个包名查看软件，后面删除包需要用这类软件来查看包名</p><h1 id="删除流程"><a href="#删除流程" class="headerlink" title="删除流程"></a>删除流程</h1><ul><li><p>手机连接电脑</p></li><li><p>在解压adb的文件夹打开 <code>cmd</code> </p></li><li><p>输入如下命令</p><pre><code class="hljs powershell">adb devices</code></pre><p>能够看到自己的设备，说明连接成功。若未看到，请检查手机准备步骤是否完成</p></li><li><p>连接设备</p><pre><code class="hljs powershell">adb shell</code></pre></li><li><p>删除命令如下</p><pre><code class="hljs powershell">pm uninstall <span class="hljs-literal">-k</span> -<span class="hljs-literal">-user</span> <span class="hljs-number">0</span> 应用包名</code></pre><p>这个包名不是应用的名字，具体的格式可以用如下命令查看</p><pre><code class="hljs powershell">pm list packages</code></pre><p>所以具体要删除啥，就用下载的包名查看软件看即可</p></li></ul><h1 id="我删除的软件"><a href="#我删除的软件" class="headerlink" title="我删除的软件"></a>我删除的软件</h1><pre><code class="hljs powershell"><span class="hljs-comment"># Call of Duty</span>com.activision.callofduty.shooter<span class="hljs-comment"># LinkedIN</span>com.linkedin.android<span class="hljs-comment"># TIDAL 3 Months Free</span>com.android.tidal.campaigninstaller<span class="hljs-comment"># Netflix</span>com.netflix.mediaclient<span class="hljs-comment"># Google地图</span>com.google.android.apps.maps<span class="hljs-comment"># 数字健康</span>com.google.android.apps.wellbeing<span class="hljs-comment"># 智能镜头</span>com.google.ar.lens<span class="hljs-comment"># Google Play Service for AR</span>com.google.ar.core<span class="hljs-comment"># Google</span>com.google.android.googlequicksearchbox<span class="hljs-comment"># Chrome</span>com.android.chrome<span class="hljs-comment"># 相册</span>com.google.android.apps.photos<span class="hljs-comment"># 文件</span>com.google.android.documentsui</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>Android</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Android</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Pluto环境搭建</title>
+    <link href="/2020/11/09/pluto%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <url>/2020/11/09/pluto%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+    
+    <content type="html"><![CDATA[<p>本文旨在帮助刚入手pluto的同志们搭建好pluto的工作环境，便于后续的在matlab下开发测试。</p><a id="more"></a><h1 id="USB驱动安装"><a href="#USB驱动安装" class="headerlink" title="USB驱动安装"></a>USB驱动安装</h1><p>安装pluto的USB驱动 <code>PlutoSDR-M2k-USB-Drivers.exe</code> ，需要的资源在 <a href="https://github.com/analogdevicesinc/plutosdr-m2k-drivers-win/releases">github页</a> 可以下载。安装过程极其简单，一路默认next就可以了。</p><p>安装完成后，可以在设备管理器看到如下图的设备（当然需要连接上pluto），就说明安装成功了。</p><p><img src="/img/pluto%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.assets/image-20201108132710358.png"></p><p><img src="/img/pluto%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.assets/image-20201108132742781.png"></p><p>同时，我们会看到如下的PlutoSDR存储盘：</p><p><img src="/img/pluto%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.assets/image-20201108132822198.png"></p><h1 id="OSC上位机安装"><a href="#OSC上位机安装" class="headerlink" title="OSC上位机安装"></a>OSC上位机安装</h1><p>安装Pluto官方的上位机管理软件 <code>adi-osc-setup.exe</code> ，需要的资源在 <a href="https://wiki.analog.com/resources/tools-software/linux-software/iio_oscilloscope">官方网站</a> 可以下载。安装过程也没啥好说的，选择合适的路径一路默认即可。</p><h1 id="libiio驱动安装"><a href="#libiio驱动安装" class="headerlink" title="libiio驱动安装"></a>libiio驱动安装</h1><p>安装所需的libiio驱动 <code>libiio-0.21.g565bf68-Windows-setup.exe</code> ，需要的资源在 <a href="https://github.com/analogdevicesinc/libiio/releases/tag/0.21">github页</a> 可以下载。一路默认完事儿了。</p><h1 id="MATLAB安装"><a href="#MATLAB安装" class="headerlink" title="MATLAB安装"></a>MATLAB安装</h1><p>这就不用我说了吧，安装要求的版本，我们这次是 <code>R2018b</code> ，相关安装的教程资料网上一大堆，不过多赘述。</p><h1 id="TDM-GCC编译器安装"><a href="#TDM-GCC编译器安装" class="headerlink" title="TDM-GCC编译器安装"></a>TDM-GCC编译器安装</h1><p>安装所需的编译器 <code>tdm64-gcc-9.2.0.exe</code> ，需要的资源在 <a href="https://jmeubank.github.io/tdm-gcc/">官方网站</a> 可以下载。</p><h2 id="编译器的安装"><a href="#编译器的安装" class="headerlink" title="编译器的安装"></a>编译器的安装</h2><ul><li><p>点击 <code>Create</code> </p><p><img src="/img/pluto%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.assets/image-20201108134436530.png"></p></li><li><p>选择安装的编译器类型，这里选择第二项</p><p><img src="/img/pluto%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.assets/image-20201108134532959.png"></p></li><li><p>选择安装路径，注意<strong>不要用中文，也不要有空格！</strong>默认的路径其实已经可以了，如果需要更改尽量只更改安装盘，不更改文件夹命名</p><p><img src="/img/pluto%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.assets/image-20201108134753307.png"></p></li><li><p>后面一路默认安装即可，可能安装的时间会比较长，耐心等待</p></li></ul><h2 id="环境变量配置"><a href="#环境变量配置" class="headerlink" title="环境变量配置"></a>环境变量配置</h2><ul><li><p>打开 <code>此电脑-&gt;属性-&gt;高级系统设置-&gt;环境变量</code> </p><p><img src="/img/pluto%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.assets/image-20201108135210921.png"></p></li><li><p>新建环境变量，如下配置。注意<strong>变量值为TDM-GCC编译器安装文件夹，一定要一致！</strong></p><p><img src="/img/pluto%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.assets/image-20201108135344804.png"></p></li></ul><h2 id="MATLAB配置"><a href="#MATLAB配置" class="headerlink" title="MATLAB配置"></a>MATLAB配置</h2><ul><li><p>设置环境变量，输入以下命令</p><pre><code class="hljs matlab">#第一个参数是我们的环境变量名，第二个参数是我们的安装路径setenv(<span class="hljs-string">&#x27;MW_MINGW64_LOC&#x27;</span>,<span class="hljs-string">&#x27;C:\TDM-GCC-64&#x27;</span>);mex -setup</code></pre></li><li><p>在弹出的选项中选择C++语言，点击即可</p><p><img src="/img/pluto%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.assets/image-20201108140126264.png"></p></li></ul><h1 id="安装Matlab依赖包"><a href="#安装Matlab依赖包" class="headerlink" title="安装Matlab依赖包"></a>安装Matlab依赖包</h1><p>记住要安装Matlab的官方依赖包，我们这次是ADI官方提供的依赖包，官网应该也有提供的下载，这里就不在列出</p><h1 id="配置完成"><a href="#配置完成" class="headerlink" title="配置完成"></a>配置完成</h1><p>至此，整个环境配置完成，愉快的去造作吧！</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>ADI</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Pluto</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>alias命令</title>
+    <link href="/2020/10/30/alias%E5%91%BD%E4%BB%A4/"/>
+    <url>/2020/10/30/alias%E5%91%BD%E4%BB%A4/</url>
+    
+    <content type="html"><![CDATA[<p>众所周知，Linux下的解压命令多又难记，时不时还有用错的情况。在邓迅邓巨神的指点下，知晓了 <code>alias</code> 这个神奇的命令，使用起来确实方便了许多，遂记下！</p><h1 id="查看当前已设置的别名"><a href="#查看当前已设置的别名" class="headerlink" title="查看当前已设置的别名"></a>查看当前已设置的别名</h1><pre><code class="hljs bash">alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span><span class="hljs-built_in">alias</span> alert=<span class="hljs-string">&#x27;notify-send --urgency=low -i &quot;$([ $? = 0 ] &amp;&amp; echo terminal || echo error)&quot; &quot;$(history|tail -n1|sed -e &#x27;</span>\<span class="hljs-string">&#x27;&#x27;</span>s/^\s*[0-9]\+\s*//;s/[;&amp;|]\s*alert$//<span class="hljs-string">&#x27;\&#x27;</span><span class="hljs-string">&#x27;)&quot;&#x27;</span><span class="hljs-built_in">alias</span> egrep=<span class="hljs-string">&#x27;egrep --color=auto&#x27;</span><span class="hljs-built_in">alias</span> fgrep=<span class="hljs-string">&#x27;fgrep --color=auto&#x27;</span><span class="hljs-built_in">alias</span> grep=<span class="hljs-string">&#x27;grep --color=auto&#x27;</span><span class="hljs-built_in">alias</span> l=<span class="hljs-string">&#x27;ls -CF&#x27;</span><span class="hljs-built_in">alias</span> la=<span class="hljs-string">&#x27;ls -A&#x27;</span><span class="hljs-built_in">alias</span> lh=<span class="hljs-string">&#x27;ls -lh&#x27;</span><span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -alF&#x27;</span><span class="hljs-built_in">alias</span> ls=<span class="hljs-string">&#x27;ls --color=auto&#x27;</span><span class="hljs-built_in">alias</span> tarbz2=<span class="hljs-string">&#x27;tar -jxvf&#x27;</span></code></pre><p>直接输入 <code>alias</code> 即可查看已经设置的别名，已经设置好的别名我们可以直接使用。例如，我输入命令 <code>ll</code> ，就相当于输入 <code>ls -alF</code> 。</p><h1 id="为命令设置别名"><a href="#为命令设置别名" class="headerlink" title="为命令设置别名"></a>为命令设置别名</h1><pre><code class="hljs bash">alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span> vi=<span class="hljs-string">&#x27;vim&#x27;</span>alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span><span class="hljs-built_in">alias</span> alert=<span class="hljs-string">&#x27;notify-send --urgency=low -i &quot;$([ $? = 0 ] &amp;&amp; echo terminal || echo error)&quot; &quot;$(history|tail -n1|sed -e &#x27;</span>\<span class="hljs-string">&#x27;&#x27;</span>s/^\s*[0-9]\+\s*//;s/[;&amp;|]\s*alert$//<span class="hljs-string">&#x27;\&#x27;</span><span class="hljs-string">&#x27;)&quot;&#x27;</span><span class="hljs-built_in">alias</span> egrep=<span class="hljs-string">&#x27;egrep --color=auto&#x27;</span><span class="hljs-built_in">alias</span> fgrep=<span class="hljs-string">&#x27;fgrep --color=auto&#x27;</span><span class="hljs-built_in">alias</span> grep=<span class="hljs-string">&#x27;grep --color=auto&#x27;</span><span class="hljs-built_in">alias</span> l=<span class="hljs-string">&#x27;ls -CF&#x27;</span><span class="hljs-built_in">alias</span> la=<span class="hljs-string">&#x27;ls -A&#x27;</span><span class="hljs-built_in">alias</span> lh=<span class="hljs-string">&#x27;ls -lh&#x27;</span><span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -alF&#x27;</span><span class="hljs-built_in">alias</span> ls=<span class="hljs-string">&#x27;ls --color=auto&#x27;</span><span class="hljs-built_in">alias</span> tarbz2=<span class="hljs-string">&#x27;tar -jxvf&#x27;</span><span class="hljs-built_in">alias</span> vi=<span class="hljs-string">&#x27;vim&#x27;</span></code></pre><p>这个例子我们给 <code>vim</code> 设置了一个别名 <code>vi</code> ，注意设置时等号左右不要有空格。此时我们输入 <code>vi</code> 命令就相当于输入 <code>vim</code> 命令。</p><h1 id="删除设置的别名"><a href="#删除设置的别名" class="headerlink" title="删除设置的别名"></a>删除设置的别名</h1><pre><code class="hljs bash">alex@PC-20200316LEME:~$ <span class="hljs-built_in">unalias</span> vialex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span><span class="hljs-built_in">alias</span> alert=<span class="hljs-string">&#x27;notify-send --urgency=low -i &quot;$([ $? = 0 ] &amp;&amp; echo terminal || echo error)&quot; &quot;$(history|tail -n1|sed -e &#x27;</span>\<span class="hljs-string">&#x27;&#x27;</span>s/^\s*[0-9]\+\s*//;s/[;&amp;|]\s*alert$//<span class="hljs-string">&#x27;\&#x27;</span><span class="hljs-string">&#x27;)&quot;&#x27;</span><span class="hljs-built_in">alias</span> egrep=<span class="hljs-string">&#x27;egrep --color=auto&#x27;</span><span class="hljs-built_in">alias</span> fgrep=<span class="hljs-string">&#x27;fgrep --color=auto&#x27;</span><span class="hljs-built_in">alias</span> grep=<span class="hljs-string">&#x27;grep --color=auto&#x27;</span><span class="hljs-built_in">alias</span> l=<span class="hljs-string">&#x27;ls -CF&#x27;</span><span class="hljs-built_in">alias</span> la=<span class="hljs-string">&#x27;ls -A&#x27;</span><span class="hljs-built_in">alias</span> lh=<span class="hljs-string">&#x27;ls -lh&#x27;</span><span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -alF&#x27;</span><span class="hljs-built_in">alias</span> ls=<span class="hljs-string">&#x27;ls --color=auto&#x27;</span><span class="hljs-built_in">alias</span> tarbz2=<span class="hljs-string">&#x27;tar -jxvf&#x27;</span></code></pre><p>使用 <code>unalias</code> 就可以删除我们已经设置好的别名。</p><h1 id="让别名永久生效（当然，别删除它）"><a href="#让别名永久生效（当然，别删除它）" class="headerlink" title="让别名永久生效（当然，别删除它）"></a>让别名永久生效（当然，别删除它）</h1><p>按照上面的方法生成的别名，在我们重启电脑后就会失效。怎么样才能让他一直生效呢？当然是把它加入到会自动运行的脚本中！ <code>~/.bashrc</code> 就是一个不错的选择。</p><p>打开 <code>~/.bashrc</code> ：</p><pre><code class="hljs bash">vim ~/.bashrc</code></pre><p>可以看到一些已经写入在这个脚本中的 <code>alias</code> 命令：</p><pre><code class="hljs bash">···<span class="hljs-comment"># some more ls aliases</span><span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -alF&#x27;</span><span class="hljs-built_in">alias</span> la=<span class="hljs-string">&#x27;ls -A&#x27;</span><span class="hljs-built_in">alias</span> lh=<span class="hljs-string">&#x27;ls -lh&#x27;</span><span class="hljs-built_in">alias</span> l=<span class="hljs-string">&#x27;ls -CF&#x27;</span><span class="hljs-comment">#下面这行是我自己加入的alia命令，用来解压.tar.bz2的压缩包</span><span class="hljs-built_in">alias</span> tarbz2=<span class="hljs-string">&#x27;tar -jxvf&#x27;</span>···</code></pre><p>现在在这个脚本中加入自己想用的别名吧！之后每次只要你是用这个账户登录的Linux，就可以使用这些设置的别名。面对那些复杂的压缩解压命令等等，碰到一个就加入进来吧！</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>setlocale warning</title>
+    <link href="/2020/10/27/setlocale%20warning/"/>
+    <url>/2020/10/27/setlocale%20warning/</url>
+    
+    <content type="html"><![CDATA[<p>小系统登陆时出现多条如下warning:</p><pre><code class="hljs bash">-bash:warning:setlocale:LC_CTYPE:connot change locale (en_US.UTF-8):No such file or directory</code></pre><a id="more"></a><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><pre><code class="hljs bash"><span class="hljs-comment"># 打开小系统里的i18n</span>vi /etc/sysconfig/i18n<span class="hljs-comment"># 添加下面的</span>LC_ALL=C<span class="hljs-built_in">export</span> LC_ALL</code></pre><p>重新打包后问题解决。</p><h1 id="LC-ALL-C"><a href="#LC-ALL-C" class="headerlink" title="LC_ALL = C"></a><code>LC_ALL = C</code></h1><p>之前的报错说明我们本身的小系统里没有安装en_US的local，使用 <code>LC_ALL = C</code> 是为了去除所有本地化的设置，让命令能正确执行。</p><p>在Linux中通过 <code>locale</code> 来设置程序运行的不同语言环境， <code>locale</code> 由ANSI C提供支持。 <code>locale</code> 的命名规则为 <code>&lt;语言&gt;_&lt;地区&gt;.&lt;字符集编码&gt;</code> ，如 <code>zh_CN.UTF-8</code> ，zh代表中文，CN代表大陆地区，UTF-8表示字符集。在 <code>locale</code> 环境中，有一组变量，代表国际化环境中的不同设置：</p><ul><li><p> <code>LC_COLLATE</code><br>定义该环境的排序和比较规则</p></li><li><p> <code>LC_CTYPE</code><br>用于字符分类和字符串处理，控制所有字符的处理方式，包括字符编码，字符是单字节还是多字节，如何打印等。是最重要的一个环境变量。</p></li><li><p> <code>LC_MONETARY</code><br>货币格式</p></li><li><p> <code>LC_NUMERIC</code><br>非货币的数字显示格式</p></li><li><p> <code>LC_TIME</code><br>时间和日期格式</p></li><li><p> <code>LC_MESSAGES</code><br>提示信息的语言。另外还有一个 <code>LANGUAGE</code> 参数，它与 <code>LC_MESSAGES</code> 相似，但如果该参数一旦设置，则 <code>LC_MESSAGES</code> 参数就会失效。 <code>LANGUAGE</code> 参数可同时设置多种语言信息，如 <code>LANGUANE=&quot;zh_CN.GB18030:zh_CN.GB2312:zh_CN&quot;</code> 。</p></li><li><p><code>LANG</code><br><code>LC_*</code> 的默认值，是最低级别的设置，如果 <code>LC_*</code> 没有设置，则使用该值。类似于 <code>LC_ALL</code> 。</p></li><li><p> <code>LC_ALL</code><br>它是一个宏，如果该值设置了，则该值会覆盖所有 <code>LC_*</code> 的设置值。注意， <code>LANG</code> 的值不受该宏影响。</p></li></ul><p>“C”是系统默认的 <code>locale</code> ，”POSIX”是”C”的别名。所以当我们新安装完一个系统时，默认的 <code>locale</code> 就是 <code>C</code> 或 <code>POSIX</code> 。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>我的摇滚歌单</title>
+    <link href="/2020/10/27/%E6%88%91%E7%9A%84%E6%91%87%E6%BB%9A%E6%AD%8C%E5%8D%95/"/>
+    <url>/2020/10/27/%E6%88%91%E7%9A%84%E6%91%87%E6%BB%9A%E6%AD%8C%E5%8D%95/</url>
+    
+    <content type="html"><![CDATA[<p>近期看了《波西米亚狂想曲》，听了1985年的live aid演唱会，被Queen给洗脑了，进而对于摇滚乐起了浓厚的兴趣。记录一下自己喜欢的摇滚歌单。</p><a id="more"></a><p>说是摇滚歌单，但我觉得有些歌其实不算我心里摇滚的概念？不过，管它的呢。</p><h1 id="Queen"><a href="#Queen" class="headerlink" title="Queen"></a>Queen</h1><ul><li>One vision</li><li>Tie your mother down</li><li>In the lap of the gods - revisited</li><li>Seven Seas of Rhyne</li><li>Tear it Up</li><li>A Kind of Magic</li><li>Under Pressure</li><li>Who Wants to Live Forever</li><li>I Want to Break Free</li><li>Now i’m Here</li><li>Love of My Life</li><li>Is This the World We Created?</li><li>Tutti Frutti</li><li>Bohemian Rhapsody</li><li>Hammer to Fall</li><li>Crazy Little Thing Called Love</li><li>Radio Ga Ga</li><li>We Will Rock You</li><li>Friends Will be Friends</li><li>We are The Champions</li><li>Play the Game</li><li>Somebody to Love</li><li>Killer Queen</li><li>Save Me</li><li>Keep Yourself Alive</li><li>Jailhouse Rock</li><li>Another One Bites the Dust</li></ul><h1 id="Beatle"><a href="#Beatle" class="headerlink" title="Beatle"></a>Beatle</h1><ul><li>Hello, Goodbye</li><li>Lady Madonna</li><li>Something</li><li>Help!</li><li>Let it be</li><li>She loves you</li><li>Twist and shout</li><li>Can’t buy me love</li><li>Get back</li><li>The long and winding road</li><li>Eight days a week</li><li>Hey Bulldog</li><li>I’ve got a feeling</li><li>Yesterday</li><li>Hey Jude</li></ul><h1 id="Linkin-Park"><a href="#Linkin-Park" class="headerlink" title="Linkin Park"></a>Linkin Park</h1><ul><li>In The End</li></ul><h1 id="Bon-Jovi"><a href="#Bon-Jovi" class="headerlink" title="Bon Jovi"></a>Bon Jovi</h1><ul><li>It’s my life</li></ul><h1 id="Michael-Jackson"><a href="#Michael-Jackson" class="headerlink" title="Michael Jackson"></a>Michael Jackson</h1><ul><li>Beat it</li></ul><h1 id="Eagles"><a href="#Eagles" class="headerlink" title="Eagles"></a>Eagles</h1><ul><li>Hotel California</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Music</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Music</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Linux小系统网络配置问题</title>
+    <link href="/2020/10/25/Linux%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/"/>
+    <url>/2020/10/25/Linux%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<p>在裁剪好内核，和外围文件系统一起启动后，发现 <code>service</code> 命令以及网络配置都无法实现，进行调试。</p><a id="more"></a><h1 id="service-命令使用后无任何输出"><a href="#service-命令使用后无任何输出" class="headerlink" title="service 命令使用后无任何输出"></a><code>service</code> 命令使用后无任何输出</h1><p>查看 <code>/sbin/service</code> ，其调用 <code>/etc/init.d/functions</code> 。为了定位问题所在，查看 <code>functions</code> ，发现它所有的错误输出都送到了 <code>/dev/null</code> （黑洞），没有显示出来。将所有的 <code>2&gt;/dev/null</code> 删去，查看到了错误信息，缺少 <code>/etc/profile.d/lang.sh</code> 。为了避免再出现相同位置的文件缺失，直接将 <code>/etc/profile.d</code>  拷入到小系统中，service能够正常的运行了。</p><h1 id="service-network-命令无法正常运行"><a href="#service-network-命令无法正常运行" class="headerlink" title="service network 命令无法正常运行"></a><code>service network</code> 命令无法正常运行</h1><p>在 <code>service</code> 能够运行后，使用 <code>service network</code> 、 <code>service network start</code> 等命令是无法正常运行的，会报错缺少某些命令或文件。按照报错信息将缺少的命令和文件补全。以下是我拷贝的一些：</p><pre><code class="hljs shell">envsort/bin/ipcalcgrep/var/run/netreportegrep/sbin/arpingpidof</code></pre><h1 id="service-ssh-命令无法正常运行"><a href="#service-ssh-命令无法正常运行" class="headerlink" title="service ssh 命令无法正常运行"></a><code>service ssh</code> 命令无法正常运行</h1><p>完成上述两个步骤后，已经可以利用 <code>service network</code> 命令配置好小系统的网络了，从主机ping可以ping通相应的IP。但是直接用ssh还无法链接，同样进行调试，查看报错进行拷贝。以下是我拷贝的一些：</p><pre><code class="hljs shell">/usr/bin/dirname</code></pre><p>拷贝完成后，现在运行 <code>service ssh restart</code> 只会提示：</p><pre><code class="hljs shell">Stopping sshd: [FAILED]</code></pre><p>由于没有更多的报错信息，难以进行调试，查看 <code>/etc/init.d/sshd</code> 脚本内容：</p><pre><code class="hljs shell">vi /etc/init.d/sshd</code></pre><p>在脚本开头可以看到一些说明信息：</p><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><span class="hljs-comment">#</span><span class="hljs-comment"># sshd          Start up the OpenSSH server daemon</span><span class="hljs-comment">#</span><span class="hljs-comment"># chkconfig: 2345 55 25</span><span class="hljs-comment"># description: SSH is a protocol for secure remote shell access. \</span><span class="hljs-comment">#              This service starts up the OpenSSH server daemon.</span><span class="hljs-comment">#</span><span class="hljs-comment"># processname: sshd</span><span class="hljs-comment"># config: /etc/ssh/ssh_host_key</span><span class="hljs-comment"># config: /etc/ssh/ssh_host_key.pub</span><span class="hljs-comment"># config: /etc/ssh/ssh_random_seed</span><span class="hljs-comment"># config: /etc/ssh/sshd_config</span><span class="hljs-comment"># pidfile: /var/run/sshd.pid</span><span class="hljs-comment">### BEGIN INIT INFO</span><span class="hljs-comment"># Provides: sshd</span><span class="hljs-comment"># Required-Start: $local_fs $network $syslog</span><span class="hljs-comment"># Required-Stop: $local_fs $syslog</span><span class="hljs-comment"># Should-Start: $syslog</span><span class="hljs-comment"># Should-Stop: $network $syslog</span><span class="hljs-comment"># Default-Start: 2 3 4 5</span><span class="hljs-comment"># Default-Stop: 0 1 6</span><span class="hljs-comment"># Short-Description: Start up the OpenSSH server daemon</span><span class="hljs-comment"># Description:       SSH is a protocol for secure remote shell access.</span><span class="hljs-comment">#                    This service starts up the OpenSSH server daemon.</span><span class="hljs-comment">### END INIT INFO</span></code></pre><p>可以看到相关的配置文件在 <code>/etc/ssh</code> 文件夹下，拷贝至小系统后再次尝试，可以看到新的有用报错信息了，继续拷贝。以下是我拷贝的一些命令：</p><pre><code class="hljs shell">usleepsleep</code></pre><h1 id="ssh无法连接"><a href="#ssh无法连接" class="headerlink" title="ssh无法连接"></a>ssh无法连接</h1><p>完成上面的操作后，ssh连接会提示输入密码，输入密码后会卡住在如下命令：</p><pre><code class="hljs shell">PTY allocation request failed on channel 0</code></pre><p>但是在ssh连接命令上加上 <code>-T</code> 就可以顺利进行连接。</p><p>查阅说明：</p><pre><code class="hljs bash">-T Disable pseudo-tty allocation.</code></pre><p> <code>-T</code> 意思是禁止分配伪终端。当用ssh或telnet等登录系统时，系统分配给我们的终端就是伪终端。 如果ssh使用此选项登录系统时，由于禁用，将无法获得终端；但仍能够获得shell，只不过看起来像在本地，也没有很多应有的环境变量，例如命令提示符，PS1等。</p><p>于是猜测仍然是与ssh相关的依赖没有拷完。使用如下命令查看ssh依赖：</p><pre><code class="hljs shell">[root@localhost ~]# rpm -ql openssh/etc/ssh/etc/ssh/moduli/usr/bin/ssh-keygen/usr/libexec/openssh/usr/libexec/openssh/ssh-keysign/usr/share/doc/openssh-5.3p1/usr/share/doc/openssh-5.3p1/CREDITS/usr/share/doc/openssh-5.3p1/ChangeLog/usr/share/doc/openssh-5.3p1/INSTALL/usr/share/doc/openssh-5.3p1/LICENCE/usr/share/doc/openssh-5.3p1/OVERVIEW/usr/share/doc/openssh-5.3p1/PROTOCOL/usr/share/doc/openssh-5.3p1/PROTOCOL.agent/usr/share/doc/openssh-5.3p1/PROTOCOL.certkeys/usr/share/doc/openssh-5.3p1/README/usr/share/doc/openssh-5.3p1/README.dns/usr/share/doc/openssh-5.3p1/README.nss/usr/share/doc/openssh-5.3p1/README.platform/usr/share/doc/openssh-5.3p1/README.privsep/usr/share/doc/openssh-5.3p1/README.smartcard/usr/share/doc/openssh-5.3p1/README.tun/usr/share/doc/openssh-5.3p1/TODO/usr/share/doc/openssh-5.3p1/WARNING.RNG/usr/share/man/man1/ssh-keygen.1.gz/usr/share/man/man8/ssh-keysign.8.gz</code></pre><p>去除相关的文档和 <code>man</code> ，剩下没有的我们就补上。补全后问题仍然没有解决。</p><p>在小系统中输入 <code>mount</code> ，可以看到已经挂载的磁盘：</p><pre><code class="hljs shell">/dev/sda1 on / type ext4 (rw)proc on /proc type proc (rw)sysfs on /sys type sysfs (rw)devpts on /dev/pts type devpts (rw,gid=5,mode=620)tmpfs on /dev/shm type tmpfs (rw)none on /proc/sys/fs/binfmt_misc type binfmt_misc (rw)</code></pre><p>奇怪的事情来了，明明已经挂载了 <code>/dev/pts</code> ，但是在 <code>/dev</code> 下却并没有出现 <code>pts</code> 文件夹，推测这就是问题的根源所在！</p><p>尝试在打包前直接新建 <code>/dev/pts</code> 目录，但是并没有用。。。。。。最后在测试小系统 <code>mkdir</code> 命令时意外发现居然失效了？！重新拷贝一次 <code>mkdir</code> 命令，问题最终解决！</p><p>最后删去打包前新建的 <code>/dev/pts</code> 目录，裁剪驱动后重新打包，可以正常运行。看来就是 <code>mkdir</code> 命令失效带来的问题了。。。。。。挺好奇为啥会失效的，可惜目前没办法复现。</p><p>至此，已经可以实现ssh直接连接小系统了。但目前的系统缺陷如下：</p><ul><li>开机不能自动配置好network和sshd，需要手动使用 <code>service</code> 命令实现</li><li>登录过程中和登陆后存在一些warning输出，虽然不影响使用，但最好还是可以解决</li></ul><p>以上缺陷等待后续处理吧！</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>libpcap离线包排序</title>
+    <link href="/2020/10/23/%E5%9C%A8libpcap%E4%B8%8B%E5%AE%9E%E7%8E%B0%E7%A6%BB%E7%BA%BF%E6%B5%81%E9%87%8F%E5%8C%85%E6%8E%92%E5%BA%8F/"/>
+    <url>/2020/10/23/%E5%9C%A8libpcap%E4%B8%8B%E5%AE%9E%E7%8E%B0%E7%A6%BB%E7%BA%BF%E6%B5%81%E9%87%8F%E5%8C%85%E6%8E%92%E5%BA%8F/</url>
+    
+    <content type="html"><![CDATA[<p>libpcap是unix/linux平台下的网络数据包捕获函数包，大多数网络监控软件都以它为基础。原先的在python下用scapy读包效率过低，故转用在C下由libpcap实现读包排序。</p><a id="more"></a><h1 id="libpcap安装"><a href="#libpcap安装" class="headerlink" title="libpcap安装"></a>libpcap安装</h1><pre><code class="hljs bash">wget https://www.tcpdump.org/release/libpcap-1.9.1.tar.gztar zxvf libpcap-1.9.1.tar.gz<span class="hljs-built_in">cd</span> libpcap-1.9.1/./configuresudo makesudo make install</code></pre><h1 id="libpcap的一些关键函数"><a href="#libpcap的一些关键函数" class="headerlink" title="libpcap的一些关键函数"></a>libpcap的一些关键函数</h1><h2 id="1-获取网络接口"><a href="#1-获取网络接口" class="headerlink" title="1.获取网络接口"></a><strong>1.获取网络接口</strong></h2><p><code>char * pcap_lookupdev(char * errbuf)</code></p><p>返回第一个合适的网络接口的字符串指针，如果出错，则errbuf存放出错信息字符串，errbuf至少应该是PCAP_ERRBUF_SIZE个字节长度的</p><h2 id="2-释放网络接口"><a href="#2-释放网络接口" class="headerlink" title="2.释放网络接口"></a><strong>2.释放网络接口</strong></h2><p><code>void pcap_close(pcap_t * p)</code></p><p>关闭pcap_open_live()获取的pcap_t的网络接口对象并释放相关资源</p><h2 id="3-读取本地pcap文件"><a href="#3-读取本地pcap文件" class="headerlink" title="3.读取本地pcap文件"></a><strong>3.读取本地pcap文件</strong></h2><p><code>pcap_t * pcap_open_offline(const char *fname, char *errbuf)</code></p><p>函数打开保存的数据包文件，用于读取，返回文件描述符</p><p>fname参数指定了pcap文件名</p><p>errbuf依旧是函数出错的时候返回错误信息</p><h2 id="4-获取数据包"><a href="#4-获取数据包" class="headerlink" title="4.获取数据包"></a><strong>4.获取数据包</strong></h2><p><code>int pcap_loop(pcap_t * p, int cnt, pcap_handler callback, u_char * user)</code></p><p><strong>第一个参数</strong>是第2步返回的pcap_t类型的指针<br><strong>第二个参数</strong>是需要抓的数据包的个数，一旦抓到了cnt个数据包，pcap_loop立即返回。负数的cnt表示pcap_loop永远循环抓包，直到出现错误。<br><strong>第三个参数</strong>是一个回调函数指针，它必须是如下的形式：<br><code>void callback(u_char * userarg, const struct pcap_pkthdr * pkthdr, const u_char * packet)</code></p><ul><li><strong>第一个参数是</strong>pcap_loop的最后一个参数，当收到足够数量的包后pcap_loop会调用callback回调函数，同时将pcap_loop()的user参数传递给它</li><li><strong>第二个参数</strong>是收到的数据包的pcap_pkthdr类型的指针</li><li><strong>第三个参数</strong>是收到的数据包数据</li></ul><h2 id="5-保存数据包"><a href="#5-保存数据包" class="headerlink" title="5.保存数据包"></a><strong>5.保存数据包</strong></h2><p><code>pcap_dumper_t *pcap_dump_open(pcap_t *p, const char *file)</code></p><p>函数返回pcap_dumper_t类型的指针，file是文件名，可以是绝对路径</p><p><code>void  pcap_dump_close(pcap_dumper_t *p)</code></p><p>用来关闭pcap_dump_open打开的文件，入参是pcap_dump_open返回的指针</p><p><code>int pcap_dump_flush(pcap_dumper_t *p)</code></p><p>刷新缓冲区，把捕获的数据包从缓冲区真正拷贝到文件</p><p><code>void  pcap_dump(u_char * userarg, const struct pcap_pkthdr * pkthdr, const u_char * packet)</code></p><p>输出数据到文件，与pcap_loop的第二个参数回调函数<code>void callback(u_char * userarg, const struct pcap_pkthdr * pkthdr, const u_char * packet)</code> 形式完全相同，可以直接当pcap_loop的第二个参数；</p><h1 id="排序思路"><a href="#排序思路" class="headerlink" title="排序思路"></a>排序思路</h1><h2 id="提取特征"><a href="#提取特征" class="headerlink" title="提取特征"></a>提取特征</h2><p><img src="/img/%E5%9C%A8libpcap%E4%B8%8B%E5%AE%9E%E7%8E%B0%E7%A6%BB%E7%BA%BF%E6%B5%81%E9%87%8F%E5%8C%85%E6%8E%92%E5%BA%8F.assets/image-20201019220018746.png"></p><p><img src="/img/%E5%9C%A8libpcap%E4%B8%8B%E5%AE%9E%E7%8E%B0%E7%A6%BB%E7%BA%BF%E6%B5%81%E9%87%8F%E5%8C%85%E6%8E%92%E5%BA%8F.assets/image-20201019220143733.png"></p><p>上面两张图相当关键，是提取出排序思路的要点。整体上可以得出如下的排序原则：</p><ul><li>对于一个流来说， <code>seq</code> 是呈递增趋势的</li><li>存在 <code>ack</code> 包长度为0，对于一个流来说，为0的包接下来的包的 <code>seq</code> 和本次相同，直至传来有长度的包</li><li>如果包为 <code>syn</code> ，对于一个流来说，即使这个包为0，下一个来的包的 <code>seq</code> + 1</li><li>对于一个seesion的包来说，两个之间的 <code>ack</code> 和 <code>seq</code> 存在对应关系，应满足如下的关系：（a、b指一个session中两个不同的流）<ul><li>a的 <code>ack</code> 小于或等于b的 <code>seq</code></li><li>a的 <code>seq</code> 小于b的 <code>ack</code></li></ul></li></ul><h2 id="排序特征总结"><a href="#排序特征总结" class="headerlink" title="排序特征总结"></a>排序特征总结</h2><p>根据上述说明，我们可以得出一些排序时我们需要得出的信息：</p><ul><li><p><code>源IP地址</code> 、 <code>目标IP地址</code></p><p>这两者用于来在一个session中区分出两个不同的流，仅需比较一个就够了。同时我们对session排序需要严格控制插入的规则，应该只允许一个流的插入到另一个流之中，避免出现混乱。</p></li><li><p><code>seq</code> 、<code>next_seq</code></p><p>这两者用于一个流的排序。 <code>next_seq</code> 实际为 <code>seq</code> 值加上包的长度 <code>len</code> ，如果 <code>len</code> 为0正常情况下 <code>seq</code> 和 <code>next_seq</code> 相同，但是在出现包为 <code>syn</code> 时，即使 <code>len</code> 为0， <code>next_seq</code> 也要为 <code>seq</code>  + 1</p></li><li><p><code>ack</code></p><p>用于session的排序中，确定一个流的包在何时插入至另一个流中。有时需要结合 <code>seq</code> 判断</p></li></ul><h2 id="分析流量包"><a href="#分析流量包" class="headerlink" title="分析流量包"></a>分析流量包</h2><p>我们使用libpcap所获得的流量包是裸包，即最原始的包信息，我们需要对获得的包手动进行分析才能得到我们需要的信息。</p><p>调用 <code>pcap_loop</code> 获得的包需要在 <code>callback</code> 函数中进行我们的分析。后两个参数是包的信息关键，原始包信息就在最后一个参数 <code>packet</code> 中，而包的长度则由前一个参数 <code>pkthdr</code> 结构里定义，其结构如下：</p><pre><code class="hljs C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pcap_pkthdr</span></span><span class="hljs-class">&#123;</span>  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">timeval</span> <span class="hljs-title">ts</span>;</span>    <span class="hljs-comment">/* time stamp */</span>  bpf_u_int32 caplen;   <span class="hljs-comment">/* length of portion present */</span>  bpf_u_int32 len;      <span class="hljs-comment">/* length this packet (off wire) */</span>&#125;;</code></pre><p>在分析过程中我们主要关注 <code>packet</code></p><h3 id="以太网帧头"><a href="#以太网帧头" class="headerlink" title="以太网帧头"></a>以太网帧头</h3><p><code>packet</code> 的第一部分为以太网帧头，排序过程中我们不关心它，不进行解析，只需要知晓它的长度跳过即可。它的长度为 <code>ETH_HLEN</code> ，为14字节</p><h3 id="IP头"><a href="#IP头" class="headerlink" title="IP头"></a>IP头</h3><p>以太网帧头后的部分为IP头，我们通过 <code>netinet/ip.h</code> 中定义好的 <code>iphdr</code> 结构来解析它。结构如下：</p><pre><code class="hljs C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">iphdr</span> &#123;</span><span class="hljs-meta">#<span class="hljs-meta-keyword">if</span> defined(__LITTLE_ENDIAN_BITFIELD)</span>__u8ihl:<span class="hljs-number">4</span>,version:<span class="hljs-number">4</span>;<span class="hljs-meta">#<span class="hljs-meta-keyword">elif</span> defined (__BIG_ENDIAN_BITFIELD)</span>__u8version:<span class="hljs-number">4</span>,  ihl:<span class="hljs-number">4</span>;<span class="hljs-meta">#<span class="hljs-meta-keyword">else</span></span><span class="hljs-meta">#<span class="hljs-meta-keyword">error</span><span class="hljs-meta-string">&quot;Please fix &lt;asm/byteorder.h&gt;&quot;</span></span><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>__u8tos;__be16tot_len;__be16id;__be16frag_off;__u8ttl;__u8protocol;__sum16check;__be32saddr;__be32daddr;<span class="hljs-comment">/*The options start here. */</span>&#125;;</code></pre><p>通过以下代码计算偏移量，我们就可以获得所需要的IP头结构：</p><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">iphdr</span> *<span class="hljs-title">ip_header</span> =</span> (struct iphdr *)(packet + ETH_HLEN);</code></pre><p>我们关注的IP头信息为 <code>源IP地址</code> 和 <code>目标IP地址</code> ，这两个信息为IP头中的 <code>saddr</code> 和 <code>daddr</code> ，但是直接读取这两者我们不能得到想要的 <code>x.x.x.x</code> 的结构。为了得到想要的内容，我们还需要借助 <code>arpa/inet.h</code> 中定义好的结构 <code>sockaddr_in</code> 。结构如下：</p><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span></span><span class="hljs-class">&#123;</span><span class="hljs-keyword">sa_family_t</span>sin_family;<span class="hljs-comment">//地址族（Address Family）</span><span class="hljs-keyword">uint16_t</span>sin_port;<span class="hljs-comment">//16位TCP/UDP端口号</span><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">in_addr</span><span class="hljs-title">sin_addr</span>;</span><span class="hljs-comment">//32位IP地址</span><span class="hljs-keyword">char</span>sin_zero[<span class="hljs-number">8</span>];<span class="hljs-comment">//不使用</span>&#125;;<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">in_addr</span></span><span class="hljs-class">&#123;</span>    In_addr_ts_addr;<span class="hljs-comment">//32位IPv4地址</span>&#125;</code></pre><p>所以，将 <code>saddr</code> 和 <code>daddr</code> 赋给上述结构中的 <code>s_addr</code> ，再调用 <code>inet_ntoa()</code> 函数，就得到了我们需要的两个地址。</p><ul><li><p><code>char *inet_ntoa(struct in_addr in)</code> </p><p>将一个32位网络字节序的二进制IP地址转换成相应的点分十进制的IP地址（返回点分十进制的字符串在静态内存中的指针）。</p><p>所在头文件： <code>arpa/inet.h</code> </p></li></ul><h3 id="TCP头"><a href="#TCP头" class="headerlink" title="TCP头"></a>TCP头</h3><p>IP头后的部分位TCP头，我们通过 <code>netinet/tcp.h</code> 中定义好的 <code>tcphdr</code> 结构解析它。结构如下：</p><pre><code class="hljs C"><span class="hljs-keyword">typedef</span>u_longtcp_seq;<span class="hljs-comment">/*</span><span class="hljs-comment"> * TCP header.</span><span class="hljs-comment"> * Per RFC 793, September, 1981.</span><span class="hljs-comment"> */</span><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">tcphdr</span> &#123;</span>u_shortth_sport;<span class="hljs-comment">/* source port */</span>u_shortth_dport;<span class="hljs-comment">/* destination port */</span>tcp_seqth_seq;<span class="hljs-comment">/* sequence number */</span>tcp_seqth_ack;<span class="hljs-comment">/* acknowledgement number */</span><span class="hljs-meta">#<span class="hljs-meta-keyword">if</span> BYTE_ORDER == LITTLE_ENDIAN </span>u_charth_x2:<span class="hljs-number">4</span>,<span class="hljs-comment">/* (unused) */</span>th_off:<span class="hljs-number">4</span>;<span class="hljs-comment">/* data offset */</span><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span><span class="hljs-meta">#<span class="hljs-meta-keyword">if</span> BYTE_ORDER == BIG_ENDIAN </span>u_charth_off:<span class="hljs-number">4</span>,<span class="hljs-comment">/* data offset */</span>th_x2:<span class="hljs-number">4</span>;<span class="hljs-comment">/* (unused) */</span><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>u_charth_flags;<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>TH_FIN0x01</span><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>TH_SYN0x02</span><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>TH_RST0x04</span><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>TH_PUSH0x08</span><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>TH_ACK0x10</span><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>TH_URG0x20</span>u_shortth_win;<span class="hljs-comment">/* window */</span>u_shortth_sum;<span class="hljs-comment">/* checksum */</span>u_shortth_urp;<span class="hljs-comment">/* urgent pointer */</span>&#125;;</code></pre><p>通过以下代码计算偏移量，我们就可以获得所需要的TCP头结构：</p><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">tcphdr</span> *<span class="hljs-title">tcp_header</span> =</span> (struct tcphdr *)(packet + ETH_HLEN + <span class="hljs-keyword">sizeof</span>(struct iphdr));</code></pre><p>我们关注的信息为 <code>seq</code> 、 <code>ack</code> 、 <code>next_seq</code> 。其中， <code>seq</code> 、 <code>ack</code> 是结构中给我们的，通过 <code>th_seq</code> 、 <code>th_ack</code> ，调用 <code>ntohl()</code> 函数，我们就可以得到需要的两个值。</p><ul><li><p><code>uint32_t ntohl(uint32_t netlong)</code> </p><p>将一个无符号长整形数从网络字节顺序转换为主机字节顺序。</p><p>所在头文件： <code>arpa/inet.h</code> </p></li></ul><p><code>next_seq</code> 是接下来的重头戏，因为结构本身并没有给出这个值，需要我们自己去计算得出。按照之前的的分析，这个值是 <code>seq</code> 的值加上包的长度。IP头结构中的 <code>tot_len</code> 可以给我们帮助，只需要用这个长度减去IP头长度和TCP头长度，这两个的长度就需要我们自己获得了。</p><p><img src="/img/%E5%9C%A8libpcap%E4%B8%8B%E5%AE%9E%E7%8E%B0%E7%A6%BB%E7%BA%BF%E6%B5%81%E9%87%8F%E5%8C%85%E6%8E%92%E5%BA%8F.assets/image-20201021111348745.png"></p><p>借助wireshark，我们可以看到IP头的长度在原始数据包中是有所记录的，就在包的第15个字节的后一位，该值*4即为IP头长度</p><p><img src="/img/%E5%9C%A8libpcap%E4%B8%8B%E5%AE%9E%E7%8E%B0%E7%A6%BB%E7%BA%BF%E6%B5%81%E9%87%8F%E5%8C%85%E6%8E%92%E5%BA%8F.assets/image-20201021115924988.png"></p><p>同样的，可以看到TCP头的长度在原始数据包中有记录，在包的第47个字节的前一位，该值*4即为TCP头长度</p><p>通过以下代码计算偏移量，我们就可以获得包的长度了：</p><pre><code class="hljs c">len = ntohs(ip_header-&gt;tot_len) - ((<span class="hljs-keyword">int</span>)packet[<span class="hljs-number">46</span>])/<span class="hljs-number">16</span>*<span class="hljs-number">4</span> - ((<span class="hljs-keyword">int</span>)packet[<span class="hljs-number">14</span>])%<span class="hljs-number">16</span>*<span class="hljs-number">4</span>;</code></pre><p> <code>next_seq</code> 的值即为 <code>seq</code> + <code>len</code></p><h1 id="排序数据结构"><a href="#排序数据结构" class="headerlink" title="排序数据结构"></a>排序数据结构</h1><p>现在我们已经获得了排序所需要的信息，接下来就需要构建一个便于我们排序的结构来进行排序。为了便于我们的插入排序，构建链表是一个不错的选择</p><pre><code class="hljs C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">packetnode</span>&#123;</span><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pcap_pkthdr</span> *<span class="hljs-title">pkthdr</span>;</span>u_char *packet;<span class="hljs-keyword">char</span> *srcip;<span class="hljs-keyword">char</span> *dstip;u_long seq;u_long ack;u_long next_seq;&#125;;</code></pre><p>上面的节点结构用来处理数据包，便于后续排序。 <code>pkthdr</code> 和 <code>packet</code> 是原始抓到的数据包，也是我们后续要保存至文件的东西。后面的五个就是在上面分析流量包的环节我们排序所需要的信息，将它保存在这个节点结构中</p><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">packlist</span>&#123;</span><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">packetnode</span> *<span class="hljs-title">data</span>;</span><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">packlist</span> *<span class="hljs-title">left</span>;</span><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">packlist</span> *<span class="hljs-title">right</span>;</span>&#125;;</code></pre><p>上面的链表结构用来构建链表，有 <code>left</code> 和 <code>right</code> 用来进行查询和插入</p><h1 id="排序流程图"><a href="#排序流程图" class="headerlink" title="排序流程图"></a>排序流程图</h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>libpcap</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>libpcap</tag>
+      
+      <tag>C</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Centos6.9网络配置</title>
+    <link href="/2020/10/08/Centos6.9%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/"/>
+    <url>/2020/10/08/Centos6.9%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</url>
+    
+    <content type="html"><![CDATA[<p>Linux初步课程学习中需要搭建一个新的虚拟机，选择了用Centos6.9的minimal版本作为虚拟机版本。不知道是我VMware配置问题还是镜像问题，配置好的虚拟机无法连接网络。</p><p><code>ifconfig</code>可以看见只有一个<code>lo</code>网卡，使用<code>ifconfig -a</code>可以看见有一个<code>eth0</code>网卡未被启用。</p><p>回想起当时新人培训的时候做的小型局域网，记一篇笔记来记录虚拟机的网络配置备忘。</p><h1 id="配置网卡"><a href="#配置网卡" class="headerlink" title="配置网卡"></a>配置网卡</h1><ul><li>进入网卡配置文件目录<code>/etc/sysconfig/network-scripts</code></li><li>找到对应的网卡文件，我的是<code>ifcfg-eth0</code>，进行配置</li></ul><pre><code class="hljs bash"><span class="hljs-comment">#别问我为啥不用vim，centos默认没有vim</span>vi ifcfg-eth0</code></pre><ul><li>重点配置以下内容</li></ul><pre><code class="hljs shell">IPADDR=192.168.229.6   ip地址NETMASK=255.255.255.0  子网掩码GATEWAY=192.168.229.2    网关ONBOOT=yes             随系统自动启动STATIC=true            静态地址BOOTPROTO=static       静态地址（推荐使用这个指定静态地址）</code></pre><ul><li><p>为何使用静态地址？</p><p>我对此的理解还不够，但是从最开始的培训和这次的配置我选择的都是静态地址的选项，使用静态的更为稳定，不需要过多的配置</p></li><li><p>其中，ip地址和网关需要查看VMware的虚拟网络配置器，如下图</p><p><img src="/img/Centos6.9%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/1.png"></p></li></ul><p>  <img src="/img/Centos6.9%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/2.png"></p><ul><li>配置到这里，基本上的网卡配置就完成了</li></ul><h1 id="DNS配置"><a href="#DNS配置" class="headerlink" title="DNS配置"></a>DNS配置</h1><ul><li>完成上述配置后，直接ping百度肯定是ping不同的，因为DNS配置还没有进行</li><li>打开DNS配置文件</li></ul><pre><code class="hljs bash">vi /etc/resolv.conf</code></pre><ul><li>文件里面应该是没有任何内容的，有也没有关系，加入以下内容</li></ul><pre><code class="hljs shell">nameserver 114.114.114.114namesetver 8.8.8.8</code></pre><p><strong>经学长指正，上述方法在重启后DNS会失效，在<code>/etc/sysconfig/network-script/ifcfg-eth0</code>中添加<code>DNS1=X.X.X.X</code>，<code>DNS2=Y.Y.Y.Y</code>等更为合适</strong></p><ul><li>重启网络</li></ul><pre><code class="hljs bash">service network restart</code></pre><ul><li>现在你就可以在这台虚拟机里愉快的使用网络啦！</li></ul><h1 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h1><ul><li><p>为啥我要配网络呢？</p><p>因为虚拟机里装好后却不少东西（连vim都没有，差评），配置新的yum源后发现无法更新，进一步发现了没有网络的问题。使用ssh连接不把网卡配好肯定也是无法连接到的。于是就折腾了一下网卡的配置。</p></li><li><p>为啥非要用ssh连接？</p><p>VMware的命令行界面，连复制粘贴的不行，不用ssh在远程终端连接能行吗？！</p></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
