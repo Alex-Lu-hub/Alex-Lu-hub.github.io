@@ -2,6 +2,8 @@
 title: libpcap离线包排序
 tags:  [libpcap,C]
 categories: [libpcap]
+date: 2020-10-23 8:00:00
+updated: 2020-10-25 16:00:00
 ---
 
 libpcap是unix/linux平台下的网络数据包捕获函数包，大多数网络监控软件都以它为基础。原先的在python下用scapy读包效率过低，故转用在C下由libpcap实现读包排序。

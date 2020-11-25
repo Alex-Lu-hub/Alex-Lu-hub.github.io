@@ -2,6 +2,8 @@
 title: alias命令
 tags:  [Linux]
 categories: [Linux]
+date: 2020-10-30 21:00:00
+updated: 2020-10-30 21:00:00
 excerpt: alias命令可以帮助我们给命令设置别名，在日常使用Linux系统的过程中，可以提供很大的便利。
 ---
 

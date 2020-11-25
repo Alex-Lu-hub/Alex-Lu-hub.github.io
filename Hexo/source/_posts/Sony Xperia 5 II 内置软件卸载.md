@@ -2,6 +2,8 @@
 title: Sony Xperia 5 II 内置软件卸载
 tags:  [Android]
 categories: [Android]
+date: 2020-11-15 21:00:00
+updated: 2020-11-19 21:00:00
 ---
 
 入手港版Sony后有一些我用不到的软件，又不想root，利用adb卸载。

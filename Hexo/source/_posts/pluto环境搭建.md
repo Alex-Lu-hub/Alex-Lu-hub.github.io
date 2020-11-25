@@ -2,6 +2,8 @@
 title: Pluto环境搭建
 tags:  [Pluto]
 categories: [ADI]
+date: 2020-11-9 16:00:00
+updated: 2020-11-15 21:00:00
 ---
 
 本文旨在帮助刚入手pluto的同志们搭建好pluto的工作环境，便于后续的在matlab下开发测试。

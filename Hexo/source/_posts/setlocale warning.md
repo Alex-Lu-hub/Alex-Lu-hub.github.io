@@ -2,6 +2,8 @@
 title: setlocale warning
 tags:  [Linux]
 categories: [Linux]
+date: 2020-10-27 16:00:00
+updated: 2020-10-27 16:00:00
 ---
 
 小系统登陆时出现多条如下warning:

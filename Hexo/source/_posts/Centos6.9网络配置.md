@@ -3,6 +3,7 @@ title: Centos6.9网络配置
 tags:  [Linux]
 categories: [Linux]
 date: 2020-10-8 12:00:00
+updated: 2020-10-25 21:00:00
 excerpt: 新的Centos6.9 minimal虚拟机无法连接网络，虚拟机网络配置的记录
 ---
 
