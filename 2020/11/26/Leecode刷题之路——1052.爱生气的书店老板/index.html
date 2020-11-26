@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Alex Lu">
   <meta name="keywords" content="">
-  <title>Sony Xperia 5 II 内置软件卸载 - LL&#39;s treasure</title>
+  <title>Leetcode刷题之路——1052.爱生气的书店老板 - LL&#39;s treasure</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -170,8 +170,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-11-15 21:00" pubdate>
-        2020年11月15日 晚上
+      <time datetime="2020-11-26 23:40" pubdate>
+        2020年11月26日 晚上
       </time>
     </span>
   
@@ -182,7 +182,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      363 字
+      655 字
     </span>
   
 
@@ -192,7 +192,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      8
        分钟
     </span>
   
@@ -230,68 +230,77 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Sony Xperia 5 II 内置软件卸载</h1>
+            <h1 style="display: none">Leetcode刷题之路——1052.爱生气的书店老板</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年11月19日 晚上
+                  本文最后更新于：2020年11月26日 晚上
                 
               </p>
             
             <div class="markdown-body" id="post-body">
-              <p>入手港版Sony后有一些我用不到的软件，又不想root，利用adb卸载。</p>
-<a id="more"></a>
+              <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>今天，书店老板有一家店打算试营业 <code>customers.length</code> 分钟。每分钟都有一些顾客（ <code>customers[i]</code> ）会进入书店，所有这些顾客都会在那一分钟结束后离开。</p>
+<p>在某些时候，书店老板会生气。 如果书店老板在第 <code>i</code> 分钟生气，那么 <code>grumpy[i] = 1</code> ，否则 <code>grumpy[i] = 0</code> 。 当书店老板生气时，那一分钟的顾客就会不满意，不生气则他们是满意的。</p>
+<p>书店老板知道一个秘密技巧，能抑制自己的情绪，可以让自己连续 <code>X</code> 分钟不生气，但却只能使用一次。</p>
+<p>请你返回这一天营业下来，最多有多少客户能够感到满意的数量。</p>
+<p>示例：</p>
+<div class="hljs"><pre><code class="hljs tap">输入：customers = [1,0,1,2,1,1,7,5], grumpy = [0,1,0,1,0,1,0,1], X = 3
+输出：16
+解释：
+书店老板在最后<span class="hljs-number"> 3 </span>分钟保持冷静。
+感到满意的最大客户数量 =<span class="hljs-number"> 1 </span>+<span class="hljs-number"> 1 </span>+<span class="hljs-number"> 1 </span>+<span class="hljs-number"> 1 </span>+<span class="hljs-number"> 7 </span>+<span class="hljs-number"> 5 </span>= 16.</code></pre></div>
 
-<h1 id="下载adb工具包"><a href="#下载adb工具包" class="headerlink" title="下载adb工具包"></a>下载adb工具包</h1><p>这玩意儿网上百度一大堆，下一个就好了。应该是个压缩包，解压到你知道的地方即可</p>
-<h1 id="手机准备"><a href="#手机准备" class="headerlink" title="手机准备"></a>手机准备</h1><p>首先，手机要打开 <code>开发者选项</code> ，通常应该是点击版本号5下即可，具体的请自行百度</p>
-<p>随后，进入 <code>开发者选下</code> ，打开 <code>USB调试</code></p>
-<p>请下载一个包名查看软件，后面删除包需要用这类软件来查看包名</p>
-<h1 id="删除流程"><a href="#删除流程" class="headerlink" title="删除流程"></a>删除流程</h1><ul>
-<li><p>手机连接电脑</p>
-</li>
-<li><p>在解压adb的文件夹打开 <code>cmd</code> </p>
-</li>
-<li><p>输入如下命令</p>
-<div class="hljs"><pre><code class="hljs powershell">adb devices</code></pre></div>
-
-<p>能够看到自己的设备，说明连接成功。若未看到，请检查手机准备步骤是否完成</p>
-</li>
-<li><p>连接设备</p>
-<div class="hljs"><pre><code class="hljs powershell">adb shell</code></pre></div>
-</li>
-<li><p>删除命令如下</p>
-<div class="hljs"><pre><code class="hljs powershell">pm uninstall <span class="hljs-literal">-k</span> -<span class="hljs-literal">-user</span> <span class="hljs-number">0</span> 应用包名</code></pre></div>
-
-<p>这个包名不是应用的名字，具体的格式可以用如下命令查看</p>
-<div class="hljs"><pre><code class="hljs powershell">pm list packages</code></pre></div>
-
-<p>所以具体要删除啥，就用下载的包名查看软件看即可</p>
-</li>
+<p>提示：</p>
+<ul>
+<li> <code>1 &lt;= X &lt;= customers.length == grumpy.length &lt;= 20000</code> </li>
+<li> <code>0 &lt;= customers[i] &lt;= 1000</code> </li>
+<li> <code>0 &lt;= grumpy[i] &lt;= 1</code> </li>
 </ul>
-<h1 id="我删除的软件"><a href="#我删除的软件" class="headerlink" title="我删除的软件"></a>我删除的软件</h1><div class="hljs"><pre><code class="hljs powershell"><span class="hljs-comment"># Call of Duty</span>
-com.activision.callofduty.shooter
-<span class="hljs-comment"># LinkedIN</span>
-com.linkedin.android
-<span class="hljs-comment"># TIDAL 3 Months Free</span>
-com.android.tidal.campaigninstaller
-<span class="hljs-comment"># Netflix</span>
-com.netflix.mediaclient
-<span class="hljs-comment"># Google地图</span>
-com.google.android.apps.maps
-<span class="hljs-comment"># 数字健康</span>
-com.google.android.apps.wellbeing
-<span class="hljs-comment"># 智能镜头</span>
-com.google.ar.lens
-<span class="hljs-comment"># Google Play Service for AR</span>
-com.google.ar.core
-<span class="hljs-comment"># Google</span>
-com.google.android.googlequicksearchbox
-<span class="hljs-comment"># Chrome</span>
-com.android.chrome
-<span class="hljs-comment"># 相册</span>
-com.google.android.apps.photos
-<span class="hljs-comment"># 文件</span>
-com.google.android.documentsui</code></pre></div>
+<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><h2 id="个人初尝试"><a href="#个人初尝试" class="headerlink" title="个人初尝试"></a>个人初尝试</h2><p>输入： <code> vector&lt;int&gt;&amp;cusstomers、vector&lt;int&gt;&amp;grumpy、int X</code> </p>
+<p>输出： <code>int maxnum</code></p>
+<p>可以看到，在不考虑使用技能的情况下，满意的人数是确定的。很直接一个思路，将确定的满意人数保存下来，采取遍历的方法，每个时段把使用技能后增加的人数加上，得到一个最大的人数返回。</p>
+<p>代码如下：</p>
+<div class="hljs"><pre><code class="hljs C++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxSatisfied</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; customers, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; grumpy, <span class="hljs-keyword">int</span> X)</span> </span>&#123;
+        <span class="hljs-comment">//初始化变量</span>
+        <span class="hljs-keyword">int</span> len = customers.size();<span class="hljs-comment">//时间长度</span>
+        <span class="hljs-keyword">int</span> basenum = <span class="hljs-number">0</span>;<span class="hljs-comment">//基本的满意人数</span>
+        <span class="hljs-keyword">int</span> maxnum = <span class="hljs-number">0</span>;<span class="hljs-comment">//最大满意人数</span>
+
+        <span class="hljs-comment">//遍历存储不用技能情况下的满意人数</span>
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; i++) &#123;
+            <span class="hljs-keyword">if</span>(grumpy[i] == <span class="hljs-number">0</span>)
+                basenum += customers[i];
+        &#125;
+
+        <span class="hljs-comment">//遍历寻找使用技能后最大满意人数</span>
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; i++) &#123;
+            <span class="hljs-keyword">int</span> tempnum = basenum;<span class="hljs-comment">//寻找最大值的中间变量</span>
+            
+            <span class="hljs-comment">//X时间的处理</span>
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; X; j++) &#123;
+                <span class="hljs-comment">//防止越界</span>
+                <span class="hljs-keyword">if</span>(i + j &lt; len)&#123;
+                    <span class="hljs-keyword">if</span>(grumpy[i + j] == <span class="hljs-number">1</span>)<span class="hljs-comment">//如果技能期间本来要生气，加上</span>
+                        tempnum += customers[i + j];
+                &#125;
+            &#125;
+
+            <span class="hljs-keyword">if</span>(tempnum &gt; maxnum)<span class="hljs-comment">//如果得到的大于目前最大的，更换目前最大值</span>
+                maxnum = tempnum;  
+        &#125;
+    <span class="hljs-keyword">return</span> maxnum;
+    &#125;
+&#125;;</code></pre></div>
+
+<h1 id="一些总结"><a href="#一些总结" class="headerlink" title="一些总结"></a>一些总结</h1><ul>
+<li><code>vector</code> 初始化用 <code>&#123;&#125;</code> 而不是 <code>[]</code></li>
+<li>类&amp;对象需要先声明，就像声明基本类型的变量一样</li>
+<li> <code>using name space std</code> 还是挺方便的，可用</li>
+<li> <code>vector</code> 的名字本身就是一个指针，传参不需要加 <code>*</code> </li>
+</ul>
+
             </div>
             <hr>
             <div>
@@ -300,7 +309,7 @@ com.google.android.documentsui</code></pre></div>
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Android/">Android</a>
+                      <a class="hover-with-bg" href="/categories/Leetcode/">Leetcode</a>
                     
                   </div>
                 
@@ -308,7 +317,7 @@ com.google.android.documentsui</code></pre></div>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Android/">Android</a>
+                      <a class="hover-with-bg" href="/tags/C/">C++</a>
                     
                   </div>
                 
@@ -321,18 +330,12 @@ com.google.android.documentsui</code></pre></div>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/11/26/Leecode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%941052.%E7%88%B1%E7%94%9F%E6%B0%94%E7%9A%84%E4%B9%A6%E5%BA%97%E8%80%81%E6%9D%BF/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Leetcode刷题之路——1052.爱生气的书店老板</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/11/09/pluto%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
-                        <span class="hidden-mobile">Pluto环境搭建</span>
+                      <a href="/2020/11/15/Sony%20Xperia%205%20II%20%E5%86%85%E7%BD%AE%E8%BD%AF%E4%BB%B6%E5%8D%B8%E8%BD%BD/">
+                        <span class="hidden-mobile">Sony Xperia 5 II 内置软件卸载</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -526,7 +529,7 @@ com.google.android.documentsui</code></pre></div>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Sony Xperia 5 II 内置软件卸载&nbsp;",
+        "Leetcode刷题之路——1052.爱生气的书店老板&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
