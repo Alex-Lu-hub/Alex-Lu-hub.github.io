@@ -182,7 +182,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      655 字
+      1.5k 字
     </span>
   
 
@@ -192,7 +192,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      18
        分钟
     </span>
   
@@ -234,7 +234,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年11月26日 晚上
+                  本文最后更新于：2020年11月27日 晚上
                 
               </p>
             
@@ -294,11 +294,73 @@
     &#125;
 &#125;;</code></pre></div>
 
-<h1 id="一些总结"><a href="#一些总结" class="headerlink" title="一些总结"></a>一些总结</h1><ul>
+<p>将上述代码提交后，最后一个测试用例超时，查看后发现是一个超长的测试用例，看来还是代码的性能不够。。。。。。没有啥好的思路，学习一下别人的做法</p>
+<h2 id="滑动窗口方法"><a href="#滑动窗口方法" class="headerlink" title="滑动窗口方法"></a>滑动窗口方法</h2><p>滑动窗口方法标准情况下采用<strong>左右窗口指针</strong> <code>left</code> 、 <code>right</code>，用来标记窗口的位置。用 <code>right - left</code> 标志窗口的大小。两指针都从0开始增加， <code>right</code> 先增，当窗口大小超过目标时移动 <code>left</code> 维持窗口大小。每次移动窗口位置都需要判断窗口内需要的信息，是否需要更新需要得到的内容。</p>
+<p>在这个例子中，具体的滑窗实现可以如下：</p>
+<div class="hljs"><pre><code class="hljs C++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxSatisfied</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; customers, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; grumpy, <span class="hljs-keyword">int</span> X)</span> </span>&#123;
+        <span class="hljs-comment">//初始化变量,left, right为左右指针，satisfy为满意人数，angry为最大受技能影响的生气人数, anginwindow即技能窗口中的生气人数</span>
+        <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>, right = <span class="hljs-number">0</span>, satisfy = <span class="hljs-number">0</span>, angry = <span class="hljs-number">0</span>, anginwindow = <span class="hljs-number">0</span>;
+
+        <span class="hljs-comment">//滑窗寻找使用技能后最大满意人数</span>
+        <span class="hljs-keyword">while</span>(right &lt; customers.size()) &#123;
+            <span class="hljs-keyword">if</span>(grumpy[right] == <span class="hljs-number">0</span>)<span class="hljs-comment">//不生气的，加入到满意人数中</span>
+                satisfy += customers[right];            
+            <span class="hljs-keyword">else</span><span class="hljs-comment">//生气的，加入到受技能影响的生气人数中</span>
+                anginwindow += customers[right];
+            ++right;
+            <span class="hljs-comment">//窗口变化的处理</span>
+            <span class="hljs-keyword">while</span>(right - left &gt; X) &#123;
+                <span class="hljs-comment">//此时需要移动左指针，如果左指针有受技能影响的人数，需减去</span>
+                anginwindow -= grumpy[left]?customers[left]:<span class="hljs-number">0</span>;
+                ++left;
+            &#125;
+            angry = max(angry,anginwindow);<span class="hljs-comment">//每次窗口变化需要更新手机能影响的最大生气人数</span>
+        &#125;
+    <span class="hljs-keyword">return</span> satisfy + angry;<span class="hljs-comment">//满意人数+受技能影响最大生气人数即为最大人数</span>
+    &#125;
+&#125;;</code></pre></div>
+
+<p>这个滑窗虽然能够解决这一问题，且成功通过了所有的用例，但是在效果上不是特别理想，还可以进一步改进。</p>
+<h3 id="该题更进一步的滑窗"><a href="#该题更进一步的滑窗" class="headerlink" title="该题更进一步的滑窗"></a>该题更进一步的滑窗</h3><p>因为题目为固定窗口，所以可以计算出第一个窗口的值作为最大值，然后每次滑动一格算下一个窗口的值，两者比较进行保留，最终得到最大值。</p>
+<p>具体实现代码可以如下：</p>
+<div class="hljs"><pre><code class="hljs C++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxSatisfied</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; customers, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; grumpy, <span class="hljs-keyword">int</span> X)</span> </span>&#123;
+        <span class="hljs-comment">//初始化变量,satisfy为最大窗口变满意人数，sinwindow即窗口滑动过程中的变满意人数， basenum为基础满意人数</span>
+        <span class="hljs-keyword">int</span> satisfy = <span class="hljs-number">0</span>, sinwindow = <span class="hljs-number">0</span>, basenum = <span class="hljs-number">0</span>;
+
+        <span class="hljs-comment">//固定滑窗的处理</span>
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span> ; i &lt; customers.size(); ++i) &#123;
+            <span class="hljs-keyword">if</span>(grumpy[i])<span class="hljs-comment">//计算窗口内此刻的生气变满意人数，相当于右指针每次增加最右侧值</span>
+                sinwindow += customers[i];
+            <span class="hljs-keyword">else</span><span class="hljs-comment">//计算基础满意人数</span>
+                basenum += customers[i];
+            
+            <span class="hljs-comment">//开始超出窗口大小，每次需要按要求减去最左侧，并比较得出最大窗口变满意人数</span>
+            <span class="hljs-keyword">if</span>(i &gt;= X<span class="hljs-number">-1</span>) &#123;
+                satisfy = max(satisfy, sinwindow);
+                sinwindow -= grumpy[i-(X<span class="hljs-number">-1</span>)]?customers[i-(X<span class="hljs-number">-1</span>)]:<span class="hljs-number">0</span>;
+            &#125;
+        &#125;
+
+        <span class="hljs-comment">//最大值就是基础满意人数加最大窗口变满意人数</span>
+        <span class="hljs-keyword">return</span> satisfy + basenum;
+    &#125;
+&#125;;</code></pre></div>
+
+<h1 id="一些小细节总结"><a href="#一些小细节总结" class="headerlink" title="一些小细节总结"></a>一些小细节总结</h1><ul>
 <li><code>vector</code> 初始化用 <code>&#123;&#125;</code> 而不是 <code>[]</code></li>
 <li>类&amp;对象需要先声明，就像声明基本类型的变量一样</li>
 <li> <code>using name space std</code> 还是挺方便的，可用</li>
 <li> <code>vector</code> 的名字本身就是一个指针，传参不需要加 <code>*</code> </li>
+<li> <code>if</code> 和 <code>? :</code> ， <code>if</code> 是用于不同逻辑代码段，而  <code>? :</code> 用于不同逻辑赋值</li>
+<li><code>i++</code> 和 <code>++i</code> ，在如 <code>for</code> 循环的使用中，用 <code>++i</code> 性能更好，原因如下：<ul>
+<li>  <code>i++</code> 由于是在使用当前值之后再 <code>+1</code> ，所以需要一个临时的变量来转存</li>
+<li> 而 <code>++i</code> 则是在直接 <code>+1</code> ，省去了对内存的操作的环节，相对而言能够提高性能</li>
+</ul>
+</li>
 </ul>
 
             </div>
