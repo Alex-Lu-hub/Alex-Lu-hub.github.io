@@ -3,7 +3,7 @@ title: Leetcode刷题之路——1052.爱生气的书店老板
 tags:  [C++]
 categories: [Leetcode]
 date: 2020-11-26 23:40:00
-updated: 2020-11-26 23:40:00
+updated: 2020-11-27 23:20:00
 excerpt: Leetcode题库1052.爱生气的书店老板
 ---
 
@@ -82,9 +82,83 @@ public:
 };
 ```
 
-# 一些总结
+将上述代码提交后，最后一个测试用例超时，查看后发现是一个超长的测试用例，看来还是代码的性能不够。。。。。。没有啥好的思路，学习一下别人的做法
+
+## 滑动窗口方法
+
+滑动窗口方法标准情况下采用**左右窗口指针** ``left`` 、 ``right``，用来标记窗口的位置。用 ``right - left`` 标志窗口的大小。两指针都从0开始增加， ``right`` 先增，当窗口大小超过目标时移动 ``left`` 维持窗口大小。每次移动窗口位置都需要判断窗口内需要的信息，是否需要更新需要得到的内容。
+
+在这个例子中，具体的滑窗实现可以如下：
+
+```C++
+class Solution {
+public:
+    int maxSatisfied(vector<int>& customers, vector<int>& grumpy, int X) {
+        //初始化变量,left, right为左右指针，satisfy为满意人数，angry为最大受技能影响的生气人数, anginwindow即技能窗口中的生气人数
+        int left = 0, right = 0, satisfy = 0, angry = 0, anginwindow = 0;
+
+        //滑窗寻找使用技能后最大满意人数
+        while(right < customers.size()) {
+            if(grumpy[right] == 0)//不生气的，加入到满意人数中
+                satisfy += customers[right];            
+            else//生气的，加入到受技能影响的生气人数中
+                anginwindow += customers[right];
+            ++right;
+            //窗口变化的处理
+            while(right - left > X) {
+                //此时需要移动左指针，如果左指针有受技能影响的人数，需减去
+                anginwindow -= grumpy[left]?customers[left]:0;
+                ++left;
+            }
+            angry = max(angry,anginwindow);//每次窗口变化需要更新手机能影响的最大生气人数
+        }
+    return satisfy + angry;//满意人数+受技能影响最大生气人数即为最大人数
+    }
+};
+```
+
+这个滑窗虽然能够解决这一问题，且成功通过了所有的用例，但是在效果上不是特别理想，还可以进一步改进。
+
+### 该题更进一步的滑窗
+
+因为题目为固定窗口，所以可以计算出第一个窗口的值作为最大值，然后每次滑动一格算下一个窗口的值，两者比较进行保留，最终得到最大值。
+
+具体实现代码可以如下：
+
+```C++
+class Solution {
+public:
+    int maxSatisfied(vector<int>& customers, vector<int>& grumpy, int X) {
+        //初始化变量,satisfy为最大窗口变满意人数，sinwindow即窗口滑动过程中的变满意人数， basenum为基础满意人数
+        int satisfy = 0, sinwindow = 0, basenum = 0;
+
+        //固定滑窗的处理
+        for(int i=0 ; i < customers.size(); ++i) {
+            if(grumpy[i])//计算窗口内此刻的生气变满意人数，相当于右指针每次增加最右侧值
+                sinwindow += customers[i];
+            else//计算基础满意人数
+                basenum += customers[i];
+            
+            //开始超出窗口大小，每次需要按要求减去最左侧，并比较得出最大窗口变满意人数
+            if(i >= X-1) {
+                satisfy = max(satisfy, sinwindow);
+                sinwindow -= grumpy[i-(X-1)]?customers[i-(X-1)]:0;
+            }
+        }
+
+        //最大值就是基础满意人数加最大窗口变满意人数
+        return satisfy + basenum;
+    }
+};
+```
+
+# 一些小细节总结
 
 * ``vector`` 初始化用 ``{}`` 而不是 ``[]``
 * 类&对象需要先声明，就像声明基本类型的变量一样
 *  ``using name space std`` 还是挺方便的，可用
 *  ``vector`` 的名字本身就是一个指针，传参不需要加 ``*`` 
+*  ``if`` 和 ``? :`` ， ``if`` 是用于不同逻辑代码段，而  ``? :`` 用于不同逻辑赋值
+*  ``i++`` 和 ``++i`` ，在如 ``for`` 循环的使用中，用 ``++i`` 性能更好，原因如下：
+  *   ``i++`` 由于是在使用当前值之后再 ``+1`` ，所以需要一个临时的变量来转存
+  *  而 ``++i`` 则是在直接 ``+1`` ，省去了对内存的操作的环节，相对而言能够提高性能
