@@ -1,0 +1,1023 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/pi.jpg">
+  <link rel="icon" type="image/png" href="/img/pi.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Alex Lu">
+  <meta name="keywords" content="">
+  <title>计算机网络考试复习 - LL&#39;s treasure</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/a11y-dark.min.css" />
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>蒹葭的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Alex Lu
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-11-28 15:04" pubdate>
+        2020年11月28日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      50
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">计算机网络考试复习</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2020年11月29日 凌晨
+                
+              </p>
+            
+            <div class="markdown-body" id="post-body">
+              <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h1><h2 id="1-1-基本概念"><a href="#1-1-基本概念" class="headerlink" title="1.1 基本概念"></a>1.1 基本概念</h2><ul>
+<li>计算机网络可以视为是 <code>计算机技术</code> 和 <code>通信技术</code> 的合成</li>
+<li>为进行网络的数据交换而建立的规则、标准或原定成为 <code>协议</code> </li>
+<li>网络通信方式包括 <code>点到点</code> 、 <code>广播</code> 、 <code>点到多点</code> 、 <code>多点到多点</code></li>
+<li>公用电话交换网(PSTN)中的交换设备提供 <code>电路交换</code> 方式</li>
+<li>世界上第一个投入运行的分组交换网是 <code>ARPANET</code></li>
+<li>ARPAnet是最早验证分组交换的网络之一</li>
+<li>Internet起源于ARPAnet</li>
+<li>根据计算机网络的定义，其主要特征包括 <code>支持计算机资源的共享</code> 、 <code>互联的计算机系统是自洽的系统</code> 、 <code>联网的计算机系统之间需要遵循共同的网络协议</code> <ul>
+<li>关于计算机网络的最简单定义是：一些相互连接的、以共享资源为目的的、自治的计算机的集合</li>
+</ul>
+</li>
+<li>计算机网络按照网络规模大小可以分为 <code>PAN、LAN、MAN、WAN</code><ul>
+<li>PAN：personal area network 个人区域网络<ul>
+<li>无线连接：蓝牙，红外，NFC</li>
+<li>有线连接：USB电缆</li>
+<li>常用于传输小文件、如音乐、照片、日历、约定等</li>
+</ul>
+</li>
+<li>LAN：local area network 局域网<ul>
+<li>由一组设备组成，如计算机、服务器、交换机、打印机等</li>
+<li>最常见的局域网类型是以太网，两台或多台计算机通过电缆连接到以太网交换机上</li>
+</ul>
+</li>
+<li>MAN：metropolitan area network 城域网<ul>
+<li>这是一种比校园网区域网络还大的网络</li>
+<li>它是一种横跨一个城市或城镇的多个建筑的网络</li>
+<li>城域网通常使用高速连接，例如光缆</li>
+<li>城域网是一种高速网络，能够在城市中共享数据和资源提供服务</li>
+</ul>
+</li>
+<li>WAN：wide area network 广域网<ul>
+<li>WAN是最大的网络类型，一个WAN可以包括多个LAN、CAN及MAN</li>
+<li>是一种跨越很大地理区域的网络，例如一个国家，一个大陆，甚至整个地球，广域网的一个很好的例子就是互联网</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>网络分类方法：<code>局域网/广域网</code> 、 <code>有线网/无线网</code> 、 <code>环星网/星型网</code> </li>
+</ul>
+<h2 id="1-2-交换原理"><a href="#1-2-交换原理" class="headerlink" title="1.2 交换原理"></a>1.2 交换原理</h2><ul>
+<li><p> <code>虚电路</code> 、 <code>TCP</code> 能提供面向连接的服务</p>
+</li>
+<li><p>现有的公共数据网主要采用的技术是 <code>分组交换</code> </p>
+</li>
+<li><p><code>数据报</code> 、 <code>信元交换</code> 、 <code>虚电路</code> 属于分组交换技术</p>
+<ul>
+<li>信元交换：信元交换又叫异步传输模式（Asynchronous Transfer Mode，ATM），是一种面向连接的快速分组交换技术，它是通过建立虚电路来进行数据传输的。</li>
+</ul>
+</li>
+<li><p>电路交换、报文交换、分组交换三者的优缺点</p>
+<ul>
+<li>电路交换：此种方式在通信之前bai需要在通信的双方间建立成一条被双方独占的物理通道。这个通道是由双方间的交换设备和链路逐段连接而建成的<ul>
+<li>优点：<ul>
+<li>数据直达传输，延迟小，具有很强的实时性</li>
+<li>双方通信是有序的，不存在失序问题</li>
+<li>该种交换方式既可以用于传输模拟信号，也可用于传输数字信号</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>该交换方式建立连接平均时间较长，影响效率</li>
+<li>该交换方式对信道的利用率较低。建立的物理通路即使处于空闲状态，也会独占通路</li>
+<li>不同类型，规格，速率的终端难以相互进行通信，且易发生差错</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>报文交换：此种方式以【报文】为数据交换的单位，报文中携带目标地址、源地址等信息，交换结点的过程中采用存储转发的传输方式<ul>
+<li>优点：<ul>
+<li>报文交换不存在连接建立时延，用户可以随时发送。</li>
+<li>当某条传输路径发生故障，该交换方式可以自动重新选择另一条路径进行传输，提高了传输稳定性。</li>
+<li>即使不同类型，规格，速率的终端也可以实现通信。</li>
+<li>可以实现多目标发送服务。</li>
+<li>交换方式会自动建立数据传输的优先级，提高信道的利用率。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>数据交换结点需要经历存储、转发这个过程，所以会引起转发时延。</li>
+<li>此种方式只能用于数字信号。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分组交换：该种方式可以说是报文交换的升级版。交换仍采用存储转发传输方式，但会将一个长报文先分割为若干个较短的分组，然后再将这些分组逐个进行发送<ul>
+<li>优点：<ul>
+<li>该方式加速了数据的网络传输</li>
+<li>该方式简化了存储管理，从而减少了出错机率和重发数据量</li>
+<li>由于其分组的特点，在优先级策略传输中更具优势</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>时延问题仍然存在，但一定程度上得到减少</li>
+<li>采用数据报服务时，可能导致出现失序、丢失或重复分组的情况</li>
+<li>通信效率不太高</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>数据报服务/虚电路服务</p>
+<ul>
+<li>数据报方式<ul>
+<li>为网络层提供<strong>无连接方式</strong></li>
+<li>无连接服务<ul>
+<li>不事先为分组的传输确定一个具体的路径，每个分组会独立的确定传输路径，不同分组传输路径可能不同</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>虚电路服务<ul>
+<li>为网络层提供<strong>连接方式</strong></li>
+<li>连接方式<ul>
+<li>首先为分组的传输确定一个传输的路径，也就是要建立连接，然后沿着该连接传输系列分组，这系列分组的传输路径都是相同的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">数据报服务</th>
+<th align="center">虚电路服务</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>连接的建立</strong></td>
+<td align="center">不要</td>
+<td align="center">必须有</td>
+</tr>
+<tr>
+<td align="center"><strong>目的地址</strong></td>
+<td align="center">每个分组都有完整的目的地址</td>
+<td align="center">仅在建立连接阶段使用，之后每个分组使用长度较短的虚电路号</td>
+</tr>
+<tr>
+<td align="center"><strong>路由的选择</strong></td>
+<td align="center">每个分组独立的进行路由选择和转发</td>
+<td align="center">属于同一条虚电路的分组按照同一路由转发</td>
+</tr>
+<tr>
+<td align="center"><strong>分组顺序</strong></td>
+<td align="center">不保证分组有序到达</td>
+<td align="center">保证分组的有序到达</td>
+</tr>
+<tr>
+<td align="center"><strong>可靠性</strong></td>
+<td align="center">不保证可靠通信，可靠性由用户主机保证</td>
+<td align="center">可靠性由网络保证</td>
+</tr>
+<tr>
+<td align="center"><strong>对网络故障的适应性</strong></td>
+<td align="center">出故障的结点丢失分组，其他分组路径选择发生变化，可正常传输</td>
+<td align="center">所有经过故障结点的虚电路均不能正常工作</td>
+</tr>
+<tr>
+<td align="center"><strong>差错处理和流量控制</strong></td>
+<td align="center">由用户主机进行流量控制，不保证数据报的可靠性</td>
+<td align="center">可由分组交换网负责，也可由用户主机负责</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>常见的网络拓扑有 <code>环形结构</code> 、 <code>总线结构</code> 、 <code>网状结构</code>  、 <code>星型结构</code> 、 <code>树形结构</code> 、 <code>混合型结构</code></p>
+</li>
+</ul>
+<h2 id="1-3-网络应用需求"><a href="#1-3-网络应用需求" class="headerlink" title="1.3 网络应用需求"></a>1.3 网络应用需求</h2><ul>
+<li>计算机网络通信的一个显著特点是 <code>间歇性、突发性</code> </li>
+<li>如果源端发送的每一个消息均希望被目的端所接收，可以采取 <code>请求/响应</code> 的通信方式</li>
+</ul>
+<h2 id="1-4-网络体系架构"><a href="#1-4-网络体系架构" class="headerlink" title="1.4 网络体系架构"></a>1.4 网络体系架构</h2><ul>
+<li><p>协议的基本要素包括 <code>语法</code> 、 <code>语义</code> 、 <code>时序</code> </p>
+</li>
+<li><p>我们将构成网络体系各个层次的抽象对象称作 <code>实体</code> </p>
+</li>
+<li><p>同一系统相邻两层的尸体进行交互的地方，称为 <code>服务访问点</code> </p>
+</li>
+<li><p>网络体系结构是网络层次结构模型与各层协议的集合</p>
+</li>
+<li><p>协议与服务</p>
+<ul>
+<li>协议的实现保证了能够向上一层提供服务，要实现本层协议，还需要使用下面一层所提供的服务</li>
+<li>在协议的控制下，两个对等实体间的通信使得本层能够向上一层提供服务</li>
+<li>协议是水平的，即协议是控制对等实体间通信的规则。服务是垂直的，即服务是下层向上层通过层间接口提供的</li>
+</ul>
+</li>
+<li><p>关于计算机网络架构的分层</p>
+<ul>
+<li>每一层都实现一种相对独立的功能，降低大系统的复杂度</li>
+<li>各层之间界面清晰，交互接口尽可能简单</li>
+<li>下层对上层相对独立，上层调用下层提供的服务</li>
+<li>各层的定义主要在功能方面，不应指定具体的实现方法</li>
+</ul>
+</li>
+<li><p>计算机网络体系采用层次结构的主要原因</p>
+<ul>
+<li>使各层次的功能相对独立，使得各层次实现技术的进步不影响相邻层次，从而保持体系结构的稳定性</li>
+<li>层次结构的方法可以简化计算机网络的实现 </li>
+</ul>
+</li>
+<li><p>OSI7层网络体系</p>
+<table>
+<thead>
+<tr>
+<th align="center">OSI中的层</th>
+<th align="center">功能</th>
+<th align="center">TCP/IP协议族</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">应用层</td>
+<td align="center">文件传输，电子邮件，文件服务，虚拟终端</td>
+<td align="center">TFTP，HTTP，SNMP，FTP，SMTP，DNS，Telnet 等等</td>
+</tr>
+<tr>
+<td align="center">表示层</td>
+<td align="center">数据格式化，代码转换，数据加密</td>
+<td align="center">没有协议</td>
+</tr>
+<tr>
+<td align="center">会话层</td>
+<td align="center">解除或建立与别的接点的联系</td>
+<td align="center">没有协议</td>
+</tr>
+<tr>
+<td align="center">传输层</td>
+<td align="center">提供端对端的接口</td>
+<td align="center">TCP，UDP</td>
+</tr>
+<tr>
+<td align="center">网络层</td>
+<td align="center">为数据包选择路由</td>
+<td align="center">IP，ICMP，OSPF，EIGRP，IGMP</td>
+</tr>
+<tr>
+<td align="center">数据链路层</td>
+<td align="center">传输有地址的帧以及错误检测功能</td>
+<td align="center">SLIP，CSLIP，PPP，MTU</td>
+</tr>
+<tr>
+<td align="center">物理层</td>
+<td align="center">以二进制数据形式在物理媒体上传输数据</td>
+<td align="center">ISO2110，IEEE802，IEEE802.2</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p><strong>物理层Physical(以二进制数据形式在物理媒体上传输数据)</strong></p>
+<p>透明的传输原始比特流</p>
+<p>主要定义物理设备标准，如网线的接口类型、光纤的接口类型、各种传输介质的传输速率等。它的主要作用是传输比特流(就是由1、0转化为电流强弱来进行传输，到达目的地后在转化为1、0，也就是我们常说的数模转换与模数转换)。这一层的数据叫做比特。</p>
+</li>
+<li><p><strong>数据链路层Data Link(传输有地址的帧以及错误检测功能 )</strong></p>
+<p>数据被分割成帧</p>
+<p>控制相邻两个结点间通信流量</p>
+<p>把原始比特流封装在分离的单元里，并且利用协议交换这些单元</p>
+<p>定义了如何让格式化数据以进行传输，以及如何让控制对物理介质的访问。这一层通常还提供错误检测和纠正，以确保数据的可靠传输。</p>
+</li>
+<li><p><strong>网络层Network(为数据包选择路由)</strong></p>
+<p>即路由器，交换机那些具有寻址功能的设备所实现的功能。这一层定义的是IP地址，通过IP地址寻址。所以产生了IP协议。</p>
+</li>
+<li><p><strong>传输层Transport(提供端对端的接口协议，TCP/OCP等)</strong></p>
+<p>自下而上第一个提供端到端服务</p>
+<p>提供建立、维护和拆除端到端连接功能</p>
+</li>
+<li><p><strong>会话层Session(解除与建立与别的接口的联系)</strong></p>
+<p>会话层的作用就是建立和管理应用程序之间的通信。</p>
+</li>
+<li><p><strong>表示层Presentation(数据格式化，代码转换，数据加密)</strong></p>
+<p>需要表示层（presentation），帮我们解决不同系统之间的通信语法问题</p>
+</li>
+<li><p><strong>应用层Application(文件传输，电子邮件，文件服务，虚拟终端)</strong></p>
+<p>传输的数据根据应用层的协议进行服务 </p>
+</li>
+<li><p>记忆口诀</p>
+<ul>
+<li><p><strong>A</strong>ll <strong>P</strong>eople <strong>S</strong>eem <strong>T</strong>o <strong>N</strong>eed <strong>D</strong>ata <strong>P</strong>rocessing</p>
+</li>
+<li><p><strong>P</strong>lease <strong>D</strong>o <strong>N</strong>ot <strong>T</strong>ell <strong>S</strong>tupid <strong>P</strong>eople <strong>A</strong>nything</p>
+</li>
+<li><p><strong>P</strong>lease <strong>D</strong>o <strong>N</strong>ot <strong>T</strong>ake <strong>S</strong>ales <strong>P</strong>eople’s <strong>A</strong>dvice</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>在 OSI 参考模型中，第 N 层是第 N+1 层的服务提供者</p>
+</li>
+<li><p>在分层网络模型中，第 N 层提供的服务是 <code>利用 N-1 层提供的服务以及按 N 层协议</code> 与对等层实体交换信息来实现的</p>
+</li>
+<li><p>协议是指在 <code>不同节点的对等实体</code> 之间进行通信的规则或者约定</p>
+</li>
+<li><p>TCP/IP网络架构</p>
+<table>
+<thead>
+<tr>
+<th align="center">OSI七层网络模型</th>
+<th align="center">TCP/IP四层概念模型</th>
+<th align="center">对应网络协议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">应用层（Application）</td>
+<td align="center">应用层</td>
+<td align="center">HTTP、TFTP, FTP, NFS, WAIS、SMTP</td>
+</tr>
+<tr>
+<td align="center">表示层（Presentation）</td>
+<td align="center">~</td>
+<td align="center">Telnet, Rlogin, SNMP, Gopher</td>
+</tr>
+<tr>
+<td align="center">会话层（Session）</td>
+<td align="center">~</td>
+<td align="center">SMTP, DNS</td>
+</tr>
+<tr>
+<td align="center">传输层（Transport）</td>
+<td align="center">传输层</td>
+<td align="center">TCP, UDP</td>
+</tr>
+<tr>
+<td align="center">网络层（Network）</td>
+<td align="center">IP层/网络层</td>
+<td align="center">IP, ICMP, ARP, RARP, AKP, UUCP</td>
+</tr>
+<tr>
+<td align="center">数据链路层（Data Link）</td>
+<td align="center">网络接入层</td>
+<td align="center">FDDI, Ethernet, Arpanet, PDN, SLIP, PPP</td>
+</tr>
+<tr>
+<td align="center">物理层（Physical）</td>
+<td align="center">~</td>
+<td align="center">IEEE 802.1A, IEEE 802.2到IEEE 802.11</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p> 应用层</p>
+</li>
+<li><p>传输层</p>
+<ul>
+<li>进程与进程之间的消息传输, 两个主要<br>的协议</li>
+</ul>
+</li>
+<li><p>TCP (Transmission Control Protocol)</p>
+<ul>
+<li>UDP (User Datagram Protocol) </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>IP层/网络层</p>
+<ul>
+<li><p>主机到主机的数据分组传输</p>
+</li>
+<li><p>唯一协议: IP</p>
+</li>
+<li><p>网络接入层</p>
+<ul>
+<li>没有指定该层的实际细节</li>
+</ul>
+</li>
+<li><p>可以是任意一种底层网络</p>
+</li>
+</ul>
+</li>
+<li><p>TCP/IP协议族的网络层提供的是 <code>无连接不可靠的数据报服务</code></p>
+</li>
+<li><p>TCP协议是面向连接的协议</p>
+</li>
+<li><p>物理层、数据链路层、网络层传送的数据单位分别为： <code>比特</code> 、 <code>帧</code> 、 <code>分组</code>  </p>
+</li>
+<li><p><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%A4%8D%E4%B9%A0.assets/image-20201128164426892.png" srcset="/img/loading.gif"></p>
+</li>
+</ul>
+<h2 id="1-5-网络性能评估"><a href="#1-5-网络性能评估" class="headerlink" title="1.5 网络性能评估"></a>1.5 网络性能评估</h2><ul>
+<li>发送数据时，数据块从节点进入到传输媒体所需要的时间为 <code>数据块长度与链路带宽之比</code> </li>
+<li> <code>吞吐量</code> 表示一段特定的时间内网络所能传送的比特数</li>
+<li>关于带宽的描述<ul>
+<li>链路的带宽是指链路上每秒所能传送的比特数，它取决于链路时钟和信道编码</li>
+<li>链路的带宽往往大于链路的吞吐量</li>
+<li>在单位时间内通过网络中某一点的最高数据率，常用的单位为bps</li>
+</ul>
+</li>
+<li>关于链路吞吐量的描述<ul>
+<li>收各种低效率因素的影响，由带宽为10Mbps的链路连接的一对节点可能值达到2Mbps的吞吐量</li>
+<li>链路吞吐量为单位时间内成功地传送数据的数量</li>
+<li>一段链路由两端节点以及节点之间的通信线路组成，链路吞吐量取值为3者的最小值</li>
+</ul>
+</li>
+<li>关于网络设备（如交换机）的吞吐量的描述<ul>
+<li>在单位时间内，网络设备各端口存储转发的比特数之和</li>
+<li>吞吐量的大小主要由网络设备的输入输出端口硬件，以及程序算法的效率决定</li>
+<li>没有帧丢失时，设备能够接收并转发的最大数据速率</li>
+</ul>
+</li>
+<li>分组从网络的一端传送到另一端所需的时间叫时延，网络中时延主要组成部分包括<ul>
+<li>发送时延<ul>
+<li>发送时延是主机或路由器发送数据帧所需要的时间， 也就是从发送数据帧的第一个比特算起，到该帧的最后一个比特发送完毕所需要的时间</li>
+<li>发送时延 = 数据帧长度（bit）/ 发送速率（bit/s）</li>
+</ul>
+</li>
+<li>传播时延<ul>
+<li>传播时延是电磁波在信道中传播一定的距离需要花费的时间</li>
+<li>传播时延 = 信道长度（m）/ 电磁波在信道上的传播速率（m/s）</li>
+</ul>
+</li>
+<li>处理时延<ul>
+<li>主机或路由器在收到分组时要花费一定的时间进行处理，例如分析分组的首部、从分组中提取数据部分、进行差错检验或查找适当的路由等，这就产生了处理时延</li>
+</ul>
+</li>
+<li>排队时延<ul>
+<li>分组通过网络传输时，要经过很多路由器。分组在进入路由器后要先在输入队列中排队等待处理。在路由器确定了转发接口后，还要在输出队列中 排队等待转发。这两个因素就造成了排队时延 。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>计算机网络最主要的性能指标是 <code>带宽</code> 、 <code>时延</code> </li>
+</ul>
+<h1 id="2-直连网络"><a href="#2-直连网络" class="headerlink" title="2.直连网络"></a>2.直连网络</h1><h2 id="2-1-物理层基本通信"><a href="#2-1-物理层基本通信" class="headerlink" title="2.1 物理层基本通信"></a>2.1 物理层基本通信</h2><ul>
+<li><p>计算机网络物理层特性</p>
+<ul>
+<li>机械特性</li>
+<li>电气特性</li>
+<li>功能特性</li>
+<li>规程特性</li>
+</ul>
+</li>
+<li><p>信息传输速率的单位是 <code>比特/秒</code></p>
+</li>
+<li><p>码元传输速率的单位是 <code>波特</code> </p>
+</li>
+<li><p>承载信息量的基本信号单位是 <code>码元</code> </p>
+</li>
+<li><p>通信系统必须具备的三个基本要素是 <code>信源</code> 、 <code>通信媒体</code> 、 <code>信宿</code> </p>
+</li>
+<li><p>调制速率，即每秒钟载波调制状态改变的数值，其单位是 1/s（称为波特，Baud）</p>
+</li>
+<li><p>调制速率又称为波特率，即码元传输的速率</p>
+</li>
+<li><p>数据传输速率，即每秒钟传输的二进制比特数，单位 bit/sec，又称为比特率</p>
+</li>
+<li><p>在两台设备之间实现通信，必须具备 <code>网卡</code> 、 <code>传输介质</code> 、 <code>协议</code> </p>
+</li>
+<li><p>网络适配器的主要功能包括 <code>实现数据链路层协议</code> 、 <code>进行串行/并行转换</code> 、 <code>缓存数据</code> </p>
+</li>
+<li><p>链路层的数据封装与解封是由 <code>网卡</code> 完成的</p>
+</li>
+<li><p>常见通信方式</p>
+<ul>
+<li><p>单工通信（Simplex Communication）</p>
+<p>是指消息只能单方向传输的工作方式</p>
+<p>在单工通信中，通信的信道是单向的，发送端与接收端也是固定的，即发送端只能发送信息，不能接收信息；接收端只能接收信息，不能发送信息。基于这种情况，数据信号从一端传送到另外一端，信号流是单方向的</p>
+</li>
+<li><p>半双工通信（Half-duplex Communication）</p>
+<p>可以实现双向的通信，但不能在两个方向上同时进行，必须轮流交替地进行</p>
+<p>在这种工作方式下，发送端可以转变为接收端；相应地，接收端也可以转变为发送端。但是在同一个时刻，信息只能在一个方向上传输。因此，也可以将半双工通信理解为一种切换方向的单工通信</p>
+</li>
+<li><p>全双工通信（Full duplex Communication）</p>
+<p>是指在通信的任意时刻，线路上存在A到B和B到A的双向信号传输。 全双工通信允许数据同时在两个方向上传输，又称为双向同时通信，即通信的双方可以同时发送和接收数据。在全双工方式下，通信系统的每一端都设置了发送器和接收器，因此，能控制数据同时在两个方向上传送。全双工方式无需进行方向的切换，因此，没有切换操作所产生的时间延迟，这对那些不能有时间延误的交互式应用（例如远程监测和控制系统）十分有利。这种方式要求通讯双方均有发送器和接收器，同时，需要2根数据线传送数据信号。（可能还需要控制线和状态线，以及地线）。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-2-数据链路层机制"><a href="#2-2-数据链路层机制" class="headerlink" title="2.2 数据链路层机制"></a>2.2 数据链路层机制</h2><ul>
+<li>帧定界的方法可分为 <code>字符计数法</code> 、 <code>起止标记法</code> </li>
+<li>中继器的作用是 <code>根据输入端的信号重新生成原始信号再通过输出端传送出去</code> </li>
+<li>奇偶校验码的特征 <code>能检查出奇数个比特错误</code> </li>
+<li>CRC的特征 <code>能查出一定数量比特的错误</code> </li>
+<li> <code>无确认，无连接服务</code> 是源机器向目的机器发出独立的帧，而目的机器对收到的帧不做确认</li>
+<li>透明传输是数据链路层的基本功能，所谓透明性是指 <code>传输的数据内容、格式及编码无限制</code> </li>
+<li>自动请求重传中差错控制的策略 <code>停止等待ARQ协议</code> 、 <code>后退N机制</code> 、 <code>选择重传机制</code> </li>
+</ul>
+<h2 id="2-3-可靠传输机制"><a href="#2-3-可靠传输机制" class="headerlink" title="2.3 可靠传输机制"></a>2.3 可靠传输机制</h2><ul>
+<li>数据链路层实现可靠传输的基本方法包括： <code>确认</code> 、 <code>超时重传</code> 、 <code>帧序号</code> </li>
+<li>数据链路层进行的流量控制指的是 <code>相邻节点之间</code> </li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/26/Leecode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%941052.%E7%88%B1%E7%94%9F%E6%B0%94%E7%9A%84%E4%B9%A6%E5%BA%97%E8%80%81%E6%9D%BF/">
+                        <span class="hidden-mobile">Leetcode刷题之路——1052.爱生气的书店老板</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ABJnbiLU9eQe9IkXz99YBnuL-gzGzoHsz",
+          app_key: "n7cSaYt4NkA2o3ai4DM5qOyo",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    waitElementVisible('vcomments', loadValine);
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://alex-lu-hub.github.io/" target="_blank" rel="nofollow noopener"><span>LL_treasure</span></a> <i class="iconfont icon-love"></i> <a href="https://alex-lu-hub.github.io/" target="_blank" rel="nofollow noopener"><span>蒹葭的博客</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "计算机网络考试复习&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
