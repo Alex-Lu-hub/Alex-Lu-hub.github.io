@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Alex Lu">
   <meta name="keywords" content="">
-  <title>alias命令 - LL&#39;s treasure</title>
+  <title>Leetcode刷题之路——304.二维区域和检索 - 矩阵不可变 - LL&#39;s treasure</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -170,8 +170,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-10-30 21:00" pubdate>
-        2020年10月30日 晚上
+      <time datetime="2021-03-02 10:11" pubdate>
+        2021年3月2日 上午
       </time>
     </span>
   
@@ -182,7 +182,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      753 字
+      739 字
     </span>
   
 
@@ -192,7 +192,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11
+      10
        分钟
     </span>
   
@@ -230,74 +230,109 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">alias命令</h1>
+            <h1 style="display: none">Leetcode刷题之路——304.二维区域和检索 - 矩阵不可变</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年10月30日 晚上
+                  本文最后更新于：2021年3月2日 上午
                 
               </p>
             
             <div class="markdown-body" id="post-body">
-              <p>众所周知，Linux下的解压命令多又难记，时不时还有用错的情况。在邓迅邓巨神的指点下，知晓了 <code>alias</code> 这个神奇的命令，使用起来确实方便了许多，遂记下！</p>
-<h1 id="查看当前已设置的别名"><a href="#查看当前已设置的别名" class="headerlink" title="查看当前已设置的别名"></a>查看当前已设置的别名</h1><div class="hljs"><pre><code class="hljs bash">alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span>
-<span class="hljs-built_in">alias</span> alert=<span class="hljs-string">&#x27;notify-send --urgency=low -i &quot;$([ $? = 0 ] &amp;&amp; echo terminal || echo error)&quot; &quot;$(history|tail -n1|sed -e &#x27;</span>\<span class="hljs-string">&#x27;&#x27;</span>s/^\s*[0-9]\+\s*//;s/[;&amp;|]\s*alert$//<span class="hljs-string">&#x27;\&#x27;</span><span class="hljs-string">&#x27;)&quot;&#x27;</span>
-<span class="hljs-built_in">alias</span> egrep=<span class="hljs-string">&#x27;egrep --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> fgrep=<span class="hljs-string">&#x27;fgrep --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> grep=<span class="hljs-string">&#x27;grep --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> l=<span class="hljs-string">&#x27;ls -CF&#x27;</span>
-<span class="hljs-built_in">alias</span> la=<span class="hljs-string">&#x27;ls -A&#x27;</span>
-<span class="hljs-built_in">alias</span> lh=<span class="hljs-string">&#x27;ls -lh&#x27;</span>
-<span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -alF&#x27;</span>
-<span class="hljs-built_in">alias</span> ls=<span class="hljs-string">&#x27;ls --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> tarbz2=<span class="hljs-string">&#x27;tar -jxvf&#x27;</span></code></pre></div>
+              <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定一个二维矩阵，计算其子矩形范围内元素的总和，该子矩阵的左上角为 <code>(row1, col1)</code> ，右下角为 <code>(row2, col2)</code> 。</p>
+<p>示例：</p>
+<div class="hljs"><pre><code class="hljs livescript">给定 matrix = [
+  [<span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">2</span>],
+  [<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>],
+  [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">5</span>],
+  [<span class="hljs-number">4</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">7</span>],
+  [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">5</span>]
+]
 
-<p>直接输入 <code>alias</code> 即可查看已经设置的别名，已经设置好的别名我们可以直接使用。例如，我输入命令 <code>ll</code> ，就相当于输入 <code>ls -alF</code> 。</p>
-<h1 id="为命令设置别名"><a href="#为命令设置别名" class="headerlink" title="为命令设置别名"></a>为命令设置别名</h1><div class="hljs"><pre><code class="hljs bash">alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span> vi=<span class="hljs-string">&#x27;vim&#x27;</span>
-alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span>
-<span class="hljs-built_in">alias</span> alert=<span class="hljs-string">&#x27;notify-send --urgency=low -i &quot;$([ $? = 0 ] &amp;&amp; echo terminal || echo error)&quot; &quot;$(history|tail -n1|sed -e &#x27;</span>\<span class="hljs-string">&#x27;&#x27;</span>s/^\s*[0-9]\+\s*//;s/[;&amp;|]\s*alert$//<span class="hljs-string">&#x27;\&#x27;</span><span class="hljs-string">&#x27;)&quot;&#x27;</span>
-<span class="hljs-built_in">alias</span> egrep=<span class="hljs-string">&#x27;egrep --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> fgrep=<span class="hljs-string">&#x27;fgrep --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> grep=<span class="hljs-string">&#x27;grep --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> l=<span class="hljs-string">&#x27;ls -CF&#x27;</span>
-<span class="hljs-built_in">alias</span> la=<span class="hljs-string">&#x27;ls -A&#x27;</span>
-<span class="hljs-built_in">alias</span> lh=<span class="hljs-string">&#x27;ls -lh&#x27;</span>
-<span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -alF&#x27;</span>
-<span class="hljs-built_in">alias</span> ls=<span class="hljs-string">&#x27;ls --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> tarbz2=<span class="hljs-string">&#x27;tar -jxvf&#x27;</span>
-<span class="hljs-built_in">alias</span> vi=<span class="hljs-string">&#x27;vim&#x27;</span></code></pre></div>
+sumRegion<span class="hljs-function"><span class="hljs-params">(<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>)</span> -&gt;</span> <span class="hljs-number">8</span>
+sumRegion<span class="hljs-function"><span class="hljs-params">(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>)</span> -&gt;</span> <span class="hljs-number">11</span>
+sumRegion<span class="hljs-function"><span class="hljs-params">(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>)</span> -&gt;</span> <span class="hljs-number">12</span></code></pre></div>
 
-<p>这个例子我们给 <code>vim</code> 设置了一个别名 <code>vi</code> ，注意设置时等号左右不要有空格。此时我们输入 <code>vi</code> 命令就相当于输入 <code>vim</code> 命令。</p>
-<h1 id="删除设置的别名"><a href="#删除设置的别名" class="headerlink" title="删除设置的别名"></a>删除设置的别名</h1><div class="hljs"><pre><code class="hljs bash">alex@PC-20200316LEME:~$ <span class="hljs-built_in">unalias</span> vi
-alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span>
-<span class="hljs-built_in">alias</span> alert=<span class="hljs-string">&#x27;notify-send --urgency=low -i &quot;$([ $? = 0 ] &amp;&amp; echo terminal || echo error)&quot; &quot;$(history|tail -n1|sed -e &#x27;</span>\<span class="hljs-string">&#x27;&#x27;</span>s/^\s*[0-9]\+\s*//;s/[;&amp;|]\s*alert$//<span class="hljs-string">&#x27;\&#x27;</span><span class="hljs-string">&#x27;)&quot;&#x27;</span>
-<span class="hljs-built_in">alias</span> egrep=<span class="hljs-string">&#x27;egrep --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> fgrep=<span class="hljs-string">&#x27;fgrep --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> grep=<span class="hljs-string">&#x27;grep --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> l=<span class="hljs-string">&#x27;ls -CF&#x27;</span>
-<span class="hljs-built_in">alias</span> la=<span class="hljs-string">&#x27;ls -A&#x27;</span>
-<span class="hljs-built_in">alias</span> lh=<span class="hljs-string">&#x27;ls -lh&#x27;</span>
-<span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -alF&#x27;</span>
-<span class="hljs-built_in">alias</span> ls=<span class="hljs-string">&#x27;ls --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> tarbz2=<span class="hljs-string">&#x27;tar -jxvf&#x27;</span></code></pre></div>
 
-<p>使用 <code>unalias</code> 就可以删除我们已经设置好的别名。</p>
-<h1 id="让别名永久生效（当然，别删除它）"><a href="#让别名永久生效（当然，别删除它）" class="headerlink" title="让别名永久生效（当然，别删除它）"></a>让别名永久生效（当然，别删除它）</h1><p>按照上面的方法生成的别名，在我们重启电脑后就会失效。怎么样才能让他一直生效呢？当然是把它加入到会自动运行的脚本中！ <code>~/.bashrc</code> 就是一个不错的选择。</p>
-<p>打开 <code>~/.bashrc</code> ：</p>
-<div class="hljs"><pre><code class="hljs bash">vim ~/.bashrc</code></pre></div>
+<p>提示：</p>
+<ul>
+<li>你可以假设矩阵不可变。</li>
+<li>会多次调用 <code>sumRegion</code> 方法。</li>
+<li>你可以假设 <code>row1 ≤ row2</code> 且 <code>col1 ≤ col2</code> 。</li>
+</ul>
+<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><h2 id="个人初尝试"><a href="#个人初尝试" class="headerlink" title="个人初尝试"></a>个人初尝试</h2><p>这个题目实际就是昨天的前缀和的二维形式，有了一个思路就是把它看作多个一维的前缀和，用一个二维的 <code>sum</code> 存储每一行的前缀和，按照输入把每行通过前缀和求出来再加到一起就得到了一个方形区域内的总和了。</p>
+<p>具体代码如下</p>
+<div class="hljs"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NumMatrix</span> &#123;</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; sum;
+    NumMatrix(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; matrix) &#123;
+        <span class="hljs-keyword">if</span>(matrix.size() != <span class="hljs-number">0</span>) &#123;
+            <span class="hljs-keyword">int</span> rowlen = matrix[<span class="hljs-number">0</span>].size();
+            <span class="hljs-keyword">int</span> columnlen = matrix.size();
+            sum.resize(columnlen);
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; columnlen; i++) &#123;
+                sum[i].resize(rowlen + <span class="hljs-number">1</span>);
+                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; rowlen; j++) &#123;
+                    sum[i][j + <span class="hljs-number">1</span>] = sum[i][j] + matrix[i][j];
+                &#125;
+            &#125; 
+        &#125;
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sumRegion</span><span class="hljs-params">(<span class="hljs-keyword">int</span> row1, <span class="hljs-keyword">int</span> col1, <span class="hljs-keyword">int</span> row2, <span class="hljs-keyword">int</span> col2)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> total = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = row1; i &lt;= row2; i++)　&#123;
+            total += sum[i][col2 + <span class="hljs-number">1</span>] - sum[i][col1];
+        &#125;
+        <span class="hljs-keyword">return</span> total;
+    &#125;
+&#125;;
 
-<p>可以看到一些已经写入在这个脚本中的 <code>alias</code> 命令：</p>
-<div class="hljs"><pre><code class="hljs bash">···
-<span class="hljs-comment"># some more ls aliases</span>
-<span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -alF&#x27;</span>
-<span class="hljs-built_in">alias</span> la=<span class="hljs-string">&#x27;ls -A&#x27;</span>
-<span class="hljs-built_in">alias</span> lh=<span class="hljs-string">&#x27;ls -lh&#x27;</span>
-<span class="hljs-built_in">alias</span> l=<span class="hljs-string">&#x27;ls -CF&#x27;</span>
-<span class="hljs-comment">#下面这行是我自己加入的alia命令，用来解压.tar.bz2的压缩包</span>
-<span class="hljs-built_in">alias</span> tarbz2=<span class="hljs-string">&#x27;tar -jxvf&#x27;</span>
-···</code></pre></div>
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * Your NumMatrix object will be instantiated and called as such:</span>
+<span class="hljs-comment"> * NumMatrix* obj = new NumMatrix(matrix);</span>
+<span class="hljs-comment"> * int param_1 = obj-&gt;sumRegion(row1,col1,row2,col2);</span>
+<span class="hljs-comment"> */</span></code></pre></div>
 
-<p>现在在这个脚本中加入自己想用的别名吧！之后每次只要你是用这个账户登录的Linux，就可以使用这些设置的别名。面对那些复杂的压缩解压命令等等，碰到一个就加入进来吧！</p>
+<p>测试用例第一个就是输入为空，结果第一次就挂了。。。。。。所以后来加了一个判断输入不为空。</p>
+<p>第二次通过了，但是时间上不是特别理想。于是进一步思考怎么调优。</p>
+<h2 id="进一步的优化"><a href="#进一步的优化" class="headerlink" title="进一步的优化"></a>进一步的优化</h2><p>先前的思路是直接转化为多个一维的前缀和解决，那能不能直接用二维的前缀和呢？用一个二维的 <code>sum</code> 存储从 <code>(0, 0)</code> 到 <code>(i, j)</code> 的大小，这样在最后求和时又可以得到像一维前缀和一样 <code>O(1)</code> 的复杂度的查询算法。</p>
+<p>具体代码如下</p>
+<div class="hljs"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NumMatrix</span> &#123;</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; sum;
+    NumMatrix(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; matrix) &#123;
+        <span class="hljs-keyword">if</span>(matrix.size() != <span class="hljs-number">0</span>) &#123;
+            <span class="hljs-keyword">int</span> rowlen = matrix[<span class="hljs-number">0</span>].size();
+            <span class="hljs-keyword">int</span> columnlen = matrix.size();
+            sum.resize(columnlen + <span class="hljs-number">1</span>);
+            sum[<span class="hljs-number">0</span>].resize(rowlen + <span class="hljs-number">1</span>);
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; columnlen; i++) &#123;
+                sum[i + <span class="hljs-number">1</span>].resize(rowlen + <span class="hljs-number">1</span>);
+                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; rowlen; j++) &#123;
+                    sum[i + <span class="hljs-number">1</span>][j + <span class="hljs-number">1</span>] = sum[i][j + <span class="hljs-number">1</span>] + sum[i + <span class="hljs-number">1</span>][j] - sum[i][j] + matrix[i][j];
+                &#125;
+            &#125; 
+        &#125;
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sumRegion</span><span class="hljs-params">(<span class="hljs-keyword">int</span> row1, <span class="hljs-keyword">int</span> col1, <span class="hljs-keyword">int</span> row2, <span class="hljs-keyword">int</span> col2)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> total = sum[row2 + <span class="hljs-number">1</span>][col2 + <span class="hljs-number">1</span>] - sum[row1][col2 + <span class="hljs-number">1</span>] - sum[row2 + <span class="hljs-number">1</span>][col1] + sum[row1][col1];
+        <span class="hljs-keyword">return</span> total;
+    &#125;
+&#125;;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * Your NumMatrix object will be instantiated and called as such:</span>
+<span class="hljs-comment"> * NumMatrix* obj = new NumMatrix(matrix);</span>
+<span class="hljs-comment"> * int param_1 = obj-&gt;sumRegion(row1,col1,row2,col2);</span>
+<span class="hljs-comment"> */</span></code></pre></div>
+
+<p>这个二维的前缀和就要注意在计算时的范围， <code>+1</code> 、 <code>-1</code> 已经要仔细分析。</p>
+<h1 id="一些细节的总结"><a href="#一些细节的总结" class="headerlink" title="一些细节的总结"></a>一些细节的总结</h1><ul>
+<li>边界条件注意判断是否为空</li>
+<li>二位前缀和的计算范围要仔细判断</li>
+</ul>
 
             </div>
             <hr>
@@ -307,7 +342,7 @@ alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span>
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
+                      <a class="hover-with-bg" href="/categories/Leetcode/">Leetcode</a>
                     
                   </div>
                 
@@ -315,7 +350,7 @@ alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                      <a class="hover-with-bg" href="/tags/C/">C++</a>
                     
                   </div>
                 
@@ -328,18 +363,12 @@ alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/11/09/pluto%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Pluto环境搭建</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/10/27/setlocale%20warning/">
-                        <span class="hidden-mobile">setlocale warning</span>
+                      <a href="/2021/03/01/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94303.%E6%95%B0%E7%BB%84%E4%B8%8D%E5%8F%AF%E5%8F%98/">
+                        <span class="hidden-mobile">Leetcode刷题之路——303.区域和检索 - 数组不可变</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -533,7 +562,7 @@ alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "alias命令&nbsp;",
+        "Leetcode刷题之路——304.二维区域和检索 - 矩阵不可变&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

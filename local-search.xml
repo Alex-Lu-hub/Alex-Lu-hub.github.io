@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Leetcode刷题之路——304.二维区域和检索 - 矩阵不可变</title>
+    <link href="/2021/03/02/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94304.%E7%9F%A9%E9%98%B5%E4%B8%8D%E5%8F%AF%E5%8F%98/"/>
+    <url>/2021/03/02/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94304.%E7%9F%A9%E9%98%B5%E4%B8%8D%E5%8F%AF%E5%8F%98/</url>
+    
+    <content type="html"><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定一个二维矩阵，计算其子矩形范围内元素的总和，该子矩阵的左上角为 <code>(row1, col1)</code> ，右下角为 <code>(row2, col2)</code> 。</p><p>示例：</p><pre><code class="hljs livescript">给定 matrix = [  [<span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">2</span>],  [<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>],  [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">5</span>],  [<span class="hljs-number">4</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">7</span>],  [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">5</span>]]sumRegion<span class="hljs-function"><span class="hljs-params">(<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>)</span> -&gt;</span> <span class="hljs-number">8</span>sumRegion<span class="hljs-function"><span class="hljs-params">(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>)</span> -&gt;</span> <span class="hljs-number">11</span>sumRegion<span class="hljs-function"><span class="hljs-params">(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>)</span> -&gt;</span> <span class="hljs-number">12</span></code></pre><p>提示：</p><ul><li>你可以假设矩阵不可变。</li><li>会多次调用 <code>sumRegion</code> 方法。</li><li>你可以假设 <code>row1 ≤ row2</code> 且 <code>col1 ≤ col2</code> 。</li></ul><h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><h2 id="个人初尝试"><a href="#个人初尝试" class="headerlink" title="个人初尝试"></a>个人初尝试</h2><p>这个题目实际就是昨天的前缀和的二维形式，有了一个思路就是把它看作多个一维的前缀和，用一个二维的 <code>sum</code> 存储每一行的前缀和，按照输入把每行通过前缀和求出来再加到一起就得到了一个方形区域内的总和了。</p><p>具体代码如下</p><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NumMatrix</span> &#123;</span><span class="hljs-keyword">public</span>:    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; sum;    NumMatrix(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; matrix) &#123;        <span class="hljs-keyword">if</span>(matrix.size() != <span class="hljs-number">0</span>) &#123;            <span class="hljs-keyword">int</span> rowlen = matrix[<span class="hljs-number">0</span>].size();            <span class="hljs-keyword">int</span> columnlen = matrix.size();            sum.resize(columnlen);            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; columnlen; i++) &#123;                sum[i].resize(rowlen + <span class="hljs-number">1</span>);                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; rowlen; j++) &#123;                    sum[i][j + <span class="hljs-number">1</span>] = sum[i][j] + matrix[i][j];                &#125;            &#125;         &#125;    &#125;        <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sumRegion</span><span class="hljs-params">(<span class="hljs-keyword">int</span> row1, <span class="hljs-keyword">int</span> col1, <span class="hljs-keyword">int</span> row2, <span class="hljs-keyword">int</span> col2)</span> </span>&#123;        <span class="hljs-keyword">int</span> total = <span class="hljs-number">0</span>;        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = row1; i &lt;= row2; i++)　&#123;            total += sum[i][col2 + <span class="hljs-number">1</span>] - sum[i][col1];        &#125;        <span class="hljs-keyword">return</span> total;    &#125;&#125;;<span class="hljs-comment">/**</span><span class="hljs-comment"> * Your NumMatrix object will be instantiated and called as such:</span><span class="hljs-comment"> * NumMatrix* obj = new NumMatrix(matrix);</span><span class="hljs-comment"> * int param_1 = obj-&gt;sumRegion(row1,col1,row2,col2);</span><span class="hljs-comment"> */</span></code></pre><p>测试用例第一个就是输入为空，结果第一次就挂了。。。。。。所以后来加了一个判断输入不为空。</p><p>第二次通过了，但是时间上不是特别理想。于是进一步思考怎么调优。</p><h2 id="进一步的优化"><a href="#进一步的优化" class="headerlink" title="进一步的优化"></a>进一步的优化</h2><p>先前的思路是直接转化为多个一维的前缀和解决，那能不能直接用二维的前缀和呢？用一个二维的 <code>sum</code> 存储从 <code>(0, 0)</code> 到 <code>(i, j)</code> 的大小，这样在最后求和时又可以得到像一维前缀和一样 <code>O(1)</code> 的复杂度的查询算法。</p><p>具体代码如下</p><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NumMatrix</span> &#123;</span><span class="hljs-keyword">public</span>:    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; sum;    NumMatrix(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; matrix) &#123;        <span class="hljs-keyword">if</span>(matrix.size() != <span class="hljs-number">0</span>) &#123;            <span class="hljs-keyword">int</span> rowlen = matrix[<span class="hljs-number">0</span>].size();            <span class="hljs-keyword">int</span> columnlen = matrix.size();            sum.resize(columnlen + <span class="hljs-number">1</span>);            sum[<span class="hljs-number">0</span>].resize(rowlen + <span class="hljs-number">1</span>);            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; columnlen; i++) &#123;                sum[i + <span class="hljs-number">1</span>].resize(rowlen + <span class="hljs-number">1</span>);                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; rowlen; j++) &#123;                    sum[i + <span class="hljs-number">1</span>][j + <span class="hljs-number">1</span>] = sum[i][j + <span class="hljs-number">1</span>] + sum[i + <span class="hljs-number">1</span>][j] - sum[i][j] + matrix[i][j];                &#125;            &#125;         &#125;    &#125;        <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sumRegion</span><span class="hljs-params">(<span class="hljs-keyword">int</span> row1, <span class="hljs-keyword">int</span> col1, <span class="hljs-keyword">int</span> row2, <span class="hljs-keyword">int</span> col2)</span> </span>&#123;        <span class="hljs-keyword">int</span> total = sum[row2 + <span class="hljs-number">1</span>][col2 + <span class="hljs-number">1</span>] - sum[row1][col2 + <span class="hljs-number">1</span>] - sum[row2 + <span class="hljs-number">1</span>][col1] + sum[row1][col1];        <span class="hljs-keyword">return</span> total;    &#125;&#125;;<span class="hljs-comment">/**</span><span class="hljs-comment"> * Your NumMatrix object will be instantiated and called as such:</span><span class="hljs-comment"> * NumMatrix* obj = new NumMatrix(matrix);</span><span class="hljs-comment"> * int param_1 = obj-&gt;sumRegion(row1,col1,row2,col2);</span><span class="hljs-comment"> */</span></code></pre><p>这个二维的前缀和就要注意在计算时的范围， <code>+1</code> 、 <code>-1</code> 已经要仔细分析。</p><h1 id="一些细节的总结"><a href="#一些细节的总结" class="headerlink" title="一些细节的总结"></a>一些细节的总结</h1><ul><li>边界条件注意判断是否为空</li><li>二位前缀和的计算范围要仔细判断</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Leetcode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Leetcode刷题之路——303.区域和检索 - 数组不可变</title>
     <link href="/2021/03/01/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94303.%E6%95%B0%E7%BB%84%E4%B8%8D%E5%8F%AF%E5%8F%98/"/>
     <url>/2021/03/01/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94303.%E6%95%B0%E7%BB%84%E4%B8%8D%E5%8F%AF%E5%8F%98/</url>
@@ -204,31 +229,6 @@
   
   
   <entry>
-    <title>我的摇滚歌单</title>
-    <link href="/2020/10/27/%E6%88%91%E7%9A%84%E6%91%87%E6%BB%9A%E6%AD%8C%E5%8D%95/"/>
-    <url>/2020/10/27/%E6%88%91%E7%9A%84%E6%91%87%E6%BB%9A%E6%AD%8C%E5%8D%95/</url>
-    
-    <content type="html"><![CDATA[<p>近期看了《波西米亚狂想曲》，听了1985年的live aid演唱会，被Queen给洗脑了，进而对于摇滚乐起了浓厚的兴趣。记录一下自己喜欢的摇滚歌单。</p><a id="more"></a><p>说是摇滚歌单，但我觉得有些歌其实不算我心里摇滚的概念？不过，管它的呢。</p><h1 id="Queen"><a href="#Queen" class="headerlink" title="Queen"></a>Queen</h1><ul><li>One vision</li><li>Tie your mother down</li><li>In the lap of the gods - revisited</li><li>Seven Seas of Rhyne</li><li>Tear it Up</li><li>A Kind of Magic</li><li>Under Pressure</li><li>Who Wants to Live Forever</li><li>I Want to Break Free</li><li>Now i’m Here</li><li>Love of My Life</li><li>Is This the World We Created?</li><li>Tutti Frutti</li><li>Bohemian Rhapsody</li><li>Hammer to Fall</li><li>Crazy Little Thing Called Love</li><li>Radio Ga Ga</li><li>We Will Rock You</li><li>Friends Will be Friends</li><li>We are The Champions</li><li>Play the Game</li><li>Somebody to Love</li><li>Killer Queen</li><li>Save Me</li><li>Keep Yourself Alive</li><li>Jailhouse Rock</li><li>Another One Bites the Dust</li></ul><h1 id="Beatle"><a href="#Beatle" class="headerlink" title="Beatle"></a>Beatle</h1><ul><li>Hello, Goodbye</li><li>Lady Madonna</li><li>Something</li><li>Help!</li><li>Let it be</li><li>She loves you</li><li>Twist and shout</li><li>Can’t buy me love</li><li>Get back</li><li>The long and winding road</li><li>Eight days a week</li><li>Hey Bulldog</li><li>I’ve got a feeling</li><li>Yesterday</li><li>Hey Jude</li></ul><h1 id="Linkin-Park"><a href="#Linkin-Park" class="headerlink" title="Linkin Park"></a>Linkin Park</h1><ul><li>In The End</li></ul><h1 id="Bon-Jovi"><a href="#Bon-Jovi" class="headerlink" title="Bon Jovi"></a>Bon Jovi</h1><ul><li>It’s my life</li></ul><h1 id="Michael-Jackson"><a href="#Michael-Jackson" class="headerlink" title="Michael Jackson"></a>Michael Jackson</h1><ul><li>Beat it</li></ul><h1 id="Eagles"><a href="#Eagles" class="headerlink" title="Eagles"></a>Eagles</h1><ul><li>Hotel California</li></ul>]]></content>
-    
-    
-    <categories>
-      
-      <category>Music</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Music</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>setlocale warning</title>
     <link href="/2020/10/27/setlocale%20warning/"/>
     <url>/2020/10/27/setlocale%20warning/</url>
@@ -246,6 +246,31 @@
     <tags>
       
       <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>我的摇滚歌单</title>
+    <link href="/2020/10/27/%E6%88%91%E7%9A%84%E6%91%87%E6%BB%9A%E6%AD%8C%E5%8D%95/"/>
+    <url>/2020/10/27/%E6%88%91%E7%9A%84%E6%91%87%E6%BB%9A%E6%AD%8C%E5%8D%95/</url>
+    
+    <content type="html"><![CDATA[<p>近期看了《波西米亚狂想曲》，听了1985年的live aid演唱会，被Queen给洗脑了，进而对于摇滚乐起了浓厚的兴趣。记录一下自己喜欢的摇滚歌单。</p><a id="more"></a><p>说是摇滚歌单，但我觉得有些歌其实不算我心里摇滚的概念？不过，管它的呢。</p><h1 id="Queen"><a href="#Queen" class="headerlink" title="Queen"></a>Queen</h1><ul><li>One vision</li><li>Tie your mother down</li><li>In the lap of the gods - revisited</li><li>Seven Seas of Rhyne</li><li>Tear it Up</li><li>A Kind of Magic</li><li>Under Pressure</li><li>Who Wants to Live Forever</li><li>I Want to Break Free</li><li>Now i’m Here</li><li>Love of My Life</li><li>Is This the World We Created?</li><li>Tutti Frutti</li><li>Bohemian Rhapsody</li><li>Hammer to Fall</li><li>Crazy Little Thing Called Love</li><li>Radio Ga Ga</li><li>We Will Rock You</li><li>Friends Will be Friends</li><li>We are The Champions</li><li>Play the Game</li><li>Somebody to Love</li><li>Killer Queen</li><li>Save Me</li><li>Keep Yourself Alive</li><li>Jailhouse Rock</li><li>Another One Bites the Dust</li></ul><h1 id="Beatle"><a href="#Beatle" class="headerlink" title="Beatle"></a>Beatle</h1><ul><li>Hello, Goodbye</li><li>Lady Madonna</li><li>Something</li><li>Help!</li><li>Let it be</li><li>She loves you</li><li>Twist and shout</li><li>Can’t buy me love</li><li>Get back</li><li>The long and winding road</li><li>Eight days a week</li><li>Hey Bulldog</li><li>I’ve got a feeling</li><li>Yesterday</li><li>Hey Jude</li></ul><h1 id="Linkin-Park"><a href="#Linkin-Park" class="headerlink" title="Linkin Park"></a>Linkin Park</h1><ul><li>In The End</li></ul><h1 id="Bon-Jovi"><a href="#Bon-Jovi" class="headerlink" title="Bon Jovi"></a>Bon Jovi</h1><ul><li>It’s my life</li></ul><h1 id="Michael-Jackson"><a href="#Michael-Jackson" class="headerlink" title="Michael Jackson"></a>Michael Jackson</h1><ul><li>Beat it</li></ul><h1 id="Eagles"><a href="#Eagles" class="headerlink" title="Eagles"></a>Eagles</h1><ul><li>Hotel California</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Music</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Music</tag>
       
     </tags>
     
