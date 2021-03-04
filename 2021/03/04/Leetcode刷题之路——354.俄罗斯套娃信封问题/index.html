@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Alex Lu">
   <meta name="keywords" content="">
-  <title>alias命令 - LL&#39;s treasure</title>
+  <title>Leetcode刷题之路——354. 俄罗斯套娃信封问题 - LL&#39;s treasure</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -170,8 +170,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-10-30 21:00" pubdate>
-        2020年10月30日 晚上
+      <time datetime="2021-03-04 14:56" pubdate>
+        2021年3月4日 下午
       </time>
     </span>
   
@@ -182,7 +182,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      753 字
+      808 字
     </span>
   
 
@@ -192,7 +192,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11
+      10
        分钟
     </span>
   
@@ -230,74 +230,91 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">alias命令</h1>
+            <h1 style="display: none">Leetcode刷题之路——354. 俄罗斯套娃信封问题</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年10月30日 晚上
+                  本文最后更新于：2021年3月4日 下午
                 
               </p>
             
             <div class="markdown-body" id="post-body">
-              <p>众所周知，Linux下的解压命令多又难记，时不时还有用错的情况。在邓迅邓巨神的指点下，知晓了 <code>alias</code> 这个神奇的命令，使用起来确实方便了许多，遂记下！</p>
-<h1 id="查看当前已设置的别名"><a href="#查看当前已设置的别名" class="headerlink" title="查看当前已设置的别名"></a>查看当前已设置的别名</h1><div class="hljs"><pre><code class="hljs bash">alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span>
-<span class="hljs-built_in">alias</span> alert=<span class="hljs-string">&#x27;notify-send --urgency=low -i &quot;$([ $? = 0 ] &amp;&amp; echo terminal || echo error)&quot; &quot;$(history|tail -n1|sed -e &#x27;</span>\<span class="hljs-string">&#x27;&#x27;</span>s/^\s*[0-9]\+\s*//;s/[;&amp;|]\s*alert$//<span class="hljs-string">&#x27;\&#x27;</span><span class="hljs-string">&#x27;)&quot;&#x27;</span>
-<span class="hljs-built_in">alias</span> egrep=<span class="hljs-string">&#x27;egrep --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> fgrep=<span class="hljs-string">&#x27;fgrep --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> grep=<span class="hljs-string">&#x27;grep --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> l=<span class="hljs-string">&#x27;ls -CF&#x27;</span>
-<span class="hljs-built_in">alias</span> la=<span class="hljs-string">&#x27;ls -A&#x27;</span>
-<span class="hljs-built_in">alias</span> lh=<span class="hljs-string">&#x27;ls -lh&#x27;</span>
-<span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -alF&#x27;</span>
-<span class="hljs-built_in">alias</span> ls=<span class="hljs-string">&#x27;ls --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> tarbz2=<span class="hljs-string">&#x27;tar -jxvf&#x27;</span></code></pre></div>
+              <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 <code>(w, h)</code> 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。</p>
+<p>请计算最多能有多少个信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）。</p>
+<p>说明:<br>不允许旋转信封。</p>
+<p>示例:</p>
+<div class="hljs"><pre><code class="hljs inform7">输入: envelopes = <span class="hljs-comment">[<span class="hljs-comment">[5,4]</span>,<span class="hljs-comment">[6,4]</span>,<span class="hljs-comment">[6,7]</span>,<span class="hljs-comment">[2,3]</span>]</span>
+输出: 3 
+解释: 最多信封的个数为 3, 组合为: <span class="hljs-comment">[2,3]</span> =&gt; <span class="hljs-comment">[5,4]</span> =&gt; <span class="hljs-comment">[6,7]</span>。</code></pre></div>
 
-<p>直接输入 <code>alias</code> 即可查看已经设置的别名，已经设置好的别名我们可以直接使用。例如，我输入命令 <code>ll</code> ，就相当于输入 <code>ls -alF</code> 。</p>
-<h1 id="为命令设置别名"><a href="#为命令设置别名" class="headerlink" title="为命令设置别名"></a>为命令设置别名</h1><div class="hljs"><pre><code class="hljs bash">alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span> vi=<span class="hljs-string">&#x27;vim&#x27;</span>
-alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span>
-<span class="hljs-built_in">alias</span> alert=<span class="hljs-string">&#x27;notify-send --urgency=low -i &quot;$([ $? = 0 ] &amp;&amp; echo terminal || echo error)&quot; &quot;$(history|tail -n1|sed -e &#x27;</span>\<span class="hljs-string">&#x27;&#x27;</span>s/^\s*[0-9]\+\s*//;s/[;&amp;|]\s*alert$//<span class="hljs-string">&#x27;\&#x27;</span><span class="hljs-string">&#x27;)&quot;&#x27;</span>
-<span class="hljs-built_in">alias</span> egrep=<span class="hljs-string">&#x27;egrep --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> fgrep=<span class="hljs-string">&#x27;fgrep --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> grep=<span class="hljs-string">&#x27;grep --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> l=<span class="hljs-string">&#x27;ls -CF&#x27;</span>
-<span class="hljs-built_in">alias</span> la=<span class="hljs-string">&#x27;ls -A&#x27;</span>
-<span class="hljs-built_in">alias</span> lh=<span class="hljs-string">&#x27;ls -lh&#x27;</span>
-<span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -alF&#x27;</span>
-<span class="hljs-built_in">alias</span> ls=<span class="hljs-string">&#x27;ls --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> tarbz2=<span class="hljs-string">&#x27;tar -jxvf&#x27;</span>
-<span class="hljs-built_in">alias</span> vi=<span class="hljs-string">&#x27;vim&#x27;</span></code></pre></div>
+<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><h2 id="个人初尝试"><a href="#个人初尝试" class="headerlink" title="个人初尝试"></a>个人初尝试</h2><p>最开始的思路是采用滑窗，将一个信封的设定为窗口的下限和上限，再遍历所有的信封，当有符合上下限变动条件，即可以被装下或者装下别的信封时，更新上下限，并计数+1。如此对每一个信封进行这样的操作，就可以得到最大的信封数了。</p>
+<p>具体代码如下：</p>
+<div class="hljs"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxEnvelopes</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; envelopes)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> max = <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span>(envelopes.size() != <span class="hljs-number">0</span>) &#123;
+            <span class="hljs-keyword">int</span> size = envelopes.size();
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; size; j++) &#123;
+                <span class="hljs-keyword">int</span> tmp = <span class="hljs-number">1</span>;
+                <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; minenv = envelopes[j];
+                <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; maxenv = envelopes[j];
+                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; size; ++i) &#123;
+                    <span class="hljs-keyword">if</span>(envelopes[i][<span class="hljs-number">0</span>] &gt; maxenv[<span class="hljs-number">0</span>] &amp;&amp; envelopes[i][<span class="hljs-number">1</span>] &gt; maxenv[<span class="hljs-number">1</span>]) &#123;
+                        maxenv = envelopes[i];
+                        ++tmp;
+                    &#125;
+                    <span class="hljs-keyword">if</span>(envelopes[i][<span class="hljs-number">0</span>] &lt; minenv[<span class="hljs-number">0</span>] &amp;&amp; envelopes[i][<span class="hljs-number">1</span>] &lt; minenv[<span class="hljs-number">1</span>]) &#123;
+                        minenv = envelopes[i];
+                        ++tmp;
+                    &#125;
+                &#125;
+                <span class="hljs-keyword">if</span>(tmp &gt; max) &#123;
+                    max = tmp;
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> max;
+    &#125;
+&#125;;</code></pre></div>
 
-<p>这个例子我们给 <code>vim</code> 设置了一个别名 <code>vi</code> ，注意设置时等号左右不要有空格。此时我们输入 <code>vi</code> 命令就相当于输入 <code>vim</code> 命令。</p>
-<h1 id="删除设置的别名"><a href="#删除设置的别名" class="headerlink" title="删除设置的别名"></a>删除设置的别名</h1><div class="hljs"><pre><code class="hljs bash">alex@PC-20200316LEME:~$ <span class="hljs-built_in">unalias</span> vi
-alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span>
-<span class="hljs-built_in">alias</span> alert=<span class="hljs-string">&#x27;notify-send --urgency=low -i &quot;$([ $? = 0 ] &amp;&amp; echo terminal || echo error)&quot; &quot;$(history|tail -n1|sed -e &#x27;</span>\<span class="hljs-string">&#x27;&#x27;</span>s/^\s*[0-9]\+\s*//;s/[;&amp;|]\s*alert$//<span class="hljs-string">&#x27;\&#x27;</span><span class="hljs-string">&#x27;)&quot;&#x27;</span>
-<span class="hljs-built_in">alias</span> egrep=<span class="hljs-string">&#x27;egrep --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> fgrep=<span class="hljs-string">&#x27;fgrep --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> grep=<span class="hljs-string">&#x27;grep --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> l=<span class="hljs-string">&#x27;ls -CF&#x27;</span>
-<span class="hljs-built_in">alias</span> la=<span class="hljs-string">&#x27;ls -A&#x27;</span>
-<span class="hljs-built_in">alias</span> lh=<span class="hljs-string">&#x27;ls -lh&#x27;</span>
-<span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -alF&#x27;</span>
-<span class="hljs-built_in">alias</span> ls=<span class="hljs-string">&#x27;ls --color=auto&#x27;</span>
-<span class="hljs-built_in">alias</span> tarbz2=<span class="hljs-string">&#x27;tar -jxvf&#x27;</span></code></pre></div>
+<p>但这个算法并不能成功，有一个明显的问题开始时没有想到。那就是当在最开始的时候就碰到了最小的或者最大的信封，即使后面遍历到了可以装下去的，也不会再计数了。。。。。。一时半会没有想到好的解决方案，看题解！</p>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p>按照题解的思路，这个题目本质是要找到最长严格递增子序列，二维的不好同时考虑，就控制一维，再处理另外一维。为了避免在前一维相同的情况下，导致第二维最长子序列求出来不符合要求，所以在排序的时候可以将第一维升序，第二维降序排列，避免出现例外情况。具体可参考 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/russian-doll-envelopes/solution/e-luo-si-tao-wa-xin-feng-wen-ti-by-leetc-wj68/">官方题解</a></p>
+<p>具体代码如下</p>
+<div class="hljs"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxEnvelopes</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; envelopes)</span> </span>&#123;
+        <span class="hljs-keyword">if</span>(envelopes.size() == <span class="hljs-number">0</span>) &#123;
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+        &#125;
 
-<p>使用 <code>unalias</code> 就可以删除我们已经设置好的别名。</p>
-<h1 id="让别名永久生效（当然，别删除它）"><a href="#让别名永久生效（当然，别删除它）" class="headerlink" title="让别名永久生效（当然，别删除它）"></a>让别名永久生效（当然，别删除它）</h1><p>按照上面的方法生成的别名，在我们重启电脑后就会失效。怎么样才能让他一直生效呢？当然是把它加入到会自动运行的脚本中！ <code>~/.bashrc</code> 就是一个不错的选择。</p>
-<p>打开 <code>~/.bashrc</code> ：</p>
-<div class="hljs"><pre><code class="hljs bash">vim ~/.bashrc</code></pre></div>
+        <span class="hljs-keyword">int</span> size = envelopes.size();
+        
+        sort(envelopes.begin(), envelopes.end(), [](<span class="hljs-keyword">const</span> <span class="hljs-keyword">auto</span>&amp; a, <span class="hljs-keyword">const</span> <span class="hljs-keyword">auto</span>&amp; b) &#123;
+        <span class="hljs-keyword">if</span>(a[<span class="hljs-number">0</span>] == b[<span class="hljs-number">0</span>]) &#123;
+            <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>] &gt; b[<span class="hljs-number">1</span>];
+        &#125;
+        <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] &lt; b[<span class="hljs-number">0</span>];
+        &#125;
+    &#125;);
+        
+        <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">fmax</span><span class="hljs-params">(size, <span class="hljs-number">1</span>)</span></span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; size; ++i) &#123;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; i; ++j) &#123;
+                <span class="hljs-keyword">if</span>(envelopes[j][<span class="hljs-number">1</span>] &lt; envelopes[i][<span class="hljs-number">1</span>]) &#123;
+                    fmax[i] = max(fmax[i], fmax[j] + <span class="hljs-number">1</span>);
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> *max_element(fmax.begin(), fmax.end());
+    &#125;
+&#125;;</code></pre></div>
 
-<p>可以看到一些已经写入在这个脚本中的 <code>alias</code> 命令：</p>
-<div class="hljs"><pre><code class="hljs bash">···
-<span class="hljs-comment"># some more ls aliases</span>
-<span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -alF&#x27;</span>
-<span class="hljs-built_in">alias</span> la=<span class="hljs-string">&#x27;ls -A&#x27;</span>
-<span class="hljs-built_in">alias</span> lh=<span class="hljs-string">&#x27;ls -lh&#x27;</span>
-<span class="hljs-built_in">alias</span> l=<span class="hljs-string">&#x27;ls -CF&#x27;</span>
-<span class="hljs-comment">#下面这行是我自己加入的alia命令，用来解压.tar.bz2的压缩包</span>
-<span class="hljs-built_in">alias</span> tarbz2=<span class="hljs-string">&#x27;tar -jxvf&#x27;</span>
-···</code></pre></div>
-
-<p>现在在这个脚本中加入自己想用的别名吧！之后每次只要你是用这个账户登录的Linux，就可以使用这些设置的别名。面对那些复杂的压缩解压命令等等，碰到一个就加入进来吧！</p>
+<h1 id="一些细节的总结"><a href="#一些细节的总结" class="headerlink" title="一些细节的总结"></a>一些细节的总结</h1><ul>
+<li>sort的用法比较灵活，可以手撸自己的排序规则，并直接写在第三个参数中</li>
+<li>C++中的 <code>&amp;</code> 指示引用，不可和C中的取地址符弄混！引用的使用用法需要进行后续总结</li>
+</ul>
 
             </div>
             <hr>
@@ -307,7 +324,7 @@ alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span>
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
+                      <a class="hover-with-bg" href="/categories/Leetcode/">Leetcode</a>
                     
                   </div>
                 
@@ -315,7 +332,7 @@ alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                      <a class="hover-with-bg" href="/tags/C/">C++</a>
                     
                   </div>
                 
@@ -328,18 +345,12 @@ alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/11/09/pluto%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Pluto环境搭建</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/10/27/setlocale%20warning/">
-                        <span class="hidden-mobile">setlocale warning</span>
+                      <a href="/2021/03/03/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94338.%E6%AF%94%E7%89%B9%E4%BD%8D%E8%AE%A1%E6%95%B0/">
+                        <span class="hidden-mobile">Leetcode刷题之路——338. 比特位计数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -533,7 +544,7 @@ alex@PC-20200316LEME:~$ <span class="hljs-built_in">alias</span>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "alias命令&nbsp;",
+        "Leetcode刷题之路——354. 俄罗斯套娃信封问题&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
