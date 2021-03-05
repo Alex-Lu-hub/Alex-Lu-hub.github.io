@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Alex Lu">
   <meta name="keywords" content="">
-  <title>Leetcode刷题之路——354. 俄罗斯套娃信封问题 - LL&#39;s treasure</title>
+  <title>Leetcode刷题之路——232. 用栈实现队列 - LL&#39;s treasure</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -170,8 +170,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-04 14:56" pubdate>
-        2021年3月4日 下午
+      <time datetime="2021-03-05 14:48" pubdate>
+        2021年3月5日 下午
       </time>
     </span>
   
@@ -182,7 +182,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      808 字
+      673 字
     </span>
   
 
@@ -192,7 +192,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      9
        分钟
     </span>
   
@@ -230,90 +230,115 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Leetcode刷题之路——354. 俄罗斯套娃信封问题</h1>
+            <h1 style="display: none">Leetcode刷题之路——232. 用栈实现队列</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月4日 下午
+                  本文最后更新于：2021年3月5日 下午
                 
               </p>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 <code>(w, h)</code> 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。</p>
-<p>请计算最多能有多少个信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）。</p>
-<p>说明:<br>不允许旋转信封。</p>
-<p>示例:</p>
-<div class="hljs"><pre><code class="hljs inform7">输入: envelopes = <span class="hljs-comment">[<span class="hljs-comment">[5,4]</span>,<span class="hljs-comment">[6,4]</span>,<span class="hljs-comment">[6,7]</span>,<span class="hljs-comment">[2,3]</span>]</span>
-输出: 3 
-解释: 最多信封的个数为 3, 组合为: <span class="hljs-comment">[2,3]</span> =&gt; <span class="hljs-comment">[5,4]</span> =&gt; <span class="hljs-comment">[6,7]</span>。</code></pre></div>
+              <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>请你仅使用两个栈实现先入先出队列。队列应当支持一般队列的支持的所有操作（ <code>push</code> 、 <code>pop</code> 、 <code>peek</code> 、 <code>empty</code> ）：</p>
+<p>实现 <code>MyQueue</code> 类：</p>
+<ul>
+<li> <code>void push(int x)</code> 将元素 x 推到队列的末尾</li>
+<li> <code>int pop()</code> 从队列的开头移除并返回元素</li>
+<li> <code>int peek()</code> 返回队列开头的元素</li>
+<li> <code>bool empty()</code> 如果队列为空，返回 <code>true</code> ；否则，返回 <code>false</code> </li>
+</ul>
+<p>说明：</p>
+<ul>
+<li>你只能使用标准的栈操作 —— 也就是只有 <code>push to top</code> , <code>peek/pop from top</code> , <code>size</code> , 和 <code>is empty</code> 操作是合法的。</li>
+<li>你所使用的语言也许不支持栈。你可以使用 list 或者 deque（双端队列）来模拟一个栈，只要是标准的栈操作即可。</li>
+</ul>
+<p>进阶：</p>
+<ul>
+<li>你能否实现每个操作均摊时间复杂度为 <code>O(1)</code> 的队列？换句话说，执行 <code>n</code> 个操作的总时间复杂度为 <code>O(n)</code> ，即使其中一个操作可能花费较长时间。</li>
+</ul>
+<p>示例：</p>
+<div class="hljs"><pre><code class="hljs gradle">输入：
+[<span class="hljs-string">&quot;MyQueue&quot;</span>, <span class="hljs-string">&quot;push&quot;</span>, <span class="hljs-string">&quot;push&quot;</span>, <span class="hljs-string">&quot;peek&quot;</span>, <span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;empty&quot;</span>]
+[[], [<span class="hljs-number">1</span>], [<span class="hljs-number">2</span>], [], [], []]
+输出：
+[<span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-keyword">false</span>]
 
-<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><h2 id="个人初尝试"><a href="#个人初尝试" class="headerlink" title="个人初尝试"></a>个人初尝试</h2><p>最开始的思路是采用滑窗，将一个信封的设定为窗口的下限和上限，再遍历所有的信封，当有符合上下限变动条件，即可以被装下或者装下别的信封时，更新上下限，并计数+1。如此对每一个信封进行这样的操作，就可以得到最大的信封数了。</p>
+解释：
+MyQueue myQueue = <span class="hljs-keyword">new</span> MyQueue();
+myQueue.<span class="hljs-keyword">push</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">// queue is: [1]</span>
+myQueue.<span class="hljs-keyword">push</span>(<span class="hljs-number">2</span>); <span class="hljs-comment">// queue is: [1, 2] (leftmost is front of the queue)</span>
+myQueue.peek(); <span class="hljs-comment">// return 1</span>
+myQueue.<span class="hljs-keyword">pop</span>(); <span class="hljs-comment">// return 1, queue is [2]</span>
+myQueue.empty(); <span class="hljs-comment">// return false</span></code></pre></div>
+
+
+<p>提示：</p>
+<ul>
+<li> <code>1 &lt;= x &lt;= 9</code> </li>
+<li>最多调用 <code>100</code> 次 <code>push</code> 、 <code>pop</code> 、 <code>peek</code> 和 <code>empty</code> </li>
+<li>假设所有操作都是有效的 （例如，一个空的队列不会调用 <code>pop</code> 或者 <code>peek</code> 操作）</li>
+</ul>
+<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><p>没啥好分析的，就是C++的栈 <code>stack</code> 还没有用过，需要学习一下。</p>
 <p>具体代码如下：</p>
-<div class="hljs"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxEnvelopes</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; envelopes)</span> </span>&#123;
-        <span class="hljs-keyword">int</span> max = <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">if</span>(envelopes.size() != <span class="hljs-number">0</span>) &#123;
-            <span class="hljs-keyword">int</span> size = envelopes.size();
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; size; j++) &#123;
-                <span class="hljs-keyword">int</span> tmp = <span class="hljs-number">1</span>;
-                <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; minenv = envelopes[j];
-                <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; maxenv = envelopes[j];
-                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; size; ++i) &#123;
-                    <span class="hljs-keyword">if</span>(envelopes[i][<span class="hljs-number">0</span>] &gt; maxenv[<span class="hljs-number">0</span>] &amp;&amp; envelopes[i][<span class="hljs-number">1</span>] &gt; maxenv[<span class="hljs-number">1</span>]) &#123;
-                        maxenv = envelopes[i];
-                        ++tmp;
-                    &#125;
-                    <span class="hljs-keyword">if</span>(envelopes[i][<span class="hljs-number">0</span>] &lt; minenv[<span class="hljs-number">0</span>] &amp;&amp; envelopes[i][<span class="hljs-number">1</span>] &lt; minenv[<span class="hljs-number">1</span>]) &#123;
-                        minenv = envelopes[i];
-                        ++tmp;
-                    &#125;
-                &#125;
-                <span class="hljs-keyword">if</span>(tmp &gt; max) &#123;
-                    max = tmp;
-                &#125;
-            &#125;
-        &#125;
-        <span class="hljs-keyword">return</span> max;
-    &#125;
-&#125;;</code></pre></div>
+<div class="hljs"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyQueue</span> &#123;</span>
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-built_in">stack</span> &lt;<span class="hljs-keyword">int</span>&gt; instack, outstack;
 
-<p>但这个算法并不能成功，有一个明显的问题开始时没有想到。那就是当在最开始的时候就碰到了最小的或者最大的信封，即使后面遍历到了可以装下去的，也不会再计数了。。。。。。一时半会没有想到好的解决方案，看题解！</p>
-<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p>按照题解的思路，这个题目本质是要找到最长严格递增子序列，二维的不好同时考虑，就控制一维，再处理另外一维。为了避免在前一维相同的情况下，导致第二维最长子序列求出来不符合要求，所以在排序的时候可以将第一维升序，第二维降序排列，避免出现例外情况。具体可参考 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/russian-doll-envelopes/solution/e-luo-si-tao-wa-xin-feng-wen-ti-by-leetc-wj68/">官方题解</a></p>
-<p>具体代码如下</p>
-<div class="hljs"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
-<span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxEnvelopes</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; envelopes)</span> </span>&#123;
-        <span class="hljs-keyword">if</span>(envelopes.size() == <span class="hljs-number">0</span>) &#123;
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">in2out</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">while</span>(!instack.empty()) &#123;
+            outstack.push(instack.top());
+            instack.pop();
         &#125;
-
-        <span class="hljs-keyword">int</span> size = envelopes.size();
-        
-        sort(envelopes.begin(), envelopes.end(), [](<span class="hljs-keyword">const</span> <span class="hljs-keyword">auto</span>&amp; a, <span class="hljs-keyword">const</span> <span class="hljs-keyword">auto</span>&amp; b) &#123;
-        <span class="hljs-keyword">if</span>(a[<span class="hljs-number">0</span>] == b[<span class="hljs-number">0</span>]) &#123;
-            <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>] &gt; b[<span class="hljs-number">1</span>];
-        &#125;
-        <span class="hljs-keyword">else</span> &#123;
-            <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] &lt; b[<span class="hljs-number">0</span>];
-        &#125;
-    &#125;);
-        
-        <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">fmax</span><span class="hljs-params">(size, <span class="hljs-number">1</span>)</span></span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; size; ++i) &#123;
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; i; ++j) &#123;
-                <span class="hljs-keyword">if</span>(envelopes[j][<span class="hljs-number">1</span>] &lt; envelopes[i][<span class="hljs-number">1</span>]) &#123;
-                    fmax[i] = max(fmax[i], fmax[j] + <span class="hljs-number">1</span>);
-                &#125;
-            &#125;
-        &#125;
-        <span class="hljs-keyword">return</span> *max_element(fmax.begin(), fmax.end());
     &#125;
-&#125;;</code></pre></div>
+
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-comment">/** Initialize your data structure here. */</span>
+    MyQueue() &#123;
+
+    &#125;
+    
+    <span class="hljs-comment">/** Push element x to the back of queue. */</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;
+        instack.push(x);
+    &#125;
+    
+    <span class="hljs-comment">/** Removes the element from in front of queue and returns that element. */</span>
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">if</span>(outstack.empty()) &#123;
+            in2out();
+        &#125;
+        <span class="hljs-keyword">int</span> number = outstack.top();
+        outstack.pop();
+        <span class="hljs-keyword">return</span> number;
+    &#125;
+    
+    <span class="hljs-comment">/** Get the front element. */</span>
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">peek</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">if</span>(outstack.empty()) &#123;
+            in2out();
+        &#125;
+        <span class="hljs-keyword">int</span> number = outstack.top();
+        <span class="hljs-keyword">return</span> number;
+    &#125;
+    
+    <span class="hljs-comment">/** Returns whether the queue is empty. */</span>
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">empty</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> instack.empty() &amp;&amp; outstack.empty();
+    &#125;
+&#125;;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * Your MyQueue object will be instantiated and called as such:</span>
+<span class="hljs-comment"> * MyQueue* obj = new MyQueue();</span>
+<span class="hljs-comment"> * obj-&gt;push(x);</span>
+<span class="hljs-comment"> * int param_2 = obj-&gt;pop();</span>
+<span class="hljs-comment"> * int param_3 = obj-&gt;peek();</span>
+<span class="hljs-comment"> * bool param_4 = obj-&gt;empty();</span>
+<span class="hljs-comment"> */</span></code></pre></div>
 
 <h1 id="一些细节的总结"><a href="#一些细节的总结" class="headerlink" title="一些细节的总结"></a>一些细节的总结</h1><ul>
-<li>sort的用法比较灵活，可以手撸自己的排序规则，并直接写在第三个参数中</li>
-<li>C++中的 <code>&amp;</code> 指示引用，不可和C中的取地址符弄混！引用的使用用法需要进行后续总结</li>
+<li>C++的STL还是需要都看一下，免得要用的时候不知道</li>
+<li>当只有一个线程对栈进行读写操作的时候，总有一个栈是空的。在多线程应用中，如果我们只有一个队列，为了线程安全，我们在读或者写队列的时候都需要锁住整个队列。而在两个栈的实现中，只要写入栈不为空，那么push操作的锁就不会影响到pop。</li>
 </ul>
 
             </div>
@@ -345,18 +370,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/05/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94232.%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Leetcode刷题之路——232. 用栈实现队列</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/03/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94338.%E6%AF%94%E7%89%B9%E4%BD%8D%E8%AE%A1%E6%95%B0/">
-                        <span class="hidden-mobile">Leetcode刷题之路——338. 比特位计数</span>
+                      <a href="/2021/03/04/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94354.%E4%BF%84%E7%BD%97%E6%96%AF%E5%A5%97%E5%A8%83%E4%BF%A1%E5%B0%81%E9%97%AE%E9%A2%98/">
+                        <span class="hidden-mobile">Leetcode刷题之路——354. 俄罗斯套娃信封问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -550,7 +569,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Leetcode刷题之路——354. 俄罗斯套娃信封问题&nbsp;",
+        "Leetcode刷题之路——232. 用栈实现队列&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
