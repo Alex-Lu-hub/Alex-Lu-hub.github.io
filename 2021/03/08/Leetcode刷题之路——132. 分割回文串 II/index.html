@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Alex Lu">
   <meta name="keywords" content="">
-  <title>Leetcode刷题之路——131.分割回文串 - LL&#39;s treasure</title>
+  <title>Leetcode刷题之路——132. 分割回文串 II - LL&#39;s treasure</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -170,8 +170,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-07 19:30" pubdate>
-        2021年3月7日 晚上
+      <time datetime="2021-03-08 14:20" pubdate>
+        2021年3月8日 下午
       </time>
     </span>
   
@@ -182,7 +182,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1k 字
+      428 字
     </span>
   
 
@@ -192,7 +192,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      5
        分钟
     </span>
   
@@ -230,137 +230,68 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Leetcode刷题之路——131.分割回文串</h1>
+            <h1 style="display: none">Leetcode刷题之路——132. 分割回文串 II</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月7日 晚上
+                  本文最后更新于：2021年3月8日 下午
                 
               </p>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给你一个字符串 <code>s</code> ，请你将 <code>s</code> 分割成一些子串，使每个子串都是 <strong>回文串</strong> 。返回 <code>s</code> 所有可能的分割方案。</p>
-<p> <strong>回文串</strong> 是正着读和反着读都一样的字符串。</p>
+              <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给你一个字符串 <code>s</code> ，请你将 <code>s</code> 分割成一些子串，使每个子串都是回文。</p>
+<p>返回符合要求的 <strong>最少分割次数</strong> 。</p>
 <p>示例 1：</p>
-<div class="hljs"><pre><code class="hljs prolog">输入：s = <span class="hljs-string">&quot;aab&quot;</span>
-输出：[[<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;b&quot;</span>],[<span class="hljs-string">&quot;aa&quot;</span>,<span class="hljs-string">&quot;b&quot;</span>]]</code></pre></div>
+<div class="hljs"><pre><code class="hljs nix">输入：<span class="hljs-attr">s</span> = <span class="hljs-string">&quot;aab&quot;</span>
+输出：<span class="hljs-number">1</span>
+解释：只需一次分割就可将 s 分割成 [<span class="hljs-string">&quot;aa&quot;</span>,<span class="hljs-string">&quot;b&quot;</span>] 这样两个回文子串。</code></pre></div>
 
 <p>示例 2：</p>
-<div class="hljs"><pre><code class="hljs lua">输入：s = <span class="hljs-string">&quot;a&quot;</span>
-输出：<span class="hljs-string">[[&quot;a&quot;]]</span></code></pre></div>
+<div class="hljs"><pre><code class="hljs nix">输入：<span class="hljs-attr">s</span> = <span class="hljs-string">&quot;a&quot;</span>
+输出：<span class="hljs-number">0</span></code></pre></div>
+
+
+<p>示例 3：</p>
+<div class="hljs"><pre><code class="hljs nix">输入：<span class="hljs-attr">s</span> = <span class="hljs-string">&quot;ab&quot;</span>
+输出：<span class="hljs-number">1</span></code></pre></div>
 
 
 <p>提示：</p>
 <ul>
-<li> <code>1 &lt;= s.length &lt;= 16</code> </li>
+<li> <code>1 &lt;= s.length &lt;= 2000</code></li>
 <li> <code>s</code> 仅由小写英文字母组成</li>
 </ul>
-<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><h2 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h2><p>泻药，今天这个题目，要是单独找回文串还是挺简单的，但是要找到全部的子回文串我确实没啥特别好的办法。。。。。。遂看题解，了解了回溯法。此处推荐 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-partitioning/solution/hui-su-fa-si-lu-yu-mo-ban-by-fuxuemingzh-azhz/">负雪明烛的题解</a> ，个人觉得讲得挺清晰的！</p>
-<p>回溯法的整体思路是：搜索每一条路，每次回溯是对具体的一条路径而言的。对当前搜索路径下的的未探索区域进行搜索，则可能有两种情况：</p>
-<ul>
-<li>当前未搜索区域满足结束条件，则保存当前路径并退出当前搜索；</li>
-<li>当前未搜索区域需要继续搜索，则遍历当前所有可能的选择：如果该选择符合要求，则把当前选择加入当前的搜索路径中，并继续搜索新的未探索区域。</li>
-</ul>
-<p>一个回溯法的模板如下</p>
-<div class="hljs"><pre><code class="hljs vim"><span class="hljs-keyword">res</span> = []
-path = []
-
-def backtrack(未探索区域, <span class="hljs-keyword">res</span>, path):
-    <span class="hljs-keyword">if</span> 未探索区域满足结束条件:
-        <span class="hljs-keyword">res</span>.<span class="hljs-built_in">add</span>(path) # 深度拷贝
-        <span class="hljs-keyword">return</span>
-    <span class="hljs-keyword">for</span> 选择 in 未探索区域当前可能的选择:
-        <span class="hljs-keyword">if</span> 当前选择符合要求:
-            path.<span class="hljs-built_in">add</span>(当前选择)
-            backtrack(新的未探索区域, <span class="hljs-keyword">res</span>, path)
-            path.<span class="hljs-keyword">pop</span>()
-
-作者：fuxuemingzhu
-链接：http<span class="hljs-variable">s:</span>//leetcode-<span class="hljs-keyword">cn</span>.<span class="hljs-keyword">com</span>/problems/palindrome-partitioning/solution/hui-su-fa-si-<span class="hljs-keyword">lu</span>-yu-mo-ban-by-fuxuemingzh-azhz/
-来源：力扣（LeetCode）
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</code></pre></div>
-
-<p>根据回溯法的思路，具体代码如下：</p>
-<div class="hljs"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p>这道题目的回文判断可以按照 <a target="_blank" rel="noopener" href="https://alex-lu-hub.github.io/2021/03/07/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/">我上一篇帖子</a> 的判断方法，但是如果要统计最小的分割次数，用回溯法的方法很明显会十分耗时。一时间想不到好的办法了，就看了题解。没想到居然是和最长递增子串一个思路的动态规划。</p>
+<p>状态转移方程很容易给出， <code>f[i] = min&#123;f[i], f[j] + 1&#125;</code> ，即在第二层遍历时，需要得到面所有的最小分割次数最小值赋给当前位置，在比较是注意是从 <code>[j + 1]</code> 到 <code>[i]</code> 是否为回文串。</p>
+<p>具体代码如下：</p>
+<div class="hljs"><pre><code class="hljs C++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
 <span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">juggement</span><span class="hljs-params">(<span class="hljs-built_in">string</span> s)</span> </span>&#123;
-        <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>, right = s.size() - <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">while</span>(left &lt;= right) &#123;
-            <span class="hljs-keyword">if</span>(s[left] != s[right]) &#123;
-                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-            &#125;
-            ++left;
-            --right;
-        &#125;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-    &#125;
-
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">traceback</span><span class="hljs-params">(<span class="hljs-built_in">string</span> s, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;&gt;&amp; ans, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; path)</span> </span>&#123;
-        <span class="hljs-keyword">if</span> (s.size() == <span class="hljs-number">0</span>) &#123;
-            ans.push_back(path);
-            <span class="hljs-keyword">return</span>;
-        &#125; 
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= s.size(); ++i) &#123;
-            <span class="hljs-built_in">string</span> pre = s.substr(<span class="hljs-number">0</span>, i);
-            <span class="hljs-keyword">if</span>(juggement(pre)) &#123;
-                path.push_back(pre);
-                traceback(s.substr(i), ans, path);
-                path.pop_back();
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">minCut</span><span class="hljs-params">(<span class="hljs-built_in">string</span> s)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> len = s.size();
+        <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-title">jugde</span> <span class="hljs-params">(len, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;(len, <span class="hljs-literal">true</span>))</span></span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = len - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; --i) &#123;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt; len; ++j) &#123;
+                jugde[i][j] = (s[i] == s[j]) &amp;&amp; jugde[i + <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];
             &#125;
         &#125;
-    &#125; 
-    
-    <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;&gt; <span class="hljs-title">partition</span><span class="hljs-params">(<span class="hljs-built_in">string</span> s)</span> </span>&#123;
-        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;&gt; ans;
-        traceback(s, ans, &#123;&#125;);
-        <span class="hljs-keyword">return</span> ans;
+        <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">count</span><span class="hljs-params">(len, INT_MAX)</span></span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; ++i) &#123;
+            <span class="hljs-keyword">if</span>(jugde[<span class="hljs-number">0</span>][i]) &#123;
+                count[i] = <span class="hljs-number">0</span>;
+            &#125;
+            <span class="hljs-keyword">else</span> &#123;
+                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; i; ++j) &#123;
+                    <span class="hljs-keyword">if</span>(jugde[j + <span class="hljs-number">1</span>][i]) &#123;
+                        count[i] = min(count[i], count[j] + <span class="hljs-number">1</span>);
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> count[len - <span class="hljs-number">1</span>];
     &#125;
 &#125;;</code></pre></div>
 
-<h2 id="动态规划的回文串判断方法"><a href="#动态规划的回文串判断方法" class="headerlink" title="动态规划的回文串判断方法"></a>动态规划的回文串判断方法</h2><p>使用一个二维的数组 <code>f[i, j]</code> 来表示字符串中从 <code>i</code> 到 <code>j</code> 是否为回文串。如果是的话该值为 <code>1</code> ，否则为 <code>0</code> 。那么就可以得出一个判断的状态转移方程。</p>
-<p>要想 <code>f[i, j]</code> 是回文串，需要对应的 <code>i</code> 、 <code>j</code> 处字符相等，且 <code>f[i + 1, j - 1]</code> 是回文串。</p>
-<p>再来考虑初始化的情况。哪些我们可以显然判断为回文串呢？字符串长度为 <code>1</code> 的，即 <code>i == j</code> 的就可以。而对于空串，即 <code>i &gt; j</code> 的情况，我们无所谓赋 <code>0</code> 或是 <code>1</code> ，因为我们在后面判断中肯定不会判断这样的情况。但是在分析了 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindromic-substrings/solution/647-hui-wen-zi-chuan-dong-tai-gui-hua-fang-shi-qiu/">这个特例</a> 后，发现赋值为 <code>1</code> 的话就可以解决这个特例的问题。那么在建立这个二维数组时，只需要把上述的两种情况赋好值即可。</p>
-<p>接下来的遍历过程，可以画一个表来判断一下</p>
-<table>
-<thead>
-<tr>
-<th align="center">纵i横j</th>
-<th align="center">a</th>
-<th align="center">b</th>
-<th align="center">a</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">a</td>
-<td align="center">1</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">b</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">a</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">1</td>
-</tr>
-</tbody></table>
-<p>可以看出来，一个值得判断取决于其左下方的值（即 <code>[i + 1, j - 1]</code>），那么我们从右下角开始遍历，就可以避免和未初始化的数据判断了。</p>
-<p>具体代码如下：</p>
-<div class="hljs"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">preprocess</span><span class="hljs-params">(<span class="hljs-built_in">string</span> s)</span> </span>&#123;
-        n = s.size();
-        f.assign(n, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;(n, <span class="hljs-literal">true</span>));
 
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; --i) &#123;
-            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt; n; ++j) &#123;
-                f[i][j] = (s[i] == s[j]) &amp;&amp; f[i + <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];
-            &#125;
-        &#125;
-&#125;</code></pre></div>
             </div>
             <hr>
             <div>
@@ -390,18 +321,12 @@ def backtrack(未探索区域, <span class="hljs-keyword">res</span>, path):
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/08/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94132.%20%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2%20II/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Leetcode刷题之路——132. 分割回文串 II</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/06/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94503.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0%20II/">
-                        <span class="hidden-mobile">Leetcode刷题之路——503. 下一个更大元素 II</span>
+                      <a href="/2021/03/07/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/">
+                        <span class="hidden-mobile">Leetcode刷题之路——131.分割回文串</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -595,7 +520,7 @@ def backtrack(未探索区域, <span class="hljs-keyword">res</span>, path):
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Leetcode刷题之路——131.分割回文串&nbsp;",
+        "Leetcode刷题之路——132. 分割回文串 II&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
