@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Alex Lu">
   <meta name="keywords" content="">
-  <title>Leetcode刷题之路——59. 螺旋矩阵 II - LL&#39;s treasure</title>
+  <title>Leetcode刷题之路——115. 不同的子序列 - LL&#39;s treasure</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -170,8 +170,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-16 12:39" pubdate>
-        2021年3月16日 下午
+      <time datetime="2021-03-17 15:10" pubdate>
+        2021年3月17日 下午
       </time>
     </span>
   
@@ -182,7 +182,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      421 字
+      603 字
     </span>
   
 
@@ -192,7 +192,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      8
        分钟
     </span>
   
@@ -230,71 +230,86 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Leetcode刷题之路——59. 螺旋矩阵 II</h1>
+            <h1 style="display: none">Leetcode刷题之路——115. 不同的子序列</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月16日 下午
+                  本文最后更新于：2021年3月17日 下午
                 
               </p>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给你一个正整数 <code>n</code> ，生成一个包含 <code>1</code> 到 <code>n^2</code> 所有元素，且元素按顺时针顺序螺旋排列的 <code>n x n</code> 正方形矩阵 <code>matrix</code> 。</p>
+              <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定一个字符串 <code>s</code> 和一个字符串 <code>t</code> ，计算在 <code>s</code> 的子序列中 <code>t</code> 出现的个数。</p>
+<p>字符串的一个 <strong>子序列</strong> 是指，通过删除一些（也可以不删除）字符且不干扰剩余字符相对位置所组成的新字符串。（例如， <code>&quot;ACE&quot;</code> 是 <code>&quot;ABCDE&quot;</code> 的一个子序列，而 <code>&quot;AEC&quot;</code> 不是）</p>
+<p>题目数据保证答案符合 32 位带符号整数范围。</p>
 <p>示例 1：</p>
-<div class="hljs"><pre><code class="hljs lua">输入：n = <span class="hljs-number">3</span>
-输出：<span class="hljs-string">[[1,2,3],[8,9,4],[7,6,5]]</span></code></pre></div>
-
+<div class="hljs"><pre><code class="hljs latex">输入：s = &quot;rabbbit&quot;, t = &quot;rabbit&quot;
+输出：3
+解释：
+如下图所示, 有 3 种可以从 s 中得到 &quot;rabbit&quot; 的方案。
+(上箭头符号 <span class="hljs-built_in">^</span> 表示选取的字母)
+rabbbit
+^^^<span class="hljs-built_in">^</span> <span class="hljs-built_in">^</span><span class="hljs-built_in">^</span>
+rabbbit
+^^ ^^^<span class="hljs-built_in">^</span>
+rabbbit
+^^^ ^^^</code></pre></div>
 
 <p>示例 2：</p>
-<div class="hljs"><pre><code class="hljs lua">输入：n = <span class="hljs-number">1</span>
-输出：<span class="hljs-string">[[1]]</span></code></pre></div>
+<div class="hljs"><pre><code class="hljs mipsasm">输入：s = <span class="hljs-string">&quot;babgbag&quot;</span>, t = <span class="hljs-string">&quot;bag&quot;</span>
+输出：<span class="hljs-number">5</span>
+解释：
+如下图所示, 有 <span class="hljs-number">5</span> 种可以从 s 中得到 <span class="hljs-string">&quot;bag&quot;</span> 的方案。 
+(上箭头符号 ^ 表示选取的字母)
+<span class="hljs-keyword">babgbag</span>
+<span class="hljs-keyword">^^ </span>^
+<span class="hljs-keyword">babgbag</span>
+<span class="hljs-keyword">^^ </span>   ^
+<span class="hljs-keyword">babgbag</span>
+<span class="hljs-keyword">^ </span>   ^^
+<span class="hljs-keyword">babgbag</span>
+<span class="hljs-keyword"> </span> ^  ^^
+<span class="hljs-keyword">babgbag</span>
+<span class="hljs-keyword"> </span>   ^^^</code></pre></div>
 
 
 <p>提示：</p>
 <ul>
-<li> <code>1 &lt;= n &lt;= 20</code> </li>
+<li> <code>0 &lt;= s.length, t.length &lt;= 1000</code> </li>
+<li> <code>s</code> 和 <code>t</code> 由英文字母组成</li>
 </ul>
-<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><h2 id="个人初尝试"><a href="#个人初尝试" class="headerlink" title="个人初尝试"></a>个人初尝试</h2><p>这个题目和之前的 <a target="_blank" rel="noopener" href="https://alex-lu-hub.github.io/2021/03/15/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%9454.%20%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5/">螺旋矩阵</a> 如出一辙，也比较顺畅，注意边界问题即可。</p>
-<p>一个比较直观的思路，顺时针遍历其实可以分成四个遍历步骤：</p>
-<ul>
-<li>从左边第一个往右边最后一个遍历</li>
-<li>从上面第一个往下面最后一个遍历</li>
-<li>从右边最后一个往左边遍历</li>
-<li>从下面最后一个往上面遍历</li>
-</ul>
-<p>所以遍历的关键就在于把四个点确定了：左边界、右边界、上边界、下边界。确定这四个边界后，就按上面的四个步骤遍历，每完成一个步骤就更新需要更新的边界，不断循环直至四个边界出现重叠现象，则遍历完成。</p>
+<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p>这个题目直接求助于题解了，动态规划的思路，关键就在于状态转移方程的构建。具体可参考 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/distinct-subsequences/solution/bu-tong-de-zi-xu-lie-by-leetcode-solutio-urw3/">官方题解</a> 。</p>
+<p>利用 <code>dp[i][j]</code> 记录 <code>s</code> 中从 <code>i</code> 到结尾的子字符串的子序列在 <code>t</code> 中从 <code>j</code> 到结尾的子字符串中出现的个数。</p>
+<p>边界情况：</p>
+<p> <code>j</code> 为 <code>n</code> 时，表示的是空字符串，空字符串是所有字符串的子串，赋值为 <code>1</code> ； <code>i</code> 为 <code>m</code> 时，同样的为空字符串，空字符串没有自己的子串，赋值为 <code>0</code> </p>
+<p>普遍情况：</p>
+<p>当 <code>s[i] ！= t[j]</code> 时， <code>dp[i][j]</code> 只能考虑 <code>s[i + 1]</code> 对于 <code>t[j]</code> 的子串个数；</p>
+<p>当 <code>s[i] == t[j]</code> 时， <code>dp[i][j]</code> 除上面的以外还可以考虑 <code>s[i + 1]</code> 对于 <code>t[j + 1]</code> 的子串个数，既将 <code>i + 1</code> 对应的字符删去后找子串。</p>
 <p>具体代码如下：</p>
 <div class="hljs"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
 <span class="hljs-keyword">public</span>:
-    <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-title">generateMatrix</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;
-        <span class="hljs-keyword">if</span>(n == <span class="hljs-number">0</span>) &#123;
-            <span class="hljs-keyword">return</span> &#123;&#125;;
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">numDistinct</span><span class="hljs-params">(<span class="hljs-built_in">string</span> s, <span class="hljs-built_in">string</span> t)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> m = s.size(), n = t.size();
+        <span class="hljs-keyword">if</span>(m &lt; n) &#123;
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
         &#125;
-        <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-title">ans</span><span class="hljs-params">(n, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;(n))</span></span>;
-        <span class="hljs-keyword">int</span> up = <span class="hljs-number">0</span>, down = n, left = <span class="hljs-number">0</span>, right = n, num = <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">while</span>(num &lt;= n*n) &#123;
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = left; i &lt; right; ++i) &#123;
-                ans[up][i] = num;
-                ++num;
-            &#125;
-            ++up;
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = up; i &lt; down; ++i) &#123;
-                ans[i][right - <span class="hljs-number">1</span>] = num;
-                ++num;
-            &#125;
-            --right;
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = right - <span class="hljs-number">1</span>; i &gt;= left; --i) &#123;
-                ans[down - <span class="hljs-number">1</span>][i] = num;
-                ++num;
-            &#125;
-            --down;
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = down - <span class="hljs-number">1</span>; i &gt;= up; --i) &#123;
-                ans[i][left] = num;
-                ++num;
-            &#125;
-            ++left;
+        <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">long</span>&gt;&gt; <span class="hljs-title">dp</span> <span class="hljs-params">(m + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">long</span>&gt;(n + <span class="hljs-number">1</span>))</span></span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= m; ++i) &#123;
+            dp[i][n] = <span class="hljs-number">1</span>;
         &#125;
-        <span class="hljs-keyword">return</span> ans;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = m - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; --i) &#123;
+            <span class="hljs-keyword">char</span> schar = s[i];
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = n - <span class="hljs-number">1</span>; j &gt;= <span class="hljs-number">0</span>; --j) &#123;
+                <span class="hljs-keyword">char</span> tchar = t[j];
+                <span class="hljs-keyword">if</span>(schar == tchar) &#123;
+                    dp[i][j] = dp[i + <span class="hljs-number">1</span>][j + <span class="hljs-number">1</span>] + dp[i + <span class="hljs-number">1</span>][j];
+                &#125;
+                <span class="hljs-keyword">else</span> &#123;
+                    dp[i][j] = dp[i + <span class="hljs-number">1</span>][j];
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>];
     &#125;
 &#125;;</code></pre></div>
 
@@ -328,18 +343,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/17/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94115.%20%E4%B8%8D%E5%90%8C%E7%9A%84%E5%AD%90%E5%BA%8F%E5%88%97/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Leetcode刷题之路——115. 不同的子序列</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/15/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%9454.%20%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5/">
-                        <span class="hidden-mobile">Leetcode刷题之路——54. 螺旋矩阵</span>
+                      <a href="/2021/03/16/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%9459.%20%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5%20II/">
+                        <span class="hidden-mobile">Leetcode刷题之路——59. 螺旋矩阵 II</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -533,7 +542,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Leetcode刷题之路——59. 螺旋矩阵 II&nbsp;",
+        "Leetcode刷题之路——115. 不同的子序列&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
