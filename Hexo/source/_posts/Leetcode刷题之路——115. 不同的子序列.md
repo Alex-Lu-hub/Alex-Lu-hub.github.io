@@ -4,7 +4,7 @@ tags: [C++]
 categories: [Leetcode]
 date: 2021-3-17 15:10:00
 updated: 2021-3-17 15:24:00
-excerpt: Leetcode题库59. 螺旋矩阵 II
+excerpt: Leetcode题库115. 不同的子序列
 ---
 
 # 题目描述
