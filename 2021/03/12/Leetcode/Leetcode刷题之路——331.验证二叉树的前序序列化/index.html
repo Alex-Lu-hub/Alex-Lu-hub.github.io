@@ -1,0 +1,738 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/pi.jpg">
+  <link rel="icon" type="image/png" href="/img/pi.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Alex Lu">
+  <meta name="keywords" content="">
+  <title>Leetcode刷题之路——331. 验证二叉树的前序序列化 - LL&#39;s treasure</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/a11y-dark.min.css" />
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>蒹葭的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Alex Lu
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-12 14:36" pubdate>
+        2021年3月12日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">Leetcode刷题之路——331. 验证二叉树的前序序列化</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年3月12日 下午
+                
+              </p>
+            
+            <div class="markdown-body" id="post-body">
+              <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>序列化二叉树的一种方法是使用前序遍历。当我们遇到一个非空节点时，我们可以记录下这个节点的值。如果它是一个空节点，我们可以使用一个标记值记录，例如 <code>#</code> 。</p>
+<div class="hljs"><pre><code class="hljs livescript">     _9_
+    /   <span class="hljs-string">\</span>
+   <span class="hljs-number">3</span>     <span class="hljs-number">2</span>
+  / <span class="hljs-string">\</span>   / <span class="hljs-string">\</span>
+ <span class="hljs-number">4</span>   <span class="hljs-number">1</span>  <span class="hljs-comment">#  6</span>
+/ <span class="hljs-string">\</span> / <span class="hljs-string">\</span>   / <span class="hljs-string">\</span>
+<span class="hljs-comment"># # #</span></code></pre></div>
+
+<p>例如，上面的二叉树可以被序列化为字符串 <code>&quot;9,3,4,#,#,1,#,#,2,#,6,#,#&quot;</code> ，其中 <code>#</code> 代表一个空节点。</p>
+<p>给定一串以逗号分隔的序列，验证它是否是正确的二叉树的前序序列化。编写一个在不重构树的条件下的可行算法。</p>
+<p>每个以逗号分隔的字符或为一个整数或为一个表示 <code>null</code> 指针的 <code>&#39;#&#39;</code> 。</p>
+<p>你可以认为输入格式总是有效的，例如它永远不会包含两个连续的逗号，比如 <code>&quot;1,,3&quot;</code> 。</p>
+<p>示例 1:</p>
+<div class="hljs"><pre><code class="hljs actionscript">输入: <span class="hljs-string">&quot;9,3,4,#,#,1,#,#,2,#,6,#,#&quot;</span>
+输出: <span class="hljs-literal">true</span></code></pre></div>
+
+
+<p>示例 2:</p>
+<div class="hljs"><pre><code class="hljs actionscript">输入: <span class="hljs-string">&quot;1,#&quot;</span>
+输出: <span class="hljs-literal">false</span></code></pre></div>
+
+
+<p>示例 3:</p>
+<div class="hljs"><pre><code class="hljs actionscript">输入: <span class="hljs-string">&quot;9,#,#,1&quot;</span>
+输出: <span class="hljs-literal">false</span></code></pre></div>
+
+<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><h2 id="个人初尝试"><a href="#个人初尝试" class="headerlink" title="个人初尝试"></a>个人初尝试</h2><p>比较直观的思路是用栈来计算，当进入左右孩子的下一层，就将父节点入栈。但是因为是一个字符串，我们需要手动记忆每一个节点的左右孩子访问情况。我是利用一个 <code>flag</code> 来记忆的，<code>0</code> 代表左右孩子都没访问， <code>1</code> 代表访问了左孩子没访问右孩子， <code>2</code> 代表访问了左右孩子，需要将这个节点退出回到父节点查看下一步情况了。</p>
+<p>考虑最后退出的情况，一定是遇到了 <code>#</code> 才会退出，否则会继续深入到其孩子节点去。所以，我们的 <code>flag</code> 仅在碰到了 <code>#</code> 才会增加，或者是有出栈情况才会把前一个节点的 <code>flag</code> 增加。按照这个想法，我们还需要一个栈来保存 <code>flag</code> 以便节点出栈时仍能获得其之前的 <code>flag</code> 情况。</p>
+<p>考虑各栈的入栈出栈情况：当碰到数字时，表明其是孩子节点，需要将数字入栈，前一节点的 <code>flag</code> 入栈，为新节点的 <code>flag</code> 初始化为 <code>0</code>；当碰到 <code>#</code> 号时， <code>++flag</code> ；如果 <code>flag == 2</code> ，表明这个节点需要退出了，数字出栈，同时需要获得前一节点的 <code>flag</code> 进行 <code>+ 1</code> 更新。</p>
+<p>如此循环，最后如果是正确的序列，一定会使两个栈都为空，否则就不是正确序列。</p>
+<p>具体代码如下：</p>
+<div class="hljs"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isValidSerialization</span><span class="hljs-params">(<span class="hljs-built_in">string</span> preorder)</span> </span>&#123;
+        <span class="hljs-built_in">stack</span>&lt;<span class="hljs-keyword">int</span>&gt; mystack;
+        <span class="hljs-built_in">stack</span>&lt;<span class="hljs-keyword">int</span>&gt; flagstack;
+        <span class="hljs-keyword">int</span> flag = <span class="hljs-number">0</span>, len = preorder.size();
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; ++i) &#123;
+            <span class="hljs-keyword">if</span>(preorder[i] == <span class="hljs-string">&#x27;,&#x27;</span>)
+                <span class="hljs-keyword">continue</span>;
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(preorder[i] == <span class="hljs-string">&#x27;#&#x27;</span>) &#123;
+                ++flag;
+            &#125;
+            <span class="hljs-keyword">else</span> &#123;
+                <span class="hljs-keyword">int</span> num = <span class="hljs-number">0</span>;
+                <span class="hljs-keyword">while</span>(preorder[i] &gt;= <span class="hljs-string">&#x27;0&#x27;</span> &amp;&amp; preorder[i] &lt;= <span class="hljs-string">&#x27;9&#x27;</span>) &#123;
+                    num = num * <span class="hljs-number">10</span> + preorder[i] - <span class="hljs-string">&#x27;0&#x27;</span>;
+                    ++i;
+                &#125;
+                mystack.push(num);
+                flagstack.push(flag);
+                flag = <span class="hljs-number">0</span>;
+            &#125;
+            <span class="hljs-keyword">while</span>(flag == <span class="hljs-number">2</span>) &#123;
+                <span class="hljs-keyword">if</span>(mystack.empty() || flagstack.empty()) &#123;
+                    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+                &#125;
+                mystack.pop();
+                flag = flagstack.top() + <span class="hljs-number">1</span>;
+                flagstack.pop();
+            &#125;
+        &#125;
+        <span class="hljs-keyword">if</span>(mystack.empty() &amp;&amp; flagstack.empty()) &#123;
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        &#125;
+        <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        &#125;
+    &#125;
+&#125;;</code></pre></div>
+
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>查看题解，题解的思路和我的有些类似，但只用了一个栈。因为这个题目不关心二叉树的内容，只关心它的节点数目是否符合条件。所以可以只用一个栈，这个栈用来保存每个节点所剩余的槽位，也就是可以放至节点的位置。如果最后槽位不为 <code>0</code> ，说明树没有放满，不符合要求；否则则证明序列正确。</p>
+<div class="hljs"><pre><code class="hljs c++">
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isValidSerialization</span><span class="hljs-params">(<span class="hljs-built_in">string</span> preorder)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> n = preorder.length();
+        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;
+        <span class="hljs-built_in">stack</span>&lt;<span class="hljs-keyword">int</span>&gt; stk;
+        stk.push(<span class="hljs-number">1</span>);
+        <span class="hljs-keyword">while</span> (i &lt; n) &#123;
+            <span class="hljs-keyword">if</span> (stk.empty()) &#123;
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            &#125;
+            <span class="hljs-keyword">if</span> (preorder[i] == <span class="hljs-string">&#x27;,&#x27;</span>) &#123;
+                i++;
+            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (preorder[i] == <span class="hljs-string">&#x27;#&#x27;</span>)&#123;
+                stk.top() -= <span class="hljs-number">1</span>;
+                <span class="hljs-keyword">if</span> (stk.top() == <span class="hljs-number">0</span>) &#123;
+                    stk.pop();
+                &#125;
+                i++;
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                <span class="hljs-comment">// 读一个数字</span>
+                <span class="hljs-keyword">while</span> (i &lt; n &amp;&amp; preorder[i] != <span class="hljs-string">&#x27;,&#x27;</span>) &#123;
+                    i++;
+                &#125;
+                stk.top() -= <span class="hljs-number">1</span>;
+                <span class="hljs-keyword">if</span> (stk.top() == <span class="hljs-number">0</span>) &#123;
+                    stk.pop();
+                &#125;
+                stk.push(<span class="hljs-number">2</span>);
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> stk.empty();
+    &#125;
+&#125;;
+
+作者：LeetCode-Solution
+链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/solution/yan-zheng-er-cha-shu-de-qian-xu-xu-lie-h-jghn/</span>
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</code></pre></div>
+
+<p>还可以甚至连栈都不用，直接用一个数来统计整个树的槽位数目，更加节省空间。</p>
+<p>具体代码如下：</p>
+<div class="hljs"><pre><code class="hljs c++">
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isValidSerialization</span><span class="hljs-params">(<span class="hljs-built_in">string</span> preorder)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> n = preorder.length();
+        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">int</span> slots = <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">while</span> (i &lt; n) &#123;
+            <span class="hljs-keyword">if</span> (slots == <span class="hljs-number">0</span>) &#123;
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            &#125;
+            <span class="hljs-keyword">if</span> (preorder[i] == <span class="hljs-string">&#x27;,&#x27;</span>) &#123;
+                i++;
+            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (preorder[i] == <span class="hljs-string">&#x27;#&#x27;</span>)&#123;
+                slots--;
+                i++;
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                <span class="hljs-comment">// 读一个数字</span>
+                <span class="hljs-keyword">while</span> (i &lt; n &amp;&amp; preorder[i] != <span class="hljs-string">&#x27;,&#x27;</span>) &#123;
+                    i++;
+                &#125;
+                slots++; <span class="hljs-comment">// slots = slots - 1 + 2</span>
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> slots == <span class="hljs-number">0</span>;
+    &#125;
+&#125;;
+
+作者：LeetCode-Solution
+链接：https:<span class="hljs-comment">//leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/solution/yan-zheng-er-cha-shu-de-qian-xu-xu-lie-h-jghn/</span>
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</code></pre></div>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Leetcode/">Leetcode</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/C/">C++</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/13/Leetcode/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94705.%20%E8%AE%BE%E8%AE%A1%E5%93%88%E5%B8%8C%E9%9B%86%E5%90%88/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Leetcode刷题之路——705. 设计哈希集合</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/11/Leetcode/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94227.%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8%20II/">
+                        <span class="hidden-mobile">Leetcode刷题之路——224. 基本计算器 II</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "ABJnbiLU9eQe9IkXz99YBnuL-gzGzoHsz",
+          app_key: "n7cSaYt4NkA2o3ai4DM5qOyo",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    waitElementVisible('vcomments', loadValine);
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://alex-lu-hub.github.io/" target="_blank" rel="nofollow noopener"><span>LL_treasure</span></a> <i class="iconfont icon-love"></i> <a href="https://alex-lu-hub.github.io/" target="_blank" rel="nofollow noopener"><span>蒹葭的博客</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Leetcode刷题之路——331. 验证二叉树的前序序列化&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
