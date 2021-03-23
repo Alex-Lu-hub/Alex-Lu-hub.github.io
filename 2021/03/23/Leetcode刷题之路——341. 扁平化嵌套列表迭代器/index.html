@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Alex Lu">
   <meta name="keywords" content="">
-  <title>setlocale warning - LL&#39;s treasure</title>
+  <title>Leetcode刷题之路——341. 扁平化嵌套列表迭代器 - LL&#39;s treasure</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -170,8 +170,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-10-27 16:00" pubdate>
-        2020年10月27日 下午
+      <time datetime="2021-03-23 13:56" pubdate>
+        2021年3月23日 下午
       </time>
     </span>
   
@@ -182,7 +182,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      468 字
+      882 字
     </span>
   
 
@@ -192,7 +192,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      13
        分钟
     </span>
   
@@ -230,48 +230,146 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">setlocale warning</h1>
+            <h1 style="display: none">Leetcode刷题之路——341. 扁平化嵌套列表迭代器</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年10月27日 下午
+                  本文最后更新于：2021年3月23日 下午
                 
               </p>
             
             <div class="markdown-body" id="post-body">
-              <p>小系统登陆时出现多条如下warning:</p>
-<div class="hljs"><pre><code class="hljs bash">-bash:warning:setlocale:LC_CTYPE:connot change locale (en_US.UTF-8):No such file or directory</code></pre></div>
+              <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给你一个嵌套的整型列表。请你设计一个迭代器，使其能够遍历这个整型列表中的所有整数。</p>
+<p>列表中的每一项或者为一个整数，或者是另一个列表。其中列表的元素也可能是整数或是其他列表。</p>
+<p>示例 1:</p>
+<div class="hljs"><pre><code class="hljs lua">输入: <span class="hljs-string">[[1,1],2,[1,1]]</span>
+输出: [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]
+解释: 通过重复调用 <span class="hljs-built_in">next</span> 直到 hasNext 返回 <span class="hljs-literal">false</span>，<span class="hljs-built_in">next</span> 返回的元素的顺序应该是: [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]。</code></pre></div>
 
-<a id="more"></a>
 
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><div class="hljs"><pre><code class="hljs bash"><span class="hljs-comment"># 打开小系统里的i18n</span>
-vi /etc/sysconfig/i18n
-<span class="hljs-comment"># 添加下面的</span>
-LC_ALL=C
-<span class="hljs-built_in">export</span> LC_ALL</code></pre></div>
+<p>示例 2:</p>
+<div class="hljs"><pre><code class="hljs inform7">输入: <span class="hljs-comment">[1,<span class="hljs-comment">[4,<span class="hljs-comment">[6]</span>]</span>]</span>
+输出: <span class="hljs-comment">[1,4,6]</span>
+解释: 通过重复调用 next 直到 hasNext 返回 false，next 返回的元素的顺序应该是: <span class="hljs-comment">[1,4,6]</span>。</code></pre></div>
 
-<p>重新打包后问题解决。</p>
-<h1 id="LC-ALL-C"><a href="#LC-ALL-C" class="headerlink" title="LC_ALL = C"></a><code>LC_ALL = C</code></h1><p>之前的报错说明我们本身的小系统里没有安装en_US的local，使用 <code>LC_ALL = C</code> 是为了去除所有本地化的设置，让命令能正确执行。</p>
-<p>在Linux中通过 <code>locale</code> 来设置程序运行的不同语言环境， <code>locale</code> 由ANSI C提供支持。 <code>locale</code> 的命名规则为 <code>&lt;语言&gt;_&lt;地区&gt;.&lt;字符集编码&gt;</code> ，如 <code>zh_CN.UTF-8</code> ，zh代表中文，CN代表大陆地区，UTF-8表示字符集。在 <code>locale</code> 环境中，有一组变量，代表国际化环境中的不同设置：</p>
-<ul>
-<li><p> <code>LC_COLLATE</code><br>定义该环境的排序和比较规则</p>
-</li>
-<li><p> <code>LC_CTYPE</code><br>用于字符分类和字符串处理，控制所有字符的处理方式，包括字符编码，字符是单字节还是多字节，如何打印等。是最重要的一个环境变量。</p>
-</li>
-<li><p> <code>LC_MONETARY</code><br>货币格式</p>
-</li>
-<li><p> <code>LC_NUMERIC</code><br>非货币的数字显示格式</p>
-</li>
-<li><p> <code>LC_TIME</code><br>时间和日期格式</p>
-</li>
-<li><p> <code>LC_MESSAGES</code><br>提示信息的语言。另外还有一个 <code>LANGUAGE</code> 参数，它与 <code>LC_MESSAGES</code> 相似，但如果该参数一旦设置，则 <code>LC_MESSAGES</code> 参数就会失效。 <code>LANGUAGE</code> 参数可同时设置多种语言信息，如 <code>LANGUANE=&quot;zh_CN.GB18030:zh_CN.GB2312:zh_CN&quot;</code> 。</p>
-</li>
-<li><p><code>LANG</code><br><code>LC_*</code> 的默认值，是最低级别的设置，如果 <code>LC_*</code> 没有设置，则使用该值。类似于 <code>LC_ALL</code> 。</p>
-</li>
-<li><p> <code>LC_ALL</code><br>它是一个宏，如果该值设置了，则该值会覆盖所有 <code>LC_*</code> 的设置值。注意， <code>LANG</code> 的值不受该宏影响。</p>
-</li>
+<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><h2 id="深度优先搜索递归"><a href="#深度优先搜索递归" class="headerlink" title="深度优先搜索递归"></a>深度优先搜索递归</h2><p>一个比较直接的想法，在初始化迭代器的时候就顺便把整个列表全部处理完成，形成一个符合顺序的整数列表。采用深度优先搜索的方法，碰到整数就送入列表中，碰到列表就进入列表进行同样的操作搜索。最终可以处理完成。那么最终这个迭代器就可以直接用整数列表的迭代器代替了。</p>
+<p>具体代码如下：</p>
+<div class="hljs"><pre><code class="hljs c++"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * // This is the interface that allows for creating nested lists.</span>
+<span class="hljs-comment"> * // You should not implement it, or speculate about its implementation</span>
+<span class="hljs-comment"> * class NestedInteger &#123;</span>
+<span class="hljs-comment"> *   public:</span>
+<span class="hljs-comment"> *     // Return true if this NestedInteger holds a single integer, rather than a nested list.</span>
+<span class="hljs-comment"> *     bool isInteger() const;</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> *     // Return the single integer that this NestedInteger holds, if it holds a single integer</span>
+<span class="hljs-comment"> *     // The result is undefined if this NestedInteger holds a nested list</span>
+<span class="hljs-comment"> *     int getInteger() const;</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> *     // Return the nested list that this NestedInteger holds, if it holds a nested list</span>
+<span class="hljs-comment"> *     // The result is undefined if this NestedInteger holds a single integer</span>
+<span class="hljs-comment"> *     const vector&lt;NestedInteger&gt; &amp;getList() const;</span>
+<span class="hljs-comment"> * &#125;;</span>
+<span class="hljs-comment"> */</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NestedIterator</span> &#123;</span>
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; val;
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator cur;
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;NestedInteger&gt; &amp;nestedList)</span> </span>&#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> info: nestedList) &#123;
+            <span class="hljs-keyword">if</span>(info.isInteger()) &#123;
+                val.push_back(info.getInteger());
+            &#125;
+            <span class="hljs-keyword">else</span> &#123;
+                dfs(info.getList());
+            &#125;
+        &#125;
+    &#125;
+
+<span class="hljs-keyword">public</span>:
+    NestedIterator(<span class="hljs-built_in">vector</span>&lt;NestedInteger&gt; &amp;nestedList) &#123;
+        dfs(nestedList);
+        cur = val.begin();
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">next</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> *cur++;
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">hasNext</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> cur != val.end();
+    &#125;
+&#125;;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * Your NestedIterator object will be instantiated and called as such:</span>
+<span class="hljs-comment"> * NestedIterator i(nestedList);</span>
+<span class="hljs-comment"> * while (i.hasNext()) cout &lt;&lt; i.next();</span>
+<span class="hljs-comment"> */</span></code></pre></div>
+
+<h2 id="使用栈来进行边遍历边展开"><a href="#使用栈来进行边遍历边展开" class="headerlink" title="使用栈来进行边遍历边展开"></a>使用栈来进行边遍历边展开</h2><p>在初始化的时候，不全部展开，而是将元素都放入栈中。因为要按顺序遍历的迭代器，所以在放入栈时应该倒序放入。迭代器遍历时，碰到列表则展开，放入栈中，直到碰到了整数才停止展开和放入栈的操作。每从栈中取出一个要注意栈的pop和push。</p>
+<p>具体的代码如下：</p>
+<div class="hljs"><pre><code class="hljs c++"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * // This is the interface that allows for creating nested lists.</span>
+<span class="hljs-comment"> * // You should not implement it, or speculate about its implementation</span>
+<span class="hljs-comment"> * class NestedInteger &#123;</span>
+<span class="hljs-comment"> *   public:</span>
+<span class="hljs-comment"> *     // Return true if this NestedInteger holds a single integer, rather than a nested list.</span>
+<span class="hljs-comment"> *     bool isInteger() const;</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> *     // Return the single integer that this NestedInteger holds, if it holds a single integer</span>
+<span class="hljs-comment"> *     // The result is undefined if this NestedInteger holds a nested list</span>
+<span class="hljs-comment"> *     int getInteger() const;</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> *     // Return the nested list that this NestedInteger holds, if it holds a nested list</span>
+<span class="hljs-comment"> *     // The result is undefined if this NestedInteger holds a single integer</span>
+<span class="hljs-comment"> *     const vector&lt;NestedInteger&gt; &amp;getList() const;</span>
+<span class="hljs-comment"> * &#125;;</span>
+<span class="hljs-comment"> */</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NestedIterator</span> &#123;</span>
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-built_in">stack</span>&lt;NestedInteger&gt; mystack;
+
+<span class="hljs-keyword">public</span>:
+    NestedIterator(<span class="hljs-built_in">vector</span>&lt;NestedInteger&gt; &amp;nestedList) &#123;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = nestedList.size() - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; --i) &#123;
+            mystack.push(nestedList[i]);
+        &#125;
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">next</span><span class="hljs-params">()</span> </span>&#123;
+        NestedInteger cur = mystack.top();
+        mystack.pop();
+        <span class="hljs-keyword">return</span> cur.getInteger();
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">hasNext</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">while</span>(!mystack.empty()) &#123;
+            NestedInteger cur = mystack.top();
+            <span class="hljs-keyword">if</span>(cur.isInteger()) &#123;
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+            &#125;
+            mystack.pop();
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = cur.getList().size() - <span class="hljs-number">1</span>; i &gt;=<span class="hljs-number">0</span>; --i) &#123;
+                mystack.push(cur.getList()[i]);
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    &#125;
+&#125;;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * Your NestedIterator object will be instantiated and called as such:</span>
+<span class="hljs-comment"> * NestedIterator i(nestedList);</span>
+<span class="hljs-comment"> * while (i.hasNext()) cout &lt;&lt; i.next();</span>
+<span class="hljs-comment"> */</span></code></pre></div>
+
+<h1 id="一些细节的总结"><a href="#一些细节的总结" class="headerlink" title="一些细节的总结"></a>一些细节的总结</h1><ul>
+<li> <code>++</code> 、 <code>--</code> 的使用还有 <code>bool</code> 类型的返回内容有很多可以简化的写法，可以多考虑一下。</li>
 </ul>
-<p>“C”是系统默认的 <code>locale</code> ，”POSIX”是”C”的别名。所以当我们新安装完一个系统时，默认的 <code>locale</code> 就是 <code>C</code> 或 <code>POSIX</code> 。</p>
 
             </div>
             <hr>
@@ -281,7 +379,7 @@ LC_ALL=C
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
+                      <a class="hover-with-bg" href="/categories/Leetcode/">Leetcode</a>
                     
                   </div>
                 
@@ -289,7 +387,7 @@ LC_ALL=C
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                      <a class="hover-with-bg" href="/tags/C/">C++</a>
                     
                   </div>
                 
@@ -302,18 +400,12 @@ LC_ALL=C
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/10/27/%E6%88%91%E7%9A%84%E6%91%87%E6%BB%9A%E6%AD%8C%E5%8D%95/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">我的摇滚歌单</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/10/25/Linux%E5%B0%8F%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">
-                        <span class="hidden-mobile">Linux小系统网络配置问题</span>
+                      <a href="/2021/03/21/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%9473.%20%E7%9F%A9%E9%98%B5%E7%BD%AE%E9%9B%B6/">
+                        <span class="hidden-mobile">Leetcode刷题之路——73. 矩阵置零</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -507,7 +599,7 @@ LC_ALL=C
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "setlocale warning&nbsp;",
+        "Leetcode刷题之路——341. 扁平化嵌套列表迭代器&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
