@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Leetcode刷题之路——456. 132模式</title>
+    <link href="/2021/03/24/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94456.%20132%E6%A8%A1%E5%BC%8F/"/>
+    <url>/2021/03/24/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94456.%20132%E6%A8%A1%E5%BC%8F/</url>
+    
+    <content type="html"><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定一个整数序列： <code>a1, a2, ..., an</code> ，一个132模式的子序列 <code>ai, aj, ak</code> 被定义为：当 <code>i &lt; j &lt; k</code> 时，<code>ai &lt; ak &lt; aj</code> 。设计一个算法，当给定有 <code>n</code> 个数字的序列时，验证这个序列中是否含有132模式的子序列。</p><p>注意：n 的值小于15000。</p><p>示例1:</p><pre><code class="hljs makefile"><span class="hljs-section">输入: [1, 2, 3, 4]</span><span class="hljs-section">输出: False</span><span class="hljs-section">解释: 序列中不存在132模式的子序列。</span></code></pre><p>示例 2:</p><pre><code class="hljs makefile"><span class="hljs-section">输入: [3, 1, 4, 2]</span><span class="hljs-section">输出: True</span><span class="hljs-section">解释: 序列中有 1 个132模式的子序列： [1, 4, 2].</span></code></pre><p>示例 3:</p><pre><code class="hljs prolog">输入: [<span class="hljs-number">-1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>]输出: <span class="hljs-symbol">True</span>解释: 序列中有 <span class="hljs-number">3</span> 个<span class="hljs-number">132</span>模式的的子序列: [<span class="hljs-number">-1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">-1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0</span>] 和 [<span class="hljs-number">-1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>].</code></pre><h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><h2 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h2><p>可以倒着遍历输入的序列，寻找符合要求 <code>3</code> 和 <code>2</code> 。</p><ul><li>当寻找到新的数字比 <code>3</code> 要大时，则我们需要更新 <code>3</code> 的值，把原先的 <code>3</code> 作为 <code>2</code> </li><li>当寻找到比 <code>2</code> 大比 <code>3</code> 小的数时，这个数可以作为新的 <code>3</code> </li><li>当寻找到小于 <code>2</code> 的数时，则找到了 <code>1</code> ，符合要求，返回 <code>true</code> </li><li>遍历完成没有返回，则返回 <code>false</code> 。</li></ul><p>根据上面的分析，我们可以维护一个 <code>3</code> 的单调栈，因为当 <code>3</code> 和 <code>2</code> 的数值越大，我们找到 <code>1</code> 的可能性也越大。那么可以针对上述第一步利用单调栈的 <code>push</code> 、 <code>pop</code> 保证 <code>3</code> 和 <code>2</code> 找到的是理论上的最大数值。</p><p>具体代码如下：</p><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><span class="hljs-keyword">public</span>:    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">find132pattern</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;        <span class="hljs-keyword">int</span> len = nums.size();        <span class="hljs-keyword">if</span>(len &lt; <span class="hljs-number">3</span>) &#123;            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;        &#125;                <span class="hljs-built_in">stack</span>&lt;<span class="hljs-keyword">int</span>&gt; mystack;        <span class="hljs-keyword">int</span> two = INT_MIN;        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = len - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; --i) &#123;            <span class="hljs-keyword">if</span>(nums[i] &gt;= two) &#123;                <span class="hljs-keyword">while</span>(!mystack.empty() &amp;&amp; nums[i] &gt; mystack.top()) &#123;                    two = mystack.top();                    mystack.pop();                &#125;                mystack.push(nums[i]);            &#125;            <span class="hljs-keyword">else</span> &#123;                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;            &#125;        &#125;        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;    &#125;&#125;;</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>Leetcode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Leetcode刷题之路——341. 扁平化嵌套列表迭代器</title>
     <link href="/2021/03/23/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94341.%20%E6%89%81%E5%B9%B3%E5%8C%96%E5%B5%8C%E5%A5%97%E5%88%97%E8%A1%A8%E8%BF%AD%E4%BB%A3%E5%99%A8/"/>
     <url>/2021/03/23/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94341.%20%E6%89%81%E5%B9%B3%E5%8C%96%E5%B5%8C%E5%A5%97%E5%88%97%E8%A1%A8%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>

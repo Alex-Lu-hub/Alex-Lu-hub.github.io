@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Alex Lu">
   <meta name="keywords" content="">
-  <title>Leetcode刷题之路——341. 扁平化嵌套列表迭代器 - LL&#39;s treasure</title>
+  <title>Leetcode刷题之路——456. 132模式 - LL&#39;s treasure</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -170,8 +170,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-23 13:56" pubdate>
-        2021年3月23日 下午
+      <time datetime="2021-03-24 10:15" pubdate>
+        2021年3月24日 上午
       </time>
     </span>
   
@@ -182,7 +182,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      882 字
+      463 字
     </span>
   
 
@@ -192,7 +192,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      6
        分钟
     </span>
   
@@ -230,146 +230,74 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Leetcode刷题之路——341. 扁平化嵌套列表迭代器</h1>
+            <h1 style="display: none">Leetcode刷题之路——456. 132模式</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月23日 下午
+                  本文最后更新于：2021年3月24日 上午
                 
               </p>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给你一个嵌套的整型列表。请你设计一个迭代器，使其能够遍历这个整型列表中的所有整数。</p>
-<p>列表中的每一项或者为一个整数，或者是另一个列表。其中列表的元素也可能是整数或是其他列表。</p>
-<p>示例 1:</p>
-<div class="hljs"><pre><code class="hljs lua">输入: <span class="hljs-string">[[1,1],2,[1,1]]</span>
-输出: [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]
-解释: 通过重复调用 <span class="hljs-built_in">next</span> 直到 hasNext 返回 <span class="hljs-literal">false</span>，<span class="hljs-built_in">next</span> 返回的元素的顺序应该是: [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>]。</code></pre></div>
+              <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定一个整数序列： <code>a1, a2, ..., an</code> ，一个132模式的子序列 <code>ai, aj, ak</code> 被定义为：当 <code>i &lt; j &lt; k</code> 时，<code>ai &lt; ak &lt; aj</code> 。设计一个算法，当给定有 <code>n</code> 个数字的序列时，验证这个序列中是否含有132模式的子序列。</p>
+<p>注意：n 的值小于15000。</p>
+<p>示例1:</p>
+<div class="hljs"><pre><code class="hljs makefile"><span class="hljs-section">输入: [1, 2, 3, 4]</span>
+
+<span class="hljs-section">输出: False</span>
+
+<span class="hljs-section">解释: 序列中不存在132模式的子序列。</span></code></pre></div>
 
 
 <p>示例 2:</p>
-<div class="hljs"><pre><code class="hljs inform7">输入: <span class="hljs-comment">[1,<span class="hljs-comment">[4,<span class="hljs-comment">[6]</span>]</span>]</span>
-输出: <span class="hljs-comment">[1,4,6]</span>
-解释: 通过重复调用 next 直到 hasNext 返回 false，next 返回的元素的顺序应该是: <span class="hljs-comment">[1,4,6]</span>。</code></pre></div>
+<div class="hljs"><pre><code class="hljs makefile"><span class="hljs-section">输入: [3, 1, 4, 2]</span>
 
-<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><h2 id="深度优先搜索递归"><a href="#深度优先搜索递归" class="headerlink" title="深度优先搜索递归"></a>深度优先搜索递归</h2><p>一个比较直接的想法，在初始化迭代器的时候就顺便把整个列表全部处理完成，形成一个符合顺序的整数列表。采用深度优先搜索的方法，碰到整数就送入列表中，碰到列表就进入列表进行同样的操作搜索。最终可以处理完成。那么最终这个迭代器就可以直接用整数列表的迭代器代替了。</p>
+<span class="hljs-section">输出: True</span>
+
+<span class="hljs-section">解释: 序列中有 1 个132模式的子序列： [1, 4, 2].</span></code></pre></div>
+
+
+<p>示例 3:</p>
+<div class="hljs"><pre><code class="hljs prolog">输入: [<span class="hljs-number">-1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>]
+
+输出: <span class="hljs-symbol">True</span>
+
+解释: 序列中有 <span class="hljs-number">3</span> 个<span class="hljs-number">132</span>模式的的子序列: [<span class="hljs-number">-1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">-1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0</span>] 和 [<span class="hljs-number">-1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>].</code></pre></div>
+
+<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><h2 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h2><p>可以倒着遍历输入的序列，寻找符合要求 <code>3</code> 和 <code>2</code> 。</p>
+<ul>
+<li>当寻找到新的数字比 <code>3</code> 要大时，则我们需要更新 <code>3</code> 的值，把原先的 <code>3</code> 作为 <code>2</code> </li>
+<li>当寻找到比 <code>2</code> 大比 <code>3</code> 小的数时，这个数可以作为新的 <code>3</code> </li>
+<li>当寻找到小于 <code>2</code> 的数时，则找到了 <code>1</code> ，符合要求，返回 <code>true</code> </li>
+<li>遍历完成没有返回，则返回 <code>false</code> 。</li>
+</ul>
+<p>根据上面的分析，我们可以维护一个 <code>3</code> 的单调栈，因为当 <code>3</code> 和 <code>2</code> 的数值越大，我们找到 <code>1</code> 的可能性也越大。那么可以针对上述第一步利用单调栈的 <code>push</code> 、 <code>pop</code> 保证 <code>3</code> 和 <code>2</code> 找到的是理论上的最大数值。</p>
 <p>具体代码如下：</p>
-<div class="hljs"><pre><code class="hljs c++"><span class="hljs-comment">/**</span>
-<span class="hljs-comment"> * // This is the interface that allows for creating nested lists.</span>
-<span class="hljs-comment"> * // You should not implement it, or speculate about its implementation</span>
-<span class="hljs-comment"> * class NestedInteger &#123;</span>
-<span class="hljs-comment"> *   public:</span>
-<span class="hljs-comment"> *     // Return true if this NestedInteger holds a single integer, rather than a nested list.</span>
-<span class="hljs-comment"> *     bool isInteger() const;</span>
-<span class="hljs-comment"> *</span>
-<span class="hljs-comment"> *     // Return the single integer that this NestedInteger holds, if it holds a single integer</span>
-<span class="hljs-comment"> *     // The result is undefined if this NestedInteger holds a nested list</span>
-<span class="hljs-comment"> *     int getInteger() const;</span>
-<span class="hljs-comment"> *</span>
-<span class="hljs-comment"> *     // Return the nested list that this NestedInteger holds, if it holds a nested list</span>
-<span class="hljs-comment"> *     // The result is undefined if this NestedInteger holds a single integer</span>
-<span class="hljs-comment"> *     const vector&lt;NestedInteger&gt; &amp;getList() const;</span>
-<span class="hljs-comment"> * &#125;;</span>
-<span class="hljs-comment"> */</span>
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NestedIterator</span> &#123;</span>
-<span class="hljs-keyword">private</span>:
-    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; val;
-    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator cur;
-
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;NestedInteger&gt; &amp;nestedList)</span> </span>&#123;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> info: nestedList) &#123;
-            <span class="hljs-keyword">if</span>(info.isInteger()) &#123;
-                val.push_back(info.getInteger());
+<div class="hljs"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">find132pattern</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> len = nums.size();
+        <span class="hljs-keyword">if</span>(len &lt; <span class="hljs-number">3</span>) &#123;
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        &#125;
+        
+        <span class="hljs-built_in">stack</span>&lt;<span class="hljs-keyword">int</span>&gt; mystack;
+        <span class="hljs-keyword">int</span> two = INT_MIN;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = len - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; --i) &#123;
+            <span class="hljs-keyword">if</span>(nums[i] &gt;= two) &#123;
+                <span class="hljs-keyword">while</span>(!mystack.empty() &amp;&amp; nums[i] &gt; mystack.top()) &#123;
+                    two = mystack.top();
+                    mystack.pop();
+                &#125;
+                mystack.push(nums[i]);
             &#125;
             <span class="hljs-keyword">else</span> &#123;
-                dfs(info.getList());
-            &#125;
-        &#125;
-    &#125;
-
-<span class="hljs-keyword">public</span>:
-    NestedIterator(<span class="hljs-built_in">vector</span>&lt;NestedInteger&gt; &amp;nestedList) &#123;
-        dfs(nestedList);
-        cur = val.begin();
-    &#125;
-    
-    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">next</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> *cur++;
-    &#125;
-    
-    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">hasNext</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> cur != val.end();
-    &#125;
-&#125;;
-
-<span class="hljs-comment">/**</span>
-<span class="hljs-comment"> * Your NestedIterator object will be instantiated and called as such:</span>
-<span class="hljs-comment"> * NestedIterator i(nestedList);</span>
-<span class="hljs-comment"> * while (i.hasNext()) cout &lt;&lt; i.next();</span>
-<span class="hljs-comment"> */</span></code></pre></div>
-
-<h2 id="使用栈来进行边遍历边展开"><a href="#使用栈来进行边遍历边展开" class="headerlink" title="使用栈来进行边遍历边展开"></a>使用栈来进行边遍历边展开</h2><p>在初始化的时候，不全部展开，而是将元素都放入栈中。因为要按顺序遍历的迭代器，所以在放入栈时应该倒序放入。迭代器遍历时，碰到列表则展开，放入栈中，直到碰到了整数才停止展开和放入栈的操作。每从栈中取出一个要注意栈的pop和push。</p>
-<p>具体的代码如下：</p>
-<div class="hljs"><pre><code class="hljs c++"><span class="hljs-comment">/**</span>
-<span class="hljs-comment"> * // This is the interface that allows for creating nested lists.</span>
-<span class="hljs-comment"> * // You should not implement it, or speculate about its implementation</span>
-<span class="hljs-comment"> * class NestedInteger &#123;</span>
-<span class="hljs-comment"> *   public:</span>
-<span class="hljs-comment"> *     // Return true if this NestedInteger holds a single integer, rather than a nested list.</span>
-<span class="hljs-comment"> *     bool isInteger() const;</span>
-<span class="hljs-comment"> *</span>
-<span class="hljs-comment"> *     // Return the single integer that this NestedInteger holds, if it holds a single integer</span>
-<span class="hljs-comment"> *     // The result is undefined if this NestedInteger holds a nested list</span>
-<span class="hljs-comment"> *     int getInteger() const;</span>
-<span class="hljs-comment"> *</span>
-<span class="hljs-comment"> *     // Return the nested list that this NestedInteger holds, if it holds a nested list</span>
-<span class="hljs-comment"> *     // The result is undefined if this NestedInteger holds a single integer</span>
-<span class="hljs-comment"> *     const vector&lt;NestedInteger&gt; &amp;getList() const;</span>
-<span class="hljs-comment"> * &#125;;</span>
-<span class="hljs-comment"> */</span>
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NestedIterator</span> &#123;</span>
-<span class="hljs-keyword">private</span>:
-    <span class="hljs-built_in">stack</span>&lt;NestedInteger&gt; mystack;
-
-<span class="hljs-keyword">public</span>:
-    NestedIterator(<span class="hljs-built_in">vector</span>&lt;NestedInteger&gt; &amp;nestedList) &#123;
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = nestedList.size() - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; --i) &#123;
-            mystack.push(nestedList[i]);
-        &#125;
-    &#125;
-    
-    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">next</span><span class="hljs-params">()</span> </span>&#123;
-        NestedInteger cur = mystack.top();
-        mystack.pop();
-        <span class="hljs-keyword">return</span> cur.getInteger();
-    &#125;
-    
-    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">hasNext</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">while</span>(!mystack.empty()) &#123;
-            NestedInteger cur = mystack.top();
-            <span class="hljs-keyword">if</span>(cur.isInteger()) &#123;
                 <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-            &#125;
-            mystack.pop();
-            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = cur.getList().size() - <span class="hljs-number">1</span>; i &gt;=<span class="hljs-number">0</span>; --i) &#123;
-                mystack.push(cur.getList()[i]);
             &#125;
         &#125;
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
     &#125;
-&#125;;
-
-<span class="hljs-comment">/**</span>
-<span class="hljs-comment"> * Your NestedIterator object will be instantiated and called as such:</span>
-<span class="hljs-comment"> * NestedIterator i(nestedList);</span>
-<span class="hljs-comment"> * while (i.hasNext()) cout &lt;&lt; i.next();</span>
-<span class="hljs-comment"> */</span></code></pre></div>
-
-<h1 id="一些细节的总结"><a href="#一些细节的总结" class="headerlink" title="一些细节的总结"></a>一些细节的总结</h1><ul>
-<li> <code>++</code> 、 <code>--</code> 的使用还有 <code>bool</code> 类型的返回内容有很多可以简化的写法，可以多考虑一下。</li>
-</ul>
+&#125;;</code></pre></div>
 
             </div>
             <hr>
@@ -400,18 +328,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/24/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94456.%20132%E6%A8%A1%E5%BC%8F/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Leetcode刷题之路——456. 132模式</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/21/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%9473.%20%E7%9F%A9%E9%98%B5%E7%BD%AE%E9%9B%B6/">
-                        <span class="hidden-mobile">Leetcode刷题之路——73. 矩阵置零</span>
+                      <a href="/2021/03/23/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94341.%20%E6%89%81%E5%B9%B3%E5%8C%96%E5%B5%8C%E5%A5%97%E5%88%97%E8%A1%A8%E8%BF%AD%E4%BB%A3%E5%99%A8/">
+                        <span class="hidden-mobile">Leetcode刷题之路——341. 扁平化嵌套列表迭代器</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -605,7 +527,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Leetcode刷题之路——341. 扁平化嵌套列表迭代器&nbsp;",
+        "Leetcode刷题之路——456. 132模式&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
